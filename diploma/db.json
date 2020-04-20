@@ -8,12 +8,12 @@
         },
         {
             "id": "g34",
-            "username": "Student_Username",
+            "username": "dahah@babah.gmail.com",
             "password": "Student_Password",
             "role": "student",
             "info": {
-                "name": "Name",
-                "lastname": "Lastname",
+                "name": "Daria",
+                "lastname": "Lobanova",
                 "level": "bachelor",
                 "year": "4",
                 "group": "IKPI-63"
@@ -33,35 +33,37 @@
     ],
     "courses": [
         {
-            "id": "",
-            "name": "Course_Name",
+            "id": "1",
+            "name": "Course_Name_1",
             "works": [
                 {
-                    "id": "",
+                    "id": "11",
                     "type": "lab",
                     "status": "not started",
-                    "title": "Work_Title",
+                    "title": "Work_Title11",
                     "description": "Work_description",
                     "deadline": null,
                     "date": null,
                     "mark": null,
                     "parts": [
-                        {
-                            "title": "Part_Title"
-                        }
                     ]
                 },
                 {
-                    "id": "",
+                    "id": "12",
                     "type": "lab",
                     "status": "not started",
-                    "title": "Work_Title",
+                    "title": "Work_Title12",
                     "description": "Work_description",
                     "deadline": null,
                     "date": null,
                     "mark": null,
                     "parts": [
                         {
+                            "id": "121",
+                            "title": "Part_Title"
+                        },
+                        {
+                            "id": "122",
                             "title": "Part_Title"
                         }
                     ]
@@ -69,20 +71,21 @@
             ]
         },
         {
-            "id": "",
-            "name": "Course_Name",
+            "id": "2",
+            "name": "Course_Name_2",
             "works": [
                 {
-                    "id": "",
+                    "id": "21",
                     "type": "lab",
                     "status": "not started",
-                    "title": "Work_Title",
+                    "title": "Work_Title21",
                     "description": "Work_description",
                     "deadline": null,
                     "date": null,
                     "mark": null,
                     "parts": [
                         {
+                            "id": "211",
                             "title": "Part_Title"
                         }
                     ]

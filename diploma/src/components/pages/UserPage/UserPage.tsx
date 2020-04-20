@@ -22,8 +22,11 @@ export class UserPage extends React.Component<any> {
 
     componentDidMount = (): void => {
         // this.user = this.props.userStore.findUser('admin', 'admin'); //admin
-        this.user = this.props.userStore.findUser('Student_Username', 'Student_Password'); //student
+        this.user = this.props.userStore.findUser('dahah@babah.gmail.com', 'Student_Password'); //student
         // this.user = this.props.userStore.findUser('Teacher_Username', 'Teacher_Password'); //teacher
+
+        //todo
+        //перенос выборку юзера в авторизацию
     };
 
     private formTitle = (): string => {
@@ -68,7 +71,8 @@ export class UserPage extends React.Component<any> {
 
     private renderSider = (): React.ReactNode => {
         return (
-            <CustomSider />
+            <CustomSider
+            />
         );
     };
 
@@ -81,9 +85,9 @@ export class UserPage extends React.Component<any> {
     private renderContent = (): React.ReactNode => {
         return (
             <Content>
-                <p className={styles.temp}>User: {this.props.userStore.user
-                ? this.props.userStore.user.username
-                : 'undefined'}</p>
+                <p className={styles.temp}>
+                    {'Content'}
+                </p>
             </Content>
         );
     };

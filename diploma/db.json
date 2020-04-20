@@ -1,0 +1,92 @@
+{
+    "users": [
+        {
+            "id": "123",
+            "username": "admin",
+            "password": "admin",
+            "role": "admin"
+        },
+        {
+            "id": "g34",
+            "username": "Student_Username",
+            "password": "Student_Password",
+            "role": "student",
+            "info": {
+                "name": "Name",
+                "lastname": "Lastname",
+                "level": "bachelor",
+                "year": "4"
+            }
+        },
+        {
+            "id": "vc1",
+            "username": "Teacher_Username",
+            "password": "Teacher_Password",
+            "role": "teacher",
+            "info": {
+                "name": "Professor_Name",
+                "lastname": "Professor_Lastname",
+                "level": "professor"
+            }
+        }
+    ],
+    "courses": [
+        {
+            "id": "",
+            "name": "Course_Name",
+            "works": [
+                {
+                    "id": "",
+                    "type": "lab",
+                    "status": "not started",
+                    "title": "Work_Title",
+                    "description": "Work_description",
+                    "deadline": null,
+                    "date": null,
+                    "mark": null,
+                    "parts": [
+                        {
+                            "title": "Part_Title"
+                        }
+                    ]
+                },
+                {
+                    "id": "",
+                    "type": "lab",
+                    "status": "not started",
+                    "title": "Work_Title",
+                    "description": "Work_description",
+                    "deadline": null,
+                    "date": null,
+                    "mark": null,
+                    "parts": [
+                        {
+                            "title": "Part_Title"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "",
+            "name": "Course_Name",
+            "works": [
+                {
+                    "id": "",
+                    "type": "lab",
+                    "status": "not started",
+                    "title": "Work_Title",
+                    "description": "Work_description",
+                    "deadline": null,
+                    "date": null,
+                    "mark": null,
+                    "parts": [
+                        {
+                            "title": "Part_Title"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

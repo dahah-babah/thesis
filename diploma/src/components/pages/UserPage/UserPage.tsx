@@ -6,6 +6,7 @@ import styles from './UserPage.module.less';
 import { Header } from '../../uui/Header/Header';
 import { CustomSider } from '../../uui/Sider/Sider';
 import { Breadcrumb } from '../../uui/Breadcrumb/Breadcrumb';
+import { User, Student, Teacher } from '../../../types/types';
 
 // interface Props {
 //     userStore?: UserStore;
@@ -17,16 +18,50 @@ const { Content } = Layout;
 @observer
 export class UserPage extends React.Component<any> {
 
-    // @observable user!: User;
+    @observable user!: User | Teacher | Student;
+
+    componentDidMount = (): void => {
+        // this.user = this.props.userStore.findUser('admin', 'admin'); //admin
+        this.user = this.props.userStore.findUser('Student_Username', 'Student_Password'); //student
+        // this.user = this.props.userStore.findUser('Teacher_Username', 'Teacher_Password'); //teacher
+    };
+
+    private formTitle = (): string => {
+        if (this.props.userStore.user) {
+            if (this.props.userStore.user.role === 'admin') {
+                return 'Administrator';
+            } else {
+                return `${this.props.userStore.user.info.name} 
+                        ${this.props.userStore.user.info.lastname}`;
+            }
+        } else {
+            return 'Undefined';
+        }
+    };
+
+    private formSubtitle = (): string => {
+        if (this.props.userStore.user) {
+            if (this.props.userStore.user.role === 'student') {
+                return `${this.props.userStore.user.info.group}`;
+            } else {
+                return '';
+            }
+        } else {
+            return 'Undefined';
+        }
+    };
 
     private renderHeader = (): React.ReactNode => {   
-        const userName = this.props.userStore.user.username; 
+        // this.props.userStore.getUser('admin', 'admin');
+        // const userName = this.props.userStore.user.username; 
             
         return (
             <Header 
-                title='UserPage_Title'
-                subtitle='UserPage_Subtitle'
-                username={userName}
+                title={this.formTitle()}
+                subtitle={this.formSubtitle()}
+                username={this.props.userStore.user
+                ? this.props.userStore.user.username
+                : 'undefined'}
             />
         );
     };
@@ -44,7 +79,6 @@ export class UserPage extends React.Component<any> {
     };
 
     private renderContent = (): React.ReactNode => {
-        this.props.userStore.getUser('admin', 'admin');
         return (
             <Content>
                 <p className={styles.temp}>User: {this.props.userStore.user

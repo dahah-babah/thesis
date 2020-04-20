@@ -15,7 +15,8 @@
                 "name": "Name",
                 "lastname": "Lastname",
                 "level": "bachelor",
-                "year": "4"
+                "year": "4",
+                "group": "IKPI-63"
             }
         },
         {

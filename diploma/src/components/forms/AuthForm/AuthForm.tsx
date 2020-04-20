@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import styles from './AuthForm.module.less';
-import { APIService } from '../../../services/APIService';
+import { inject, observer } from 'mobx-react';
 
-export class AuthForm extends React.Component {
+
+@inject('userStore')
+@observer
+export class AuthForm extends React.Component<any> {
 
     private onSubmit = (values: any): void => {
         console.log(values);
-        APIService.getUsers();
+        this.props.getUsers();
     };
 
     private renderFormItems = (): React.ReactNode => {

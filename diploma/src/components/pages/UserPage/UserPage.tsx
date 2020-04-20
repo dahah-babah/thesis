@@ -1,25 +1,32 @@
 import React from 'react';
+import { observable } from 'mobx';
+import { observer, inject } from 'mobx-react';
 import { Layout } from 'antd';
 import styles from './UserPage.module.less';
-import { APIService } from '../../../services/APIService';
 import { Header } from '../../uui/Header/Header';
 import { CustomSider } from '../../uui/Sider/Sider';
 import { Breadcrumb } from '../../uui/Breadcrumb/Breadcrumb';
 
+// interface Props {
+//     userStore?: UserStore;
+// }
+
 const { Content } = Layout;
 
-export class UserPage extends React.Component {
+@inject('userStore')
+@observer
+export class UserPage extends React.Component<any> {
 
-    private getUsername = (): void => {
-        const user = APIService.getUser('123');
-    }
+    // @observable user!: User;
 
-    private renderHeader = (): React.ReactNode => {
+    private renderHeader = (): React.ReactNode => {   
+        const userName = this.props.userStore.user.username; 
+            
         return (
             <Header 
                 title='UserPage_Title'
                 subtitle='UserPage_Subtitle'
-                username={'username'}
+                username={userName}
             />
         );
     };
@@ -37,15 +44,17 @@ export class UserPage extends React.Component {
     };
 
     private renderContent = (): React.ReactNode => {
+        this.props.userStore.getUser('admin', 'admin');
         return (
             <Content>
-                <p className={styles.temp}>UserPage</p>
+                <p className={styles.temp}>User: {this.props.userStore.user
+                ? this.props.userStore.user.username
+                : 'undefined'}</p>
             </Content>
         );
     };
-
-    render(): React.ReactChild {
-        this.getUsername();
+        
+    render(): React.ReactChild {        
         return (
             <>
                 <Layout>

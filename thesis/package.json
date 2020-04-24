@@ -84,6 +84,8 @@
   },
   "scripts": {
     "start": "concurrently --kill-others \"json-server --watch db.json --port 3333\" \"node scripts/start.js\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },

@@ -18,11 +18,10 @@ export class UserPage extends React.Component<any> {
 
     componentDidMount = (): void => {
         // this.user = this.props.userStore.findUser('admin', 'admin'); //admin
-        this.user = this.props.userStore.findUser('dahah@babah.gmail.com', 'Student_Password'); //student
+        // this.user = this.props.userStore.findUser('dahah@babah.gmail.com', 'Student_Password'); //student
         // this.user = this.props.userStore.findUser('Teacher_Username', 'Teacher_Password'); //teacher
 
-        //todo
-        //перенос выборку юзера в авторизацию
+        this.user = this.props.userStore.getUser();
     };
 
     private formTitle = (): string => {

@@ -4,14 +4,25 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import styles from './AuthForm.module.less';
 import { inject, observer } from 'mobx-react';
+import { observable } from 'mobx';
+import { User, Teacher, Student } from '../../../types/types';
 
 @inject('userStore')
 @observer
 export class AuthForm extends React.Component<any> {
 
+    @observable user!: User | Teacher | Student;
+
     private onSubmit = (values: any): void => {
         console.log(values);
-        this.props.getUsers();
+        this.validateUser(values);
+    };
+
+    private validateUser = (data: any): void => {
+        // this.user = this.props.userStore.findUser('dahah@babah.gmail.com', 'Student_Password'); //student
+        this.user = this.props.userStore.findUser(data.username, data.password);
+        console.log(this.user);
+        
     };
 
     private renderFormItems = (): React.ReactNode => {

@@ -5,7 +5,6 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import styles from './AuthForm.module.less';
 import { inject, observer } from 'mobx-react';
 
-
 @inject('userStore')
 @observer
 export class AuthForm extends React.Component<any> {
@@ -48,7 +47,7 @@ export class AuthForm extends React.Component<any> {
                         type='primary'
                         htmlType='submit'
                     >
-                        <Link to='/user'>Log in</Link>
+                        <Link to={`/user/${this.props.userStore.getUser() ? this.props.userStore.user.id : null}`}>Log in</Link>
                     </Button>
                 </Form.Item>
             </>

@@ -3,14 +3,10 @@ import { observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import { Layout } from 'antd';
 import styles from './UserPage.module.less';
-import { Header } from '../../uui/Header/Header';
-import { CustomSider } from '../../uui/Sider/Sider';
-import { Breadcrumb } from '../../uui/Breadcrumb/Breadcrumb';
-import { User, Student, Teacher } from '../../../types/types';
-
-// interface Props {
-//     userStore?: UserStore;
-// }
+import { Header } from '../../../uui/Header/Header';
+import { CustomSider } from '../../../uui/Sider/Sider';
+import { Breadcrumb } from '../../../uui/Breadcrumb/Breadcrumb';
+import { User, Student, Teacher } from '../../../../types/types';
 
 const { Content } = Layout;
 
@@ -54,10 +50,7 @@ export class UserPage extends React.Component<any> {
         }
     };
 
-    private renderHeader = (): React.ReactNode => {   
-        // this.props.userStore.getUser('admin', 'admin');
-        // const userName = this.props.userStore.user.username; 
-            
+    private renderHeader = (): React.ReactNode => {               
         return (
             <Header 
                 title={this.formTitle()}
@@ -72,6 +65,9 @@ export class UserPage extends React.Component<any> {
     private renderSider = (): React.ReactNode => {
         return (
             <CustomSider
+                user={this.props.userStore.user
+                        ?   this.props.userStore.user
+                        :   null}
             />
         );
     };

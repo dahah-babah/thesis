@@ -4,20 +4,23 @@ export interface IdName {
 }
 
 export interface User extends IdName {
-    role: string;
+    role: 'admin' | 'student' | 'teacher';
 }
 
 export interface Student extends User {
     name: string;
     lastname: string;
-    level: string;
+    group: string;
+    level: 'bachelor' | 'master';
     year: string;
+    semester: string;
 }
 
 export interface Teacher extends User {
     name: string;
     lastname: string;
     level: string;
+    courses: string[]; //temporary mock
 }
 
 export interface Work extends IdName {
@@ -28,7 +31,7 @@ export interface Work extends IdName {
     deadline: Date;
     date: Date;
     mark: string;
-    parts: string[]; //temporary mock
+    parts: object[]; //temporary mock
 }
 
 export interface Course extends IdName {

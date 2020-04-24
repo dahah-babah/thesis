@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import './AuthPage.module.less';
-import { AuthForm } from '../../forms/AuthForm/AuthForm';
+import { AuthForm } from '../../../forms/AuthForm/AuthForm';
 
 const { Content } = Layout;
 

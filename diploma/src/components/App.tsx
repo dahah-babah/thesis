@@ -3,8 +3,9 @@ import { Router, Route, Switch, Redirect } from 'react-router';
 import { createBrowserHistory } from 'history';
 
 import { PATH } from '../routes/paths';
-import { AuthPage } from './pages/AuthPage/AuthPage';
-import { UserPage } from './pages/UserPage/UserPage';
+import { AuthPage } from './pages/CommonPages/AuthPage/AuthPage';
+//temporary mock
+import { UserPage } from './pages/StudentPages/UserPage/UserPage';
 
 const history = createBrowserHistory();
 

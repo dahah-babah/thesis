@@ -7,7 +7,7 @@ interface Props {
     menuItems: Course[];
 }
 
-const { SubMenu, ItemGroup, Item } = AntdMenu;
+const { SubMenu, Item } = AntdMenu;
 
 export class Menu extends React.Component<Props> {
 
@@ -24,12 +24,12 @@ export class Menu extends React.Component<Props> {
             return (
                 course.works.map((work: Work) => 
                     work.parts.length
-                    ?   <ItemGroup 
+                    ?   <SubMenu 
                             key={work.id} 
                             title={work.title}
                         >
                             {this.renderParts(work.parts)}
-                        </ItemGroup>
+                        </SubMenu>
                     :   <Item key={work.id}>{work.title}</Item>
                 )
             );

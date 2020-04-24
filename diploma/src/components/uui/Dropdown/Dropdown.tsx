@@ -23,7 +23,7 @@ export class Dropdown extends React.Component<Props> {
         return (
             <AntdDropdown overlay={menu} className={this.props.className}>
                 <Button>
-                    Choose <DownOutlined />
+                    <DownOutlined />
                 </Button>
             </AntdDropdown>
         );

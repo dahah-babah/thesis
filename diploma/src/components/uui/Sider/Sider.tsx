@@ -5,24 +5,25 @@ import styles from './Sider.module.less';
 
 import { Menu } from '../Menu/Menu';
 import { Dropdown } from '../Dropdown/Dropdown';
+import { User, Teacher, Student } from '../../../types/types';
 
 interface Props {
     mode?: 'light' | 'dark';
+    user: User | Teacher | Student;
 }
 
 const { Sider } = Layout;
-const { Title } = Typography;
+// const { Title } = Typography;
 
-@inject('siderStore', 'courseStore')
+@inject('userStore', 'siderStore', 'courseStore')
 @observer
 export class CustomSider extends React.Component<Props | any> {
 
     componentDidMount = (): void => {
-        this.props.courseStore.fetchCourses();
+        this.props.courseStore.fetchCourses(this.props.userStore.user);
     };
 
     private renderMenuHeader = (): React.ReactNode => {
-        // select is around of Title
        return (
             <Dropdown 
                 className={styles.menuHeader}

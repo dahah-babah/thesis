@@ -20,7 +20,7 @@ class UserStore {
     };
 
     @action.bound
-    public getUser(username: string, password: string) {
+    public findUser(username: string, password: string) {
         Axios.get(`${PATH.SERVER}/users`)
         .then((users) => {
             for (let i = 0; i < users.data.length; i++) {                
@@ -34,6 +34,11 @@ class UserStore {
             }
         })
         .catch(error => console.log(error))
+    };
+
+    @action
+    public getUser = (): User | Student | Teacher => {
+        return this.user;
     };
 
     @action

@@ -8,32 +8,35 @@ export interface User extends IdName {
 }
 
 export interface Student extends User {
-    name: string;
     lastname: string;
     group: string;
     level: 'bachelor' | 'master';
     year: string;
     semester: string;
+    courses: Course[];
 }
 
 export interface Teacher extends User {
     name: string;
     lastname: string;
     level: string;
-    courses: string[]; //temporary mock
+    courses: Course[]; 
 }
 
 export interface Work extends IdName {
-    type: 'Lab' | 'Practic' | 'Theory';
     status: 'Not started' | 'In propgress' | 'Done';
     title: string;
     description: string;
     deadline: Date;
-    date: Date;
-    mark: string;
-    parts: object[]; //temporary mock
+    parts: Part[]; 
 }
 
 export interface Course extends IdName {
     works: Work[];
+}
+
+export interface Part extends IdName {
+    title: string;
+    type: string; //mock
+    content: any; //mock
 }

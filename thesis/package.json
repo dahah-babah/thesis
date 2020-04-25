@@ -65,6 +65,7 @@
     "react-app-rewired": "^2.1.5",
     "react-dev-utils": "^10.2.1",
     "react-dom": "^16.13.1",
+    "react-google-charts": "^3.0.15",
     "react-router": "^5.1.2",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.1.2",

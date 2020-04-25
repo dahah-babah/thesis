@@ -29,8 +29,8 @@ export class UserPage extends React.Component<any> {
             if (this.props.userStore.user.role === 'admin') {
                 return 'Administrator';
             } else {
-                return `${this.props.userStore.user.info.name} 
-                        ${this.props.userStore.user.info.lastname}`;
+                return `${this.props.userStore.user.name} 
+                        ${this.props.userStore.user.lastname}`;
             }
         } else {
             return 'Undefined';
@@ -40,7 +40,7 @@ export class UserPage extends React.Component<any> {
     private formSubtitle = (): string => {
         if (this.props.userStore.user) {
             if (this.props.userStore.user.role === 'student') {
-                return `${this.props.userStore.user.info.group}`;
+                return `${this.props.userStore.user.group}`;
             } else {
                 return '';
             }

@@ -7,29 +7,98 @@
             "role": "admin"
         },
         {
-            "id": "g34",
-            "username": "dahah@babah.gmail.com",
-            "password": "Student_Password",
+            "id": "g34sad4df2",
+            "username": "Ivanov_Ivan",
+            "password": "123",
             "role": "student",
-            "info": {
-                "name": "Daria",
-                "lastname": "Lobanova",
-                "level": "bachelor",
-                "year": "4",
-                "semester": "8",
-                "group": "IKPI-63"
-            }
+            "name": "Ivan",
+            "lastname": "Ivanov",
+            "level": "bachelor",
+            "year": "2",
+            "semester": "3",
+            "group": "QWE-81",
+            "courses": [
+                {
+                    "id": "1"
+                }
+            ]
         },
         {
-            "id": "vc1",
-            "username": "Belaya",
-            "password": "Teacher_Password",
+            "id": "dfmsk4ksamd",
+            "username": "Semenov_Semon",
+            "password": "123",
+            "role": "student",
+            "name": "Semen",
+            "lastname": "Semenov",
+            "level": "bachelor",
+            "year": "2",
+            "semester": "3",
+            "group": "QWE-81",
+            "courses": [
+                {
+                    "id": "1"
+                }
+            ]
+        },
+        {
+            "id": "aasd5sdag34",
+            "username": "Petrov_Petr",
+            "password": "123",
+            "role": "student",
+            "name": "Petr",
+            "lastname": "Petrov",
+            "level": "bachelor",
+            "year": "2",
+            "semester": "3",
+            "group": "QWE-82",
+            "courses": [
+                {
+                    "id": "1"
+                }
+            ]
+        },
+        {
+            "id": "asmdsk4dg34",
+            "username": "Pusyash_Pushistiy",
+            "password": "123",
+            "role": "student",
+            "name": "Pusyash",
+            "lastname": "Pushistiy",
+            "level": "bachelor",
+            "year": "2",
+            "semester": "3",
+            "group": "QWE-82",
+            "courses": [
+                {
+                    "id": "1"
+                }
+            ]
+        },
+        {
+            "id": "g34as3dsad",
+            "username": "Maria_Marfina",
+            "password": "123",
+            "role": "student",
+            "name": "Maria",
+            "lastname": "Marfina",
+            "level": "bachelor",
+            "year": "2",
+            "semester": "3",
+            "group": "QWE-82",
+            "courses": [
+                {
+                    "id": "1"
+                }
+            ]
+        },
+        {
+            "id": "vcklnjb1",
+            "username": "Poshposh_Poashka",
+            "password": "321",
             "role": "teacher",
-            "info": {
-                "name": "Professor_Name",
-                "lastname": "Professor_Lastname",
-                "level": "assistant professor"
-            },
+            "name": "Poashka",
+            "lastname": "Poshposh",
+            "level": "professor",
             "courses": [
                 {
                     "id": "1"
@@ -40,72 +109,52 @@
     "courses": [
         {
             "id": "1",
-            "name": "Course_Name_1",
-            "studentGroups": [
-                "IKPI-63"
-            ],
+            "name": "MiVT",
             "works": [
                 {
-                    "id": "11",
-                    "type": "lab",
-                    "status": "not started",
-                    "title": "Work_Title11",
+                    "id": "1",
+                    "title": "Lab1",
                     "description": "Work_description",
                     "deadline": null,
-                    "date": null,
-                    "mark": null,
                     "parts": [
+                        {
+                            "id": "1",
+                            "title": "Theory",
+                            "type": "theory",
+                            "content": "Some theory"
+                        },
+                        {
+                            "id": "2",
+                            "title": "Test",
+                            "type": "test",
+                            "content": "mock test"
+                        }
                     ],
                     "files": [
                         
                     ]
                 },
                 {
-                    "id": "12",
-                    "type": "lab",
-                    "status": "not started",
-                    "title": "Work_Title12",
+                    "id": "2",
+                    "title": "Lab2",
                     "description": "Work_description",
                     "deadline": null,
-                    "date": null,
-                    "mark": null,
                     "parts": [
                         {
-                            "id": "121",
-                            "title": "Part_Title"
+                            "id": "1",
+                            "title": "Theory",
+                            "type": "theory",
+                            "content": "Some theory"
                         },
                         {
-                            "id": "122",
-                            "title": "Part_Title"
+                            "id": "2",
+                            "title": "Lab",
+                            "type": "lab",
+                            "content": "mock lab"
                         }
                     ],
                     "files": [
 
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "2",
-            "name": "Course_Name_2",
-            "works": [
-                {
-                    "id": "21",
-                    "type": "lab",
-                    "status": "not started",
-                    "title": "Work_Title21",
-                    "description": "Work_description",
-                    "deadline": null,
-                    "date": null,
-                    "mark": null,
-                    "parts": [
-                        {
-                            "id": "211",
-                            "title": "Part_Title"
-                        }
-                    ],
-                    "files": [
-                        
                     ]
                 }
             ]

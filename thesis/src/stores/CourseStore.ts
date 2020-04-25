@@ -21,8 +21,8 @@ class CourseStore {
 
     @action.bound
     public fetchStudentCourses(user: Student) {
-        const studentGroup = user.group;
-        Axios.get(`${PATH.SERVER}/courses?studentGroups=${studentGroup}`)
+        //make correct reauest
+        Axios.get(`${PATH.SERVER}/courses`)
         .then((courses) => {
             runInAction(() => {
                 this.setCourses(courses.data)
@@ -35,7 +35,7 @@ class CourseStore {
     public fetchTeacherCourses(user: Teacher) {
         const coursesId = user.courses;
         //make correct request for several course id
-        Axios.get(`${PATH.SERVER}/courses?id=${coursesId}`)
+        Axios.get(`${PATH.SERVER}/courses`)
         .then((courses) => {
             runInAction(() => {
                 this.setCourses(courses.data)

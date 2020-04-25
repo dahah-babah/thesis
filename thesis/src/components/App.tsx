@@ -4,8 +4,7 @@ import { createBrowserHistory } from 'history';
 
 import { PATH } from '../routes/paths';
 import { AuthPage } from './pages/CommonPages/AuthPage/AuthPage';
-//temporary mock
-import { UserPage } from './pages/StudentPages/UserPage/UserPage';
+import { UserPage } from './pages/CommonPages/UserPage/UserPage';
 
 const history = createBrowserHistory();
 

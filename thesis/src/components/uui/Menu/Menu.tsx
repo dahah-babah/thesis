@@ -64,6 +64,8 @@ export class Menu extends React.Component<Props> {
             <AntdMenu
                 mode='inline'
                 theme='light'
+                multiple={false}
+                selectable={true}
             >
                 {this.renderMenuItems()}
             </AntdMenu>

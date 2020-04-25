@@ -7,6 +7,8 @@ import { Header } from '../../../uui/Header/Header';
 import { CustomSider } from '../../../uui/Sider/Sider';
 import { Breadcrumb } from '../../../uui/Breadcrumb/Breadcrumb';
 import { User, Student, Teacher } from '../../../../types/types';
+import { StudentMainPage } from '../../StudentPages/MainPage/MainPage';
+import { TeacherMainPage } from '../../TeacherPages/MainPage/MainPage';
 
 const { Content } = Layout;
 
@@ -17,9 +19,9 @@ export class UserPage extends React.Component<any> {
     @observable user!: User | Teacher | Student;
 
     componentDidMount = (): void => {
-        // this.user = this.props.userStore.findUser('admin', 'admin'); //admin
-        // this.user = this.props.userStore.findUser('dahah@babah.gmail.com', 'Student_Password'); //student
-        // this.user = this.props.userStore.findUser('Teacher_Username', 'Teacher_Password'); //teacher
+        // this.user = this.props.userStore.findUser('123', '321'); //admin
+        this.user = this.props.userStore.findUser('Ivanov_Ivan', '123'); //student
+        // this.user = this.props.userStore.findUser('Poshposh_Poashka', '321'); //teacher
 
         this.user = this.props.userStore.getUser();
     };
@@ -41,6 +43,8 @@ export class UserPage extends React.Component<any> {
         if (this.props.userStore.user) {
             if (this.props.userStore.user.role === 'student') {
                 return `${this.props.userStore.user.group}`;
+            } else if (this.props.userStore.role === 'teacher') {
+                return `${this.props.userStore.user.level}`;
             } else {
                 return '';
             }
@@ -65,8 +69,8 @@ export class UserPage extends React.Component<any> {
         return (
             <CustomSider
                 user={this.props.userStore.user
-                        ?   this.props.userStore.user
-                        :   null}
+                    ?   this.props.userStore.user
+                    :   null}
             />
         );
     };
@@ -77,12 +81,24 @@ export class UserPage extends React.Component<any> {
         );
     };
 
+    private renderUserContent = (): React.ReactNode => {
+        {/* if S: render ALL not comleted works <StudentMainPage /> 
+        else T: render ALL not comleted reports <TeacherMainPage /> */}
+        if (this.props.userStore.user) {
+            if (this.props.userStore.user.role === 'teacher') {
+                return <TeacherMainPage />;
+            } else if (this.props.userStore.user.role === 'student') {
+                return <StudentMainPage user={this.props.userStore.user} />
+            } else return 'Admin';
+        } else return null;
+    };
+
     private renderContent = (): React.ReactNode => {
         return (
             <Content>
-                <p className={styles.temp}>
-                    {'Content'}
-                </p>
+                <article className={styles.temp}>
+                    {this.renderUserContent()}
+                </article>
             </Content>
         );
     };

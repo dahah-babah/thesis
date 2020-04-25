@@ -12,6 +12,17 @@ interface Props {
 
 export class UserIcon extends React.Component<Props> {
 
+    private getBadgeCount = (): number => {
+        // temporary mock
+        
+        // reauest to user (student or teacher)
+        // S: count not comleted works
+        // T: count not comleted reports
+        // if exists then count -> this number
+        // else return 0
+        return 0;
+    };
+
     private renderAvatar = (): React.ReactNode => {
         const { username } = this.props;
         return (
@@ -32,7 +43,7 @@ export class UserIcon extends React.Component<Props> {
                 <span>
                     <Badge
                         content={this.renderAvatar()}
-                        count={5}
+                        count={this.getBadgeCount()}
                     />
                 </span>
             </>

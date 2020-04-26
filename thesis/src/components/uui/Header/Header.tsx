@@ -4,30 +4,55 @@ import styles from './Header.module.less';
 import { UserIcon } from '../UserIcon/UserIcon';
 
 interface Props {
-    title: string;
-    subtitle?: string;
-    username: string;
+    user: any;
 }
 
 export class Header extends React.Component<Props> {
 
+    private formTitle = (): string => {
+        if (this.props.user) {
+            if (this.props.user.role === 'admin') {
+                return 'Administrator';
+            } else {
+                return `${this.props.user.name} 
+                        ${this.props.user.lastname}`;
+            }
+        } else {
+            return 'Undefined';
+        }
+    };
+
+    private formSubtitle = (): string => {
+        if (this.props.user) {
+            if (this.props.user.role === 'student') {
+                return `${this.props.user.group}`;
+            } else if (this.props.user.role === 'teacher') {
+                return `${this.props.user.level}`;
+            } else {
+                return '';
+            }
+        } else {
+            return 'Undefined';
+        }
+    };
+
     private renderUserInfo = (): React.ReactNode => {
-        const { username } = this.props;
         return (
-            <span className={styles.userWrapper}>
-                <p className={styles.username}>{username}</p>
-                <UserIcon username={'User'} />
-            </span>
+            this.props.user 
+            ?   <span className={styles.userWrapper}>
+                    <p className={styles.username}>{this.props.user.username}</p>
+                    <UserIcon username={'User'} />
+                </span>
+            : null
         );
     };
 
     render(): React.ReactChild {
-        const { title, subtitle } = this.props;
         return (
             <PageHeader
                 // onBack={() => history.back()}
-                title={title}
-                subTitle={subtitle}
+                title={this.formTitle()}
+                subTitle={this.formSubtitle()}
             >
                 {this.renderUserInfo()}
             </PageHeader>

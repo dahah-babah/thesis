@@ -19,6 +19,8 @@ export class UserPage extends React.Component<any> {
     @observable user!: User | Teacher | Student;
 
     componentDidMount = (): void => {
+        // temporary mock
+
         // this.user = this.props.userStore.findUser('123', '321'); //admin
         this.user = this.props.userStore.findUser('Ivanov_Ivan', '123'); //student
         // this.user = this.props.userStore.findUser('Poshposh_Poashka', '321'); //teacher
@@ -26,41 +28,10 @@ export class UserPage extends React.Component<any> {
         this.user = this.props.userStore.getUser();
     };
 
-    private formTitle = (): string => {
-        if (this.props.userStore.user) {
-            if (this.props.userStore.user.role === 'admin') {
-                return 'Administrator';
-            } else {
-                return `${this.props.userStore.user.name} 
-                        ${this.props.userStore.user.lastname}`;
-            }
-        } else {
-            return 'Undefined';
-        }
-    };
-
-    private formSubtitle = (): string => {
-        if (this.props.userStore.user) {
-            if (this.props.userStore.user.role === 'student') {
-                return `${this.props.userStore.user.group}`;
-            } else if (this.props.userStore.role === 'teacher') {
-                return `${this.props.userStore.user.level}`;
-            } else {
-                return '';
-            }
-        } else {
-            return 'Undefined';
-        }
-    };
-
     private renderHeader = (): React.ReactNode => {               
         return (
-            <Header 
-                title={this.formTitle()}
-                subtitle={this.formSubtitle()}
-                username={this.props.userStore.user
-                ? this.props.userStore.user.username
-                : 'undefined'}
+            <Header
+                user={this.props.userStore.user} 
             />
         );
     };

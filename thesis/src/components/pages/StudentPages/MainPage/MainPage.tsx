@@ -2,6 +2,7 @@ import React from 'react';
 import { observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import { Course, Student } from '../../../../types/types';
+import { Collapse } from '../../../uui/Collapse/Collapse';
 
 interface Props {
     user: Student;
@@ -20,9 +21,10 @@ export class StudentMainPage extends React.Component<Props | any> {
 
     private renderCourses = (): React.ReactNode => {
         return this.courses.map((course: Course) => 
-            <div key={course.id}>
-                {course.name}
-            </div>
+            <Collapse 
+                key={course.id}
+                title={course.name}
+            />
         );
     };
         

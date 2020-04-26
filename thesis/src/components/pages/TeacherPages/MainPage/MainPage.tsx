@@ -20,9 +20,9 @@ export class TeacherMainPage extends React.Component<Props | any> {
 
     private renderCourses = (): React.ReactNode => {
         return this.courses.map((course: Course) => 
-            <div key={course.id}>
-                {course.name}
-            </div>
+            <ul key={course.id}>
+                <li>{course.name}</li>
+            </ul>
         );
     };
         

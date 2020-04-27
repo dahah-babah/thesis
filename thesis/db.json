@@ -138,6 +138,29 @@
                     "id": "2",
                     "title": "Lab2",
                     "description": "Work_description",
+                    "deadline": "1.04.2020",
+                    "parts": [
+                        {
+                            "id": "1",
+                            "title": "Theory",
+                            "type": "theory",
+                            "content": "Some theory"
+                        },
+                        {
+                            "id": "2",
+                            "title": "Lab",
+                            "type": "lab",
+                            "content": "mock lab"
+                        }
+                    ],
+                    "files": [
+
+                    ]
+                },
+                {
+                    "id": "3",
+                    "title": "Lab3",
+                    "description": "Work_description",
                     "deadline": null,
                     "parts": [
                         {

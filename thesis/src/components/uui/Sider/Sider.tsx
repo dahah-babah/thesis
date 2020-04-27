@@ -27,7 +27,7 @@ export class CustomSider extends React.Component<Props | any> {
        return (
             <Dropdown 
                 className={styles.menuHeader}
-                menuItems={['Courses']} 
+                menuItems={['Courses', 'Statistic']} 
             />
        );
     };

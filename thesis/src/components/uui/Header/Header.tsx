@@ -9,6 +9,10 @@ interface Props {
 
 export class Header extends React.Component<Props> {
 
+    private firstLetter = (username: string): string => {
+        return username[0];
+    };
+
     private formTitle = (): string => {
         if (this.props.user) {
             if (this.props.user.role === 'admin') {
@@ -41,7 +45,7 @@ export class Header extends React.Component<Props> {
             this.props.user 
             ?   <span className={styles.userWrapper}>
                     <p className={styles.username}>{this.props.user.username}</p>
-                    <UserIcon username={'User'} />
+                    <UserIcon username={this.firstLetter(this.props.user.username)} />
                 </span>
             : null
         );

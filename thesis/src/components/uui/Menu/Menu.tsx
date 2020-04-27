@@ -1,7 +1,11 @@
 import React from 'react';
 import { Menu as AntdMenu } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { Course, Work } from '../../../types/types';
+import { Course, Work, User, Student, Teacher } from '../../../types/types';
+import { Link } from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
+import { observable } from 'mobx';
+import { Badge } from '../Badge/Badge';
 
 interface Props {
     menuItems: Course[];
@@ -9,28 +13,45 @@ interface Props {
 
 const { SubMenu, Item } = AntdMenu;
 
-export class Menu extends React.Component<Props> {
+@inject('userStore')
+@observer
+export class Menu extends React.Component<Props | any> {
 
-    private renderParts = (parts: any): React.ReactNode => {
+    @observable user!: User | Teacher | Student;
+
+    componentDidMount() {
+        this.user = this.props.userStore.getUser();
+    };
+
+    private renderCourseName = (name: string): React.ReactNode => {
         return (
-            parts.map((part: any) => 
-                <Item key={part.id}>{part.title}</Item>
-            )
+            <span>
+                <ArrowRightOutlined />
+                <Badge
+                    content={<span>{name}</span>}
+                    dot
+                    offset={[10, 0]}
+                />
+            </span>
         );
     };
 
-    private renderItemGroups = (course: Course): React.ReactNode => {
-        if (course.works) {
+    private renderItems = (course: Course): React.ReactNode => {
+        if (course.works && this.props.userStore.user) {
             return (
                 course.works.map((work: Work) => 
-                    work.parts.length
-                    ?   <SubMenu 
-                            key={work.id} 
-                            title={work.title}
+                    <Item key={work.id}>
+                        <Link
+                            to={`/user/${this.props.userStore.user.id}/courses/${course.id}/works/${work.id}`}
                         >
-                            {this.renderParts(work.parts)}
-                        </SubMenu>
-                    :   <Item key={work.id}>{work.title}</Item>
+                            {/* mock add status */}
+                            <Badge 
+                                content={work.title} 
+                                dot 
+                                offset={[10, 0]}
+                            />
+                        </Link>
+                    </Item>
                 )
             );
         } else return null;
@@ -38,19 +59,18 @@ export class Menu extends React.Component<Props> {
 
     private renderMenuItems = (): React.ReactNode => {
         const { menuItems } = this.props;        
-        if (menuItems) {
+        if (menuItems && this.props.userStore.user) {
             return (
                 menuItems.map((menuItem: Course) => 
                     <SubMenu
                         key={menuItem.id}
                         title={
-                            <span>
-                                <ArrowRightOutlined />
-                                <span>{menuItem.name}</span>
-                            </span>
+                            <Link to={`/user/${this.props.userStore.user.id}/courses/${menuItem.id}`}>
+                                {this.renderCourseName(menuItem.name)}
+                            </Link>
                         }
                     >
-                        {this.renderItemGroups(menuItem)}
+                        {this.renderItems(menuItem)}
                     </SubMenu>
                 )
             );

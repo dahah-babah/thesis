@@ -1,6 +1,6 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import { Layout, Typography } from 'antd';
+import { Layout } from 'antd';
 import styles from './Sider.module.less';
 
 import { Menu } from '../Menu/Menu';
@@ -13,7 +13,6 @@ interface Props {
 }
 
 const { Sider } = Layout;
-// const { Title } = Typography;
 
 @inject('userStore', 'siderStore', 'courseStore')
 @observer
@@ -24,12 +23,18 @@ export class CustomSider extends React.Component<Props | any> {
     };
 
     private renderMenuHeader = (): React.ReactNode => {
-       return (
-            <Dropdown 
-                className={styles.menuHeader}
-                menuItems={['Courses', 'Statistic']} 
-            />
-       );
+        if (this.props.userStore.user) {
+            if (this.props.userStore.user.role === 'student') {
+                return null;
+            } else {
+                return (
+                    <Dropdown 
+                        className={styles.menuHeader}
+                        menuItems={['Courses', 'Statistic']} 
+                    />
+               );
+            }
+        } else return null;
     };
 
     private renderMenu = (): React.ReactNode => {

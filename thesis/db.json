@@ -19,7 +19,14 @@
             "group": "QWE-81",
             "courses": [
                 {
-                    "id": "1"
+                    "id": "1",
+                    "works": [
+                        {
+                            "id": "1",
+                            "completed": true,
+                            "mark": "75"
+                        }
+                    ]
                 }
             ]
         },

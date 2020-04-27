@@ -53,8 +53,6 @@ export class UserPage extends React.Component<any> {
     };
 
     private renderUserContent = (): React.ReactNode => {
-        {/* if S: render ALL not comleted works <StudentMainPage /> 
-        else T: render ALL not comleted reports <TeacherMainPage /> */}
         if (this.props.userStore.user) {
             if (this.props.userStore.user.role === 'teacher') {
                 return <TeacherMainPage />;

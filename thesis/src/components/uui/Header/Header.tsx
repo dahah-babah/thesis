@@ -45,7 +45,13 @@ export class Header extends React.Component<Props> {
             this.props.user 
             ?   <span className={styles.userWrapper}>
                     <p className={styles.username}>{this.props.user.username}</p>
-                    <UserIcon username={this.firstLetter(this.props.user.username)} />
+                    <UserIcon 
+                        username={this.firstLetter(this.props.user.username)}
+                        userRole={this.props.user.role}
+                        userId={this.props.user.id} 
+                        shape={'square'}
+                        size={'large'}
+                    />
                 </span>
             : null
         );

@@ -1,10 +1,13 @@
 import React from 'react';
+import { Typography } from 'antd';
 import { observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import { Course, Student, Work } from '../../../../types/types';
 import { Collapse } from '../../../uui/Collapse/Collapse';
 import styles from './MainPage.module.less';
 import { BorderlessTableOutlined } from '@ant-design/icons'; 
+
+const { Text } = Typography;
 
 interface Props {
     user: Student;
@@ -46,7 +49,7 @@ export class StudentMainPage extends React.Component<Props | any> {
             <section>
                 <span className={styles.titleWrapper}>
                     <BorderlessTableOutlined />
-                    <h4 className={styles.title}>{'Not comleted works'}</h4>
+                    <Text mark strong className={styles.title}>{'Not comleted tasks'}</Text>
                 </span>
                 {this.renderCourses()}
             </section>

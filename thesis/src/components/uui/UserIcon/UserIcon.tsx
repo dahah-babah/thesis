@@ -3,9 +3,11 @@ import { Avatar } from 'antd';
 import { Badge } from '../Badge/Badge';
 
 interface Props {
+    userId: string;
+    userRole: string;
     username: string;
-    icon?: React.ReactNode;
-    src?: string;
+    // icon?: React.ReactNode;
+    // src?: string;
     shape?: 'circle' | 'square';
     size?: number | 'large' | 'small' | 'default';
 }
@@ -24,12 +26,12 @@ export class UserIcon extends React.Component<Props> {
     };
 
     private renderAvatar = (): React.ReactNode => {
-        const { username } = this.props;
+        const { username, shape, size } = this.props;
         return (
             <>
                 <Avatar
-                    shape={'square'}
-                    size={'large'}
+                    shape={shape}
+                    size={size}
                 > 
                     {username}
                 </Avatar>

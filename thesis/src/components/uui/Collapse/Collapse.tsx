@@ -2,8 +2,10 @@ import React from 'react';
 import { Collapse as AntdCollapse } from 'antd';
 import { Work } from '../../../types/types';
 import styles from './Collapse.module.less';
+import { Typography } from 'antd';
 
 const { Panel } = AntdCollapse;
+const { Title, Paragraph } = Typography;
 
 interface Props {
     title: string;
@@ -17,7 +19,14 @@ export class Collapse extends React.Component<Props> {
     private renderContent = (): React.ReactNode => {
         const { content } = this.props; 
         return (
-            <p>{`Deadline: ${content.deadline ? content.deadline : '-'}`}</p>
+            <>
+                <span className={styles.titleWrapper}>
+                    <Title className={styles.title}>{content.title}</Title>
+                    <Paragraph>{` - ${content.parts.length} part${content.parts.length === 1 ? '' : 's'}`}</Paragraph>
+                </span>
+                <Paragraph>{`Deadline: ${content.deadline ? content.deadline : '-'}`}</Paragraph>
+                <Paragraph>{`Description: ${content.description}`}</Paragraph>
+            </>
         );
     }
 

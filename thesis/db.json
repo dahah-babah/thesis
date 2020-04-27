@@ -126,12 +126,6 @@
                     "parts": [
                         {
                             "id": "1",
-                            "title": "Theory",
-                            "type": "theory",
-                            "content": "Some theory"
-                        },
-                        {
-                            "id": "2",
                             "title": "Test",
                             "type": "test",
                             "content": "mock test"

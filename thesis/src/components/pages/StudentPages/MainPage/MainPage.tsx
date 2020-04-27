@@ -24,13 +24,15 @@ export class StudentMainPage extends React.Component<Props | any> {
         this.courses = this.props.courseStore.getCourses();        
     };
 
-    private renderNotCompletedWorks = (works: Work[], courseName: string): React.ReactNode => {
+    private renderNotCompletedWorks = (works: Work[], course: Course): React.ReactNode => {
         return (
             works.map((work: Work) =>
                 <Collapse
                     key={work.id}
-                    title={`${courseName} - ${work.title}`}
+                    title={`${course.name} - ${work.title}`}
                     content={work}
+                    user={this.props.user}
+                    courseId={course.id}
                 />
             )
         );
@@ -39,7 +41,7 @@ export class StudentMainPage extends React.Component<Props | any> {
     private renderCourses = (): React.ReactNode => {
         return this.courses.map((course: Course) => 
             course.works
-            ?   this.renderNotCompletedWorks(course.works, course.name)
+            ?   this.renderNotCompletedWorks(course.works, course)
             :   `You already completed all works on ${course.name} course! Great job!`
         );
     };

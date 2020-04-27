@@ -22,21 +22,6 @@ export class CustomSider extends React.Component<Props | any> {
         this.props.courseStore.fetchCourses(this.props.userStore.user);
     };
 
-    private renderMenuHeader = (): React.ReactNode => {
-        if (this.props.userStore.user) {
-            if (this.props.userStore.user.role === 'student') {
-                return null;
-            } else {
-                return (
-                    <Dropdown 
-                        className={styles.menuHeader}
-                        menuItems={['Courses', 'Statistic']} 
-                    />
-               );
-            }
-        } else return null;
-    };
-
     private renderMenu = (): React.ReactNode => {
         return (
             <Menu
@@ -48,7 +33,6 @@ export class CustomSider extends React.Component<Props | any> {
     render(): React.ReactChild {        
         return (
             <div className={styles.menuWrapper}>
-                {this.renderMenuHeader()}
                 <Sider
                     theme='light'
                     collapsible

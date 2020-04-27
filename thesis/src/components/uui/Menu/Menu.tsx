@@ -31,6 +31,8 @@ export class Menu extends React.Component<Props | any> {
                     content={<span>{name}</span>}
                     dot
                     offset={[10, 0]}
+                    // status
+                    // title
                 />
             </span>
         );
@@ -49,6 +51,8 @@ export class Menu extends React.Component<Props | any> {
                                 content={work.title} 
                                 dot 
                                 offset={[10, 0]}
+                                // status
+                                // title
                             />
                         </Link>
                     </Item>

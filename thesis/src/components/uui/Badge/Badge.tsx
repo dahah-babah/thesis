@@ -13,13 +13,14 @@ interface Props {
 export class Badge extends React.Component<Props> {
 
     render(): React.ReactChild {
-        const { content, count, status, dot, offset } = this.props;
+        const { content, count, status, dot, offset, title } = this.props;
         return (
             <AntdBadge
                 count={count}
                 status={status}
                 dot={dot}
                 offset={offset}
+                title={title}
             >
                 {content}
             </AntdBadge>

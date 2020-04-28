@@ -23,16 +23,18 @@ export class CustomSider extends React.Component<Props | any> {
 
     private renderMenu = (): React.ReactNode => {
         return (
-            <Menu
-                menuItems={this.props.courseStore.courses}
-            />
+            <div className={styles.fixed}>
+                <Menu
+                    menuItems={this.props.courseStore.courses}
+                />
+            </div>
         );
     };
 
     render(): React.ReactChild {        
         return (
             <div className={styles.menuWrapper}>
-                <Sider
+                <Sider                    
                     theme='light'
                     collapsible
                     collapsed={this.props.siderStore.isSiderCollapsed}

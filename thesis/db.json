@@ -187,6 +187,29 @@
                     "files": [
 
                     ]
+                },
+                {
+                    "id": "4",
+                    "title": "Lab4",
+                    "description": "Work_description",
+                    "deadline": null,
+                    "parts": [
+                        {
+                            "id": "1",
+                            "title": "Theory",
+                            "type": "theory",
+                            "content": "Some theory"
+                        },
+                        {
+                            "id": "2",
+                            "title": "Lab",
+                            "type": "lab",
+                            "content": "mock lab"
+                        }
+                    ],
+                    "files": [
+
+                    ]
                 }
             ]
         }

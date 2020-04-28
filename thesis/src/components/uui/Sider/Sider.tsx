@@ -4,7 +4,6 @@ import { Layout } from 'antd';
 import styles from './Sider.module.less';
 
 import { Menu } from '../Menu/Menu';
-import { Dropdown } from '../Dropdown/Dropdown';
 import { User, Teacher, Student } from '../../../types/types';
 
 interface Props {

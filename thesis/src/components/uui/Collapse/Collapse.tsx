@@ -1,7 +1,7 @@
 import React from 'react';
 import { Collapse as AntdCollapse } from 'antd';
 import { DoubleRightOutlined } from '@ant-design/icons';
-import { Work, Student } from '../../../types/types';
+import { Work, Student, Teacher } from '../../../types/types';
 import styles from './Collapse.module.less';
 import { Typography } from 'antd';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ const { Panel } = AntdCollapse;
 const { Title, Paragraph } = Typography;
 
 interface Props {
-    user: Student;
+    user: Student | Teacher;
     courseId: string;
     title: string;
     bordered?: boolean; 
@@ -21,19 +21,21 @@ interface Props {
 export class Collapse extends React.Component<Props> {
 
     private renderContent = (): React.ReactNode => {
-        const { content } = this.props; //content = work
-        return (
-            <>
-                <span className={styles.titleWrapper}>
-                    <Title className={styles.title}>{content.title}</Title>
-                    <Paragraph>{` - ${content.parts.length} part${content.parts.length === 1 ? '' : 's'}`}</Paragraph>
-                </span>
-                <Paragraph>{`Deadline: ${content.deadline ? content.deadline : '-'}`}</Paragraph>
-                <Paragraph>{`Description: ${content.description}`}</Paragraph>
-                {/* correct path */}
-                <Link to={`/user/${this.props.user.id}/courses/${this.props.courseId}/works/${content.id}`}>Go to tast <DoubleRightOutlined /></Link>
-            </>
-        );
+        const { content, user, courseId } = this.props; //content = work        
+        if (user && content) {
+            return (
+                <>
+                    <span className={styles.titleWrapper}>
+                        <Title className={styles.title}>{content.title}</Title>
+                        <Paragraph>{` - ${content.parts.length} part${content.parts.length === 1 ? '' : 's'}`}</Paragraph>
+                    </span>
+                    <Paragraph>{`Deadline: ${content.deadline ? content.deadline : '-'}`}</Paragraph>
+                    <Paragraph>{`Description: ${content.description}`}</Paragraph>
+                    {/* correct path */}
+                    <Link to={`/user/${user.id}/courses/${courseId}/works/${content.id}`}>Go to tast <DoubleRightOutlined /></Link>
+                </>
+            );
+        } else return 'null';
     }
 
     private renderPanels = (): React.ReactNode => {

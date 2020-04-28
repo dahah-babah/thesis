@@ -58,7 +58,7 @@ export class AuthForm extends React.Component<any> {
                         type='primary'
                         htmlType='submit'
                     >
-                        <Link to={`/user/${this.props.userStore.getUser() ? this.props.userStore.user.id : null}`}>Log in</Link>
+                        <Link to={`/user/${this.props.userStore.getUser() ? this.props.userStore.user.id : null}/home`}>Log in</Link>
                     </Button>
                 </Form.Item>
             </>

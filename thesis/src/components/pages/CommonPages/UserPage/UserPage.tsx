@@ -55,7 +55,7 @@ export class UserPage extends React.Component<any> {
     private renderUserContent = (): React.ReactNode => {
         if (this.props.userStore.user) {
             if (this.props.userStore.user.role === 'teacher') {
-                return <TeacherMainPage />;
+                return <TeacherMainPage user={this.props.userStore.user} />;
             } else if (this.props.userStore.user.role === 'student') {
                 return <StudentMainPage user={this.props.userStore.user} />
             } else return 'Admin';

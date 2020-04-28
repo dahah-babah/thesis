@@ -2,12 +2,25 @@ import React from 'react';
 import { PageHeader } from 'antd';
 import styles from './Header.module.less';
 import { UserIcon } from '../UserIcon/UserIcon';
+import { Dropdown } from '../Dropdown/Dropdown';
 
 interface Props {
     user: any;
 }
 
 export class Header extends React.Component<Props> {
+
+    private renderUserIcon = (): React.ReactNode => {
+        return (
+            <UserIcon 
+                username={this.firstLetter(this.props.user.username)}
+                userRole={this.props.user.role}
+                userId={this.props.user.id} 
+                shape={'square'}
+                size={'large'}
+            />
+        );
+    };
 
     private firstLetter = (username: string): string => {
         return username[0];
@@ -45,12 +58,10 @@ export class Header extends React.Component<Props> {
             this.props.user 
             ?   <span className={styles.userWrapper}>
                     <p className={styles.username}>{this.props.user.username}</p>
-                    <UserIcon 
-                        username={this.firstLetter(this.props.user.username)}
-                        userRole={this.props.user.role}
-                        userId={this.props.user.id} 
-                        shape={'square'}
-                        size={'large'}
+                    <Dropdown
+                        content={this.renderUserIcon()}
+                        menuItems={['Statistic']}
+                        links={`user/${this.props.user.id}/statistic`}
                     />
                 </span>
             : null

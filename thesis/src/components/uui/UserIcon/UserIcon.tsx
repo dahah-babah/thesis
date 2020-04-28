@@ -28,27 +28,23 @@ export class UserIcon extends React.Component<Props> {
     private renderAvatar = (): React.ReactNode => {
         const { username, shape, size } = this.props;
         return (
-            <>
-                <Avatar
-                    shape={shape}
-                    size={size}
-                > 
-                    {username}
-                </Avatar>
-            </>
+            <Avatar
+                shape={shape}
+                size={size}
+            > 
+                {username}
+            </Avatar>
         );
     };
 
     render(): React.ReactChild {
         return (
-            <>
-                <span>
-                    <Badge
-                        content={this.renderAvatar()}
-                        count={this.getBadgeCount()}
-                    />
-                </span>
-            </>
+            <span>
+                <Badge
+                    content={this.renderAvatar()}
+                    count={this.getBadgeCount()}
+                />
+            </span>
         );
     }
 }

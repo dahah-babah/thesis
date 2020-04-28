@@ -23,6 +23,19 @@ export class Menu extends React.Component<Props | any> {
         this.user = this.props.userStore.getUser();
     };
 
+
+    private renderAddWorkButton = (courseId: string): React.ReactNode => {
+        if (this.props.userStore.user) {
+            return (
+                <Item key={courseId}>
+                    {/* set correct path to add work + correct POST request */}
+                    {/* correct path: /user/{userId}/courses/{courseId}/addWork */}
+                    <Link to={`/user/${this.props.userStore.user.id}/courses/${courseId}/addWork`}>+ add task</Link>
+                </Item>
+            );
+        } else return null;
+    };
+
     private renderCourseName = (name: string): React.ReactNode => {
         return (
             <span>
@@ -64,6 +77,8 @@ export class Menu extends React.Component<Props | any> {
     private renderMenuItems = (): React.ReactNode => {
         const { menuItems } = this.props;        
         if (menuItems && this.props.userStore.user) {
+            console.log(this.props.userStore.user.role);
+            
             return (
                 menuItems.map((menuItem: Course) => 
                     <SubMenu
@@ -75,6 +90,9 @@ export class Menu extends React.Component<Props | any> {
                         }
                     >
                         {this.renderItems(menuItem)}
+                        {this.props.userStore.user.role === 'teacher'
+                        ?   this.renderAddWorkButton(menuItem.id)
+                        :   null}
                     </SubMenu>
                 )
             );

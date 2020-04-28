@@ -48,6 +48,11 @@ export class StudentMainPage extends React.Component<Props | any> {
         
     render(): React.ReactChild {        
         return (
+            // wrap main page content in switch
+            // by default - MainPage component
+            // ability to go to:
+            // (dynamic) course, works (only gets) - test later
+            // statistic  
             <section>
                 <span className={styles.titleWrapper}>
                     <BorderlessTableOutlined />

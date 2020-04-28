@@ -50,6 +50,7 @@ export class TeacherMainPage extends React.Component<Props | any> {
         
     render(): React.ReactChild {        
         return (
+            // wrap main page content in switch
             <section>
                 <span className={styles.titleWrapper}>
                     <BorderlessTableOutlined />

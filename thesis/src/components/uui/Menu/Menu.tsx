@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import { observable } from 'mobx';
 import { Badge } from '../Badge/Badge';
+import './Menu.module.less';
 
 interface Props {
     menuItems: Course[];
@@ -30,7 +31,7 @@ export class Menu extends React.Component<Props | any> {
                 <Item key={courseId}>
                     {/* set correct path to add work + correct POST request */}
                     {/* correct path: /user/{userId}/courses/{courseId}/addWork */}
-                    <Link to={`/user/${this.props.userStore.user.id}/courses/${courseId}/edit`}>+ add task</Link>
+                    <Link to={`/user/${this.props.userStore.user.id}/courses/${courseId}/works/new`}>+ ADD TASK</Link>
                 </Item>
             );
         } else return null;

@@ -29,10 +29,12 @@ export interface Work extends IdName {
     description: string;
     deadline: Date;
     parts: Part[]; 
+    files: any;
 }
 
 export interface Course extends IdName {
     works: Work[];
+    description: any;
 }
 
 export interface Part extends IdName {

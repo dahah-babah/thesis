@@ -11,8 +11,9 @@ export const PATH = {
     // WORKDO: '/user/:userId/courses/:courseId/works/:workId/do',
     
     // TEACHER PATHS
-    WORKEDIT: '/user/:userId/courses/:courseId/works/:workId',
-    COURSEEDIT: '/user/:userId/courses/:courseId/edit', //delete also here
+    WORKEDIT: '/user/:userId/courses/:courseId/works/:workId/edit',
+    WORKADD: '/user/:userId/courses/:courseId/works/new',
+    COURSEEDIT: '/user/:userId/courses/:courseId/edit',
     
     // ADMIN PATHS
 };

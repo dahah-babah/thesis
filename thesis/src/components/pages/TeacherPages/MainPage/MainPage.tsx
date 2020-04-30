@@ -10,6 +10,7 @@ import { Switch, Route } from 'react-router';
 import { EditCourse } from '../Courses/EditCourse/EditCourse';
 import { PATH } from '../../../../routes/paths';
 import { EditWork } from '../Courses/EditCourse/Works/EditWork/EditWork';
+import { AddWork } from '../Courses/EditCourse/Works/AddWork/AddWork';
 
 const { Text } = Typography;
 
@@ -88,11 +89,18 @@ export class TeacherMainPage extends React.Component<Props | any> {
                         {/* only edit work */}
                         <EditWork />
                     </Route>
+
+                    <Route path={PATH.WORKADD}>
+                        <AddWork
+                            course={this.courses[0]}
+                        />
+                    </Route>
                     
                     <Route path={PATH.COURSEEDIT}>
-                        {/* temporary mock (add(delete) work, edit course) */}
+                        {/* temporary mock delete works, edit course) */}
                         <EditCourse
-                            course={this.courses[0]} 
+                            course={this.courses[0]}
+                            user={this.props.user} 
                         />
                     </Route>
 

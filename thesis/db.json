@@ -117,6 +117,7 @@
         {
             "id": "1",
             "name": "MiVT",
+            "description": "Course 1 description",
             "works": [
                 {
                     "id": "1",

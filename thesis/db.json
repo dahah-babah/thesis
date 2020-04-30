@@ -108,14 +108,7 @@
             "level": "professor",
             "courses": [
                 {
-                    "id": "1",
-                    "works": [
-                        {
-                            "id": "1",
-                            "completed": true,
-                            "mark": "75"
-                        }
-                    ]
+                    "id": "1"
                 }
             ]
         }

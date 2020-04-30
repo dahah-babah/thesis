@@ -18,7 +18,8 @@ class App extends React.Component {
                     <Route path={PATH.LOGIN}>
                         <AuthPage />
                     </Route>
-                    <Route path={PATH.USER}>
+                    <Redirect exact from={PATH.USER} to={`${PATH.USER}/home`} />
+                    <Route path={`${PATH.USER}`}>
                         <UserPage />
                     </Route>
                 </Switch>

@@ -1,7 +1,7 @@
 import { observable, action, runInAction } from "mobx";
 import Axios from "axios";
 
-import { Course, Teacher, Student } from "../types/types";
+import { Course } from "../types/types";
 import { PATH } from "../routes/paths";
 
 class CourseStore {
@@ -20,7 +20,7 @@ class CourseStore {
     };
 
     @action.bound
-    public fetchStudentCourses(user: Student) {
+    public fetchStudentCourses(userId: string) {
         //make correct reauest
         Axios.get(`${PATH.SERVER}/courses`)
         .then((courses) => {
@@ -32,7 +32,7 @@ class CourseStore {
     }
 
     @action.bound
-    public fetchTeacherCourses(user: Teacher) {
+    public fetchTeacherCourses(courseId: string) {
         //make correct request for several course id
         Axios.get(`${PATH.SERVER}/courses`)
         .then((courses) => {
@@ -51,7 +51,7 @@ class CourseStore {
     @action
     private setCourses = (courses: Course[]): void => {
         this.courses = courses;
-        console.log(this.courses);
+        // console.log(this.courses);
         
     };
 }

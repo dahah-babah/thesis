@@ -44,7 +44,7 @@ class UserStore {
     @action
     private setUser = (user: User | Student | Teacher): void => {
         this.user = user;
-        console.log(this.user);
+        // console.log(this.user);
         
     };
 }

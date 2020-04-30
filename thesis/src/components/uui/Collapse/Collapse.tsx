@@ -20,7 +20,7 @@ interface Props {
 
 export class Collapse extends React.Component<Props> {
 
-    private renderContent = (): React.ReactNode => {
+    private renderStudentTasks = (): React.ReactNode => {
         const { content, user, courseId } = this.props; //content = work        
         if (user && content) {
             return (
@@ -36,6 +36,33 @@ export class Collapse extends React.Component<Props> {
                 </>
             );
         } else return 'null';
+    };
+
+    private renderTeacherTasks = (): React.ReactNode => {
+        const { content, user, courseId } = this.props; //content = work        
+        if (user && content) {
+            return (
+                <>
+                    <span className={styles.titleWrapper}>
+                        <Title className={styles.title}>{content.title}</Title>
+                        <Paragraph>{` - ${content.parts.length} part${content.parts.length === 1 ? '' : 's'}`}</Paragraph>
+                    </span>
+                    <span>
+                        <Paragraph>{`Deadline: ${content.deadline ? content.deadline : '-'}`}</Paragraph>
+                        <Paragraph>{`Date: here is date for student`}</Paragraph>
+                    </span>
+                    <Paragraph>{`Mark: mark of student`}</Paragraph>
+                    {/* correct path - ? */}
+                    <Link to={`/user/${user.id}/courses/${courseId}/works/${content.id}`}>View report<DoubleRightOutlined /></Link>
+                </>
+            );
+        } else return 'null';
+    };
+
+    private renderContent = (): React.ReactNode => {
+        const { user: { role } } = this.props;
+        if (role === 'student') return this.renderStudentTasks();
+        else return this.renderTeacherTasks();
     }
 
     private renderPanels = (): React.ReactNode => {

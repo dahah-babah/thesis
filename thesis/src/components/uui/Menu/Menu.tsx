@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu as AntdMenu } from 'antd';
-import { ArrowRightOutlined } from '@ant-design/icons';
+import { ArrowRightOutlined, EditOutlined } from '@ant-design/icons';
 import { Course, Work, User, Student, Teacher } from '../../../types/types';
 import { Link } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
@@ -30,25 +30,55 @@ export class Menu extends React.Component<Props | any> {
                 <Item key={courseId}>
                     {/* set correct path to add work + correct POST request */}
                     {/* correct path: /user/{userId}/courses/{courseId}/addWork */}
-                    <Link to={`/user/${this.props.userStore.user.id}/courses/${courseId}/addWork`}>+ add task</Link>
+                    <Link to={`/user/${this.props.userStore.user.id}/courses/${courseId}/edit`}>+ add task</Link>
                 </Item>
             );
         } else return null;
     };
 
-    private renderCourseName = (name: string): React.ReactNode => {
-        return (
-            <span>
-                <ArrowRightOutlined />
-                <Badge
-                    content={<span>{name}</span>}
-                    dot
+    private renderCourseName = (name: string, role: string): React.ReactNode => {
+        if (role === 'student') {
+            return (
+                <span>
+                    <ArrowRightOutlined />
+                    <Badge
+                        content={<span>{name}</span>}
+                        dot
+                        offset={[10, 0]}
+                        // status
+                        // title
+                    />
+                </span>
+            );
+        } else {
+            return (
+                <span>
+                    {name}
+                    <EditOutlined />
+                </span>
+            );
+        }
+    };
+
+    private renderBadge = (workTitle: string): React.ReactNode => {
+        if (this.props.userStore.user.role === 'student') {
+            return (
+                <Badge 
+                    content={workTitle} 
+                    dot 
                     offset={[10, 0]}
                     // status
                     // title
                 />
-            </span>
-        );
+            );
+        } else if (this.props.userStore.user.role === 'teacher') {
+            return (
+                <span>
+                    {workTitle}
+                    <EditOutlined />
+                </span>
+            );
+        }
     };
 
     private renderItems = (course: Course): React.ReactNode => {
@@ -59,14 +89,7 @@ export class Menu extends React.Component<Props | any> {
                         <Link
                             to={`/user/${this.props.userStore.user.id}/courses/${course.id}/works/${work.id}`}
                         >
-                            {/* mock add status */}
-                            <Badge 
-                                content={work.title} 
-                                dot 
-                                offset={[10, 0]}
-                                // status
-                                // title
-                            />
+                            {this.renderBadge(work.title)}
                         </Link>
                     </Item>
                 )
@@ -76,16 +99,14 @@ export class Menu extends React.Component<Props | any> {
 
     private renderMenuItems = (): React.ReactNode => {
         const { menuItems } = this.props;        
-        if (menuItems && this.props.userStore.user) {
-            console.log(this.props.userStore.user.role);
-            
+        if (menuItems && this.props.userStore.user) {            
             return (
                 menuItems.map((menuItem: Course) => 
                     <SubMenu
                         key={menuItem.id}
                         title={
-                            <Link to={`/user/${this.props.userStore.user.id}/courses/${menuItem.id}`}>
-                                {this.renderCourseName(menuItem.name)}
+                            <Link to={`/user/${this.props.userStore.user.id}/courses/${menuItem.id}/edit`}>
+                                {this.renderCourseName(menuItem.name, this.props.userStore.user.role)}
                             </Link>
                         }
                     >

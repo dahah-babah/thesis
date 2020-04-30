@@ -2,7 +2,7 @@ import { observable, action } from "mobx";
 
 class SiderStore {
     @observable
-    isSiderCollapsed = true;
+    isSiderCollapsed = false;
 
     @action
     public toggleSider = (): void => {

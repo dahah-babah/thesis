@@ -122,7 +122,7 @@
                 {
                     "id": "1",
                     "title": "Lab1",
-                    "description": "Work_description",
+                    "description": "Work_description1",
                     "deadline": null,
                     "parts": [
                         {
@@ -139,7 +139,7 @@
                 {
                     "id": "2",
                     "title": "Lab2",
-                    "description": "Work_description",
+                    "description": "Work_description2",
                     "deadline": "1.04.2020",
                     "parts": [
                         {
@@ -162,7 +162,7 @@
                 {
                     "id": "3",
                     "title": "Lab3",
-                    "description": "Work_description",
+                    "description": "Work_description3",
                     "deadline": null,
                     "parts": [
                         {
@@ -185,7 +185,7 @@
                 {
                     "id": "4",
                     "title": "Lab4",
-                    "description": "Work_description",
+                    "description": "Work_description4",
                     "deadline": null,
                     "parts": [
                         {

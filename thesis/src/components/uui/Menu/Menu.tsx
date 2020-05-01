@@ -88,7 +88,7 @@ export class Menu extends React.Component<Props | any> {
                 course.works.map((work: Work) => 
                     <Item key={work.id}>
                         <Link
-                            to={`/user/${this.props.userStore.user.id}/courses/${course.id}/works/${work.id}`}
+                            to={`/user/${this.props.userStore.user.id}/courses/${course.id}/works/${work.id}/edit`}
                         >
                             {this.renderBadge(work.title)}
                         </Link>

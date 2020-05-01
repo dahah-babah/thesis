@@ -85,10 +85,10 @@ export class TeacherMainPage extends React.Component<Props | any> {
 
                     <Route exact path={`${PATH.USER}/home`} render={() => this.renderDefault()} />
 
-                    <Route path={PATH.WORKEDIT}>
-                        {/* only edit work */}
-                        <EditWork />
-                    </Route>
+                    <Route 
+                        path={PATH.WORKEDIT} 
+                        render={(matchProps) => <EditWork {...matchProps} {...this.props} />} 
+                    />
 
                     <Route path={PATH.WORKADD}>
                         <AddWork

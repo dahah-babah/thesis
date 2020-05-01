@@ -57,7 +57,7 @@ export class EditCourse extends React.Component<Props> {
         const { user, course } = this.props;
         return (
             <Link
-                to={`/user/${user?.id}/courses/${course?.id}/works/${work.id}`}
+                to={`/user/${user?.id}/courses/${course?.id}/works/${work.id}/edit`}
             >
                 <span className={styles.cardTitle}>
                     <Text strong>{work.title}</Text>
@@ -77,7 +77,7 @@ export class EditCourse extends React.Component<Props> {
         const { user, course } = this.props;
         return (
             <>
-                <Button>
+                <Button type='default'>
                     <Link
                         to={`/user/${user?.id}/courses/${course?.id}/works/${workId}/edit`}
                     >

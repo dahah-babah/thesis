@@ -132,7 +132,7 @@ export class EditCourse extends React.Component<Props> {
                 {this.renderCourseWorks()}
                 <ul className={styles.worksWrapper}>
                     {this.renderCards()}
-                    <li key={'add'} className={styles.li}>
+                    <li key={'addWork'} className={styles.li}>
                         {this.renderAddWorkCard()}
                     </li>
                 </ul>

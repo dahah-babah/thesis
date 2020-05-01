@@ -1,13 +1,15 @@
 import React from 'react';
-import { Course, Work } from '../../../../../../../types/types';
+import { Course, Work, Part } from '../../../../../../../types/types';
 import styles from './EditWork.module.less';
-import { Typography, Collapse } from 'antd';
-import { BorderlessTableOutlined, DoubleRightOutlined } from '@ant-design/icons';
+import { Typography, Collapse, Upload, message, Card } from 'antd';
+import { BorderlessTableOutlined, DoubleRightOutlined, InboxOutlined } from '@ant-design/icons';
 import { inject, observer } from 'mobx-react';
 import { observable } from 'mobx';
+import Title from 'antd/lib/typography/Title';
 
 const { Text, Paragraph } = Typography;
 const { Panel } = Collapse;
+const { Dragger } = Upload;
 
 interface Props {
     course?: Course;
@@ -22,7 +24,6 @@ export class EditWork extends React.Component<Props | any> {
 
     async componentDidMount() {
         const workId = this.props.match.params.workId;
-
         await this.props.workStore.fetchWorks(this.courseId);
         this.work = this.props.workStore.getWork(workId);
         
@@ -30,7 +31,6 @@ export class EditWork extends React.Component<Props | any> {
 
     async componentDidUpdate() {
         const workId = this.props.match.params.workId;
-
         this.work = this.props.workStore.getWork(workId);
     }
 
@@ -56,6 +56,7 @@ export class EditWork extends React.Component<Props | any> {
         return (
             <Collapse
                 bordered={true}
+                defaultActiveKey={course ? course.id : 'def'}
             >
                 <Panel 
                     key={course ? course.id : 'def'} 
@@ -89,22 +90,49 @@ export class EditWork extends React.Component<Props | any> {
     };
 
     private renderFiles = (): React.ReactNode => {
+        // does not work 
+        const props = {
+
+        };
+
         return (
-            <div>
-                <Text className={styles.marginRight10}>Files:</Text>
-                {/* upload component */}
-                {this.work
-                // render files in column
-                ?   this.work.files
-                :   'no files'}
-            </div>
+            <>
+                <Dragger {...props}>
+                    <p className={styles.icon}>
+                        <InboxOutlined />
+                    </p>
+                    <p>Click or drag file to this area to upload</p>
+                    <p>
+                        Support for a single or bulk upload. 
+                        Strictly prohibit from uploading company data or other band files
+                    </p>
+                </Dragger>
+            </>
         );
     };
 
     private renderParts = (): React.ReactNode => {
         // render parts [#title - type(editable)]
+        if (this.work) {
+            return (
+                this.work.parts.map((part: Part) =>
+                    <li key={part.id} className={styles.li}>
+                        <Card hoverable>
+                            {`${part.title} - ${part.type}`}
+                        </Card>
+                    </li>
+                )
+            );
+        } else return null;
+    };
+
+    private renderAddPartCard = (): React.ReactNode => {
         return (
-            null
+            <Card hoverable>
+                <Title className={styles.addPartCardTitle} level={4} type='secondary'>
+                    + ADD PART TO TASK
+                </Title>
+            </Card>
         );
     };
 
@@ -117,7 +145,12 @@ export class EditWork extends React.Component<Props | any> {
                 </div>
                 {this.renderDeadline()}
                 {this.renderFiles()}
-                <ul>{this.renderParts()}</ul>
+                <ul className={styles.partWrapper}>
+                    {this.renderParts()}
+                    <li key={'addPart'} className={styles.li}>
+                        {this.renderAddPartCard()}
+                    </li>
+                </ul>
             </>
         );
     }

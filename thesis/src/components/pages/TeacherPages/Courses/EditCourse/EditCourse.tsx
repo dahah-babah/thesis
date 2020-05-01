@@ -116,11 +116,13 @@ export class EditCourse extends React.Component<Props> {
     private renderAddWorkCard = (): React.ReactNode => {
         const { user, course } = this.props;
         return (
-            <Card hoverable>
-                <Title className={styles.addWorkCardTitle} level={4} type='secondary'>
-                    <Link to={`/user/${user?.id}/courses/${course?.id}/works/new`}>+ ADD TASK</Link>
-                </Title>
-            </Card>
+            <Link to={`/user/${user?.id}/courses/${course?.id}/works/new`}>
+                <Card hoverable>
+                    <Title className={styles.addWorkCardTitle} level={4} type='secondary'>
+                        + ADD TASK
+                    </Title>
+                </Card>
+            </Link>
         );
     };
 

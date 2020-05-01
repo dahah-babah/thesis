@@ -42,7 +42,7 @@ export class EditWork extends React.Component<Props | any> {
                 <Text mark strong className={styles.title}>{course?.name}</Text>
                 <DoubleRightOutlined />
                 {/* editable */}
-                <Text strong className={styles.title}>
+                <Text editable strong className={styles.title}>
                     {this.work
                     ?   this.work.title
                     :   null}
@@ -113,6 +113,7 @@ export class EditWork extends React.Component<Props | any> {
 
     private renderParts = (): React.ReactNode => {
         // render parts [#title - type(editable)]
+        // title - editable : type as dropdown [test, lab, practical]
         if (this.work) {
             return (
                 this.work.parts.map((part: Part) =>

@@ -91,9 +91,7 @@ export class TeacherMainPage extends React.Component<Props | any> {
                     />
 
                     <Route path={PATH.WORKADD}>
-                        <AddWork
-                            course={this.courses[0]}
-                        />
+                        <AddWork {...this.props} />
                     </Route>
                     
                     <Route path={PATH.COURSEEDIT}>

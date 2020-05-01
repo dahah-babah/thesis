@@ -24,12 +24,12 @@ export interface Teacher extends User {
 }
 
 export interface Work extends IdName {
-    status: 'Not started' | 'In propgress' | 'Done';
+    status?: 'Not started' | 'In propgress' | 'Done';
     title: string;
     description: string;
     deadline: Date;
     parts: Part[]; 
-    files: any;
+    files?: any; // mock
 }
 
 export interface Course extends IdName {

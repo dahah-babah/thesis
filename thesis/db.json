@@ -144,9 +144,9 @@
                     "parts": [
                         {
                             "id": "1",
-                            "title": "Theory",
-                            "type": "theory",
-                            "content": "Some theory"
+                            "title": "Lab",
+                            "type": "Lab",
+                            "content": "Some lab"
                         },
                         {
                             "id": "2",
@@ -167,12 +167,6 @@
                     "parts": [
                         {
                             "id": "1",
-                            "title": "Theory",
-                            "type": "theory",
-                            "content": "Some theory"
-                        },
-                        {
-                            "id": "2",
                             "title": "Lab",
                             "type": "lab",
                             "content": "mock lab"
@@ -190,12 +184,6 @@
                     "parts": [
                         {
                             "id": "1",
-                            "title": "Theory",
-                            "type": "theory",
-                            "content": "Some theory"
-                        },
-                        {
-                            "id": "2",
                             "title": "Lab",
                             "type": "lab",
                             "content": "mock lab"

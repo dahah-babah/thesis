@@ -7,18 +7,19 @@ interface Props {
     content: React.ReactNode;
     menuItems: string[];
     className?: any;
+    userId: string;
 }
 
 export class Dropdown extends React.Component<Props> {
     
     render(): React.ReactChild {
-        const { content, className, menuItems } = this.props;
+        const { content, className, menuItems, userId } = this.props;
         
         const menu = (
             <AntdMenu>
                 {menuItems.map((menuItem: string) => 
                     <AntdMenu.Item key={menuItem}>
-                        <Link to={menuItem}>{menuItem}</Link>    
+                        <Link to={`/user/${userId}/${menuItem}`}>{menuItem}</Link>    
                     </AntdMenu.Item>
                 )}
             </AntdMenu>

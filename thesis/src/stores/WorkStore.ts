@@ -23,7 +23,7 @@ class WorkStore {
     @action
     private setWorks = (works: Work[]) => {
         this.works = works;
-        console.log(this.works);
+        // console.log(this.works);
         
     };
 

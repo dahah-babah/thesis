@@ -29,8 +29,6 @@ export class Menu extends React.Component<Props | any> {
         if (this.props.userStore.user) {
             return (
                 <Item key={courseId}>
-                    {/* set correct path to add work + correct POST request */}
-                    {/* correct path: /user/{userId}/courses/{courseId}/addWork */}
                     <Link to={`/user/${this.props.userStore.user.id}/courses/${courseId}/works/new`}>+ ADD TASK</Link>
                 </Item>
             );
@@ -88,7 +86,9 @@ export class Menu extends React.Component<Props | any> {
                 course.works.map((work: Work) => 
                     <Item key={work.id}>
                         <Link
-                            to={`/user/${this.props.userStore.user.id}/courses/${course.id}/works/${work.id}/edit`}
+                            to={this.props.userStore.user.role === 'student'
+                                ?   `/user/${this.props.userStore.user.id}/courses/${course.id}/works/${work.id}`
+                                :   `/user/${this.props.userStore.user.id}/courses/${course.id}/works/${work.id}/edit`}
                         >
                             {this.renderBadge(work.title)}
                         </Link>
@@ -106,7 +106,10 @@ export class Menu extends React.Component<Props | any> {
                     <SubMenu
                         key={menuItem.id}
                         title={
-                            <Link to={`/user/${this.props.userStore.user.id}/courses/${menuItem.id}/edit`}>
+                            <Link to={this.props.userStore.user.role === 'student'
+                                ?   `/user/${this.props.userStore.user.id}/courses/${menuItem.id}`
+                                :   `/user/${this.props.userStore.user.id}/courses/${menuItem.id}/edit`}
+                            >
                                 {this.renderCourseName(menuItem.name, this.props.userStore.user.role)}
                             </Link>
                         }

@@ -12,7 +12,6 @@ import { PATH } from '../../../../routes/paths';
 import { EditWork } from '../Courses/EditCourse/Works/EditWork/EditWork';
 import { AddWork } from '../Courses/EditCourse/Works/AddWork/AddWork';
 import { TeacherStatistic } from '../Statistic/Statistic';
-import { StudentStatistic } from '../../StudentPages/Statistic/Statistic';
 
 const { Text } = Typography;
 
@@ -26,8 +25,7 @@ export class TeacherMainPage extends React.Component<Props | any> {
         
     @observable courses: Course[] = [];
 
-    componentDidMount() {        
-        // console.log(this.props.user.id);
+    UNSAFE_componentWillMount() {        
         //get course id for teacher
         const courseId: string | string[] = ''; //mock => get from store
         this.props.courseStore.fetchTeacherCourses(courseId);
@@ -35,14 +33,8 @@ export class TeacherMainPage extends React.Component<Props | any> {
     };
 
     private formCollapseTitle = (course: Course, work: Work): string => {
-        const { user } = this.props;
-                
-        if (user.role === 'student') {
-            return `${course.name} - ${work.title}`;
-        } else if (user.role === 'teacher') {
-            // mock
-            return `${course.name} - ${work.title} - student_group - student_lastname`;
-        } else return '';
+        // mock
+        return `${course.name} - ${work.title} - student_group - student_lastname`;
     }
 
     private renderUnverifiedReports = (works: Work[], course: Course): React.ReactNode => {
@@ -85,7 +77,11 @@ export class TeacherMainPage extends React.Component<Props | any> {
             <section>
                 <Switch>
 
-                    <Route exact path={`${PATH.USER}/home`} render={() => this.renderDefault()} />
+                    <Route 
+                        exact 
+                        path={`${PATH.USER}/home`} 
+                        render={() => this.renderDefault()} 
+                    />
 
                     <Route 
                         path={PATH.WORKEDIT} 
@@ -97,7 +93,6 @@ export class TeacherMainPage extends React.Component<Props | any> {
                     </Route>
                     
                     <Route path={PATH.COURSEEDIT}>
-                        {/* temporary mock delete works, edit course) */}
                         <EditCourse
                             course={this.courses[0]}
                             user={this.props.user} 
@@ -106,11 +101,7 @@ export class TeacherMainPage extends React.Component<Props | any> {
 
                     <Route path={PATH.STATISTIC}>
                         {this.props.user
-                        ?   this.props.user.role === 'teacher'
-                            ?   <TeacherStatistic {...this.props} />
-                            :   this.props.user.role === 'student'
-                                ?   <StudentStatistic />
-                                :   null //mock admin statistic
+                        ?   <TeacherStatistic {...this.props} />
                         :   null}
                     </Route>
 

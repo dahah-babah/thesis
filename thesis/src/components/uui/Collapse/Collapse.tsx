@@ -32,7 +32,7 @@ export class Collapse extends React.Component<Props> {
                     <Paragraph>{`Deadline: ${content.deadline ? content.deadline : '-'}`}</Paragraph>
                     <Paragraph>{`Description: ${content.description}`}</Paragraph>
                     {/* correct path */}
-                    <Link to={`/user/${user.id}/courses/${courseId}/works/${content.id}`}>Go to tast <DoubleRightOutlined /></Link>
+                    <Link to={`/user/${user.id}/courses/${courseId}/works/${content.id}/do`}>Go to tast <DoubleRightOutlined /></Link>
                 </>
             );
         } else return 'null';

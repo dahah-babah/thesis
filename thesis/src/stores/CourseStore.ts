@@ -20,7 +20,7 @@ class CourseStore {
     };
 
     @action.bound
-    public fetchStudentCourses(userId: string) {
+    public fetchStudentCourses(courseId: string) {
         //make correct reauest
         Axios.get(`${PATH.SERVER}/courses`)
         .then((courses) => {
@@ -45,6 +45,7 @@ class CourseStore {
 
     @action
     public getCourses = (): Course[] => {
+        // console.log(this.courses);        
         return this.courses;
     };
 

@@ -8,7 +8,9 @@ export const PATH = {
     // TASKS: '/user/:userId/courses/:courseId/works',
     
     // STUDENT PATHS
-    // WORKDO: '/user/:userId/courses/:courseId/works/:workId/do',
+    WORKDO: '/user/:userId/courses/:courseId/works/:workId/do',
+    WORKVIEW: '/user/:userId/courses/:courseId/works/:workId/',
+    COURSE: '/user/:userId/courses/:courseId',
     
     // TEACHER PATHS
     WORKEDIT: '/user/:userId/courses/:courseId/works/:workId/edit',

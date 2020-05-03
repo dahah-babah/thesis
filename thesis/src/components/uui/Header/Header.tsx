@@ -61,6 +61,7 @@ export class Header extends React.Component<Props> {
                     <Dropdown
                         content={this.renderUserIcon()}
                         menuItems={['statistic']}
+                        userId={this.props.user.id}
                     />
                 </span>
             : null

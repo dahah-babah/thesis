@@ -11,6 +11,8 @@ import { EditCourse } from '../Courses/EditCourse/EditCourse';
 import { PATH } from '../../../../routes/paths';
 import { EditWork } from '../Courses/EditCourse/Works/EditWork/EditWork';
 import { AddWork } from '../Courses/EditCourse/Works/AddWork/AddWork';
+import { TeacherStatistic } from '../Statistic/Statistic';
+import { StudentStatistic } from '../../StudentPages/Statistic/Statistic';
 
 const { Text } = Typography;
 
@@ -100,6 +102,16 @@ export class TeacherMainPage extends React.Component<Props | any> {
                             course={this.courses[0]}
                             user={this.props.user} 
                         />
+                    </Route>
+
+                    <Route path={PATH.STATISTIC}>
+                        {this.props.user
+                        ?   this.props.user.role === 'teacher'
+                            ?   <TeacherStatistic {...this.props} />
+                            :   this.props.user.role === 'student'
+                                ?   <StudentStatistic />
+                                :   null //mock admin statistic
+                        :   null}
                     </Route>
 
                 </Switch>

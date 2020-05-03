@@ -3,7 +3,7 @@ export const PATH = {
     SERVER: 'http://localhost:3333',
     LOGIN: '/login',
     USER: '/user/:userId',
-    // STATISTIC: '/user/:userId/statistic',
+    STATISTIC: '/user/:userId/statistic',
     // COURSES: '/user/:userId/courses',
     // TASKS: '/user/:userId/courses/:courseId/works',
     

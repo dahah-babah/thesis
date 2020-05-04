@@ -27,7 +27,6 @@ export class Collapse extends React.Component<Props> {
                 <>
                     <span className={styles.titleWrapper}>
                         <Title className={styles.title}>{content.title}</Title>
-                        <Paragraph>{` - ${content.parts.length} part${content.parts.length === 1 ? '' : 's'}`}</Paragraph>
                     </span>
                     <Paragraph>{`Deadline: ${content.deadline ? content.deadline : '-'}`}</Paragraph>
                     <Paragraph>{`Description: ${content.description}`}</Paragraph>
@@ -45,7 +44,6 @@ export class Collapse extends React.Component<Props> {
                 <>
                     <span className={styles.titleWrapper}>
                         <Title className={styles.title}>{content.title}</Title>
-                        <Paragraph>{` - ${content.parts.length} part${content.parts.length === 1 ? '' : 's'}`}</Paragraph>
                     </span>
                     <span>
                         <Paragraph>{`Deadline: ${content.deadline ? content.deadline : '-'}`}</Paragraph>

@@ -23,78 +23,14 @@
                     "works": [
                         {
                             "id": "1",
+                            "completed": true
+                        },
+                        {
+                            "id": "2",
                             "completed": true,
                             "mark": "75"
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "id": "dfmsk4ksamd",
-            "username": "Semenov_Semon",
-            "password": "123",
-            "role": "student",
-            "name": "Semen",
-            "lastname": "Semenov",
-            "level": "bachelor",
-            "year": "2",
-            "semester": "3",
-            "group": "QWE-81",
-            "courses": [
-                {
-                    "id": "1"
-                }
-            ]
-        },
-        {
-            "id": "aasd5sdag34",
-            "username": "Petrov_Petr",
-            "password": "123",
-            "role": "student",
-            "name": "Petr",
-            "lastname": "Petrov",
-            "level": "bachelor",
-            "year": "2",
-            "semester": "3",
-            "group": "QWE-82",
-            "courses": [
-                {
-                    "id": "1"
-                }
-            ]
-        },
-        {
-            "id": "asmdsk4dg34",
-            "username": "Pusyash_Pushistiy",
-            "password": "123",
-            "role": "student",
-            "name": "Pusyash",
-            "lastname": "Pushistiy",
-            "level": "bachelor",
-            "year": "2",
-            "semester": "3",
-            "group": "QWE-82",
-            "courses": [
-                {
-                    "id": "1"
-                }
-            ]
-        },
-        {
-            "id": "g34as3dsad",
-            "username": "Maria_Marfina",
-            "password": "123",
-            "role": "student",
-            "name": "Maria",
-            "lastname": "Marfina",
-            "level": "bachelor",
-            "year": "2",
-            "semester": "3",
-            "group": "QWE-82",
-            "courses": [
-                {
-                    "id": "1"
                 }
             ]
         },
@@ -117,25 +53,18 @@
         {
             "id": "1",
             "name": "MiVT",
-            "description": "Course 1 description",
+            "description": "This course about nothing",
             "works": [
                 {
                     "id": "1",
                     "title": "Lab1",
-                    "description": "Work_description1",
+                    "type": "lab",
+                    "description": "The task of this work is to met a devil: 1st - lab, 2nd - test!",
                     "deadline": null,
-                    "parts": [
-                        {
-                            "id": "1",
-                            "title": "Test",
-                            "type": "test",
-                            "content": "mock test"
-                        }
-                    ],
                     "files": [
                         {
-                            "filename": "desc_lab1",
-                            "path": "path_path"
+                            "filename": "Lab1Task.pdf",
+                            "path": "mock"
                         }
                     ],
                     "reports": [
@@ -143,8 +72,8 @@
                             "userId": "g34sad4df2",
                             "files": [
                                 {
-                                    "filename": "ivan_report",
-                                    "path": "path"
+                                    "filename": "ivans_report_lab1",
+                                    "path": "mock"
                                 }
                             ] 
                         }
@@ -152,67 +81,90 @@
                 },
                 {
                     "id": "2",
-                    "title": "Lab2",
-                    "description": "Work_description2",
+                    "title": "Lab2 (test)",
+                    "type": "test",
+                    "description": "Comlete the test and you will become a GOD",
                     "deadline": "1.04.2020",
-                    "parts": [
-                        {
-                            "id": "1",
-                            "title": "Lab",
-                            "type": "Lab",
-                            "content": "Some lab"
-                        },
-                        {
-                            "id": "2",
-                            "title": "Lab",
-                            "type": "lab",
-                            "content": "mock lab"
-                        }
-                    ],
                     "files": [
                         {
-                            "filename": "desc_lab2",
-                            "path": "path_path"
+                            "filename": "theotyFORtest",
+                            "path": "mock"
+                        }
+                    ],
+                    "reports": [
+                        {
+                            "userId": "g34sad4df2",
+                            "files": [
+                                {
+                                    "filename": "ivan_report_test",
+                                    "path": "mock"
+                                }
+                            ] 
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "tests": [
+        {
+            "id": "1",
+            "courseId": "1",
+            "workId": "2",
+            "questions": [
+                {
+                    "id": "1",
+                    "title": "there is the 1st question",
+                    "type": "radio",
+                    "points": [
+                        {
+                            "id": "1",
+                            "text": "answer 1",
+                            "isCorrect": false
+                        },
+                        {
+                            "id": "1",
+                            "text": "answer 2",
+                            "isCorrect": true
+                        },
+                        {
+                            "id": "1",
+                            "text": "answer 3",
+                            "isCorrect": false
+                        }
+                    ]
+                },
+                {
+                    "id": "2",
+                    "title": "there is the 2nd question",
+                    "type": "checkbox",
+                    "points": [
+                        {
+                            "id": "1",
+                            "text": "answer 1",
+                            "isCorrect": true
+                        },
+                        {
+                            "id": "1",
+                            "text": "answer 2",
+                            "isCorrect": true
+                        },
+                        {
+                            "id": "1",
+                            "text": "answer 3",
+                            "isCorrect": false
                         }
                     ]
                 },
                 {
                     "id": "3",
-                    "title": "Lab3",
-                    "description": "Work_description3",
-                    "deadline": null,
-                    "parts": [
+                    "title": "there is the 3rd question",
+                    "type": "text",
+                    "points": [
                         {
                             "id": "1",
-                            "title": "Lab",
-                            "type": "lab",
-                            "content": "mock lab"
-                        }
-                    ],
-                    "files": [
-                        {
-                            "filename": "desc_lab3",
-                            "path": "path_path"
-                        }
-                    ]
-                },
-                {
-                    "id": "4",
-                    "title": "Lab4",
-                    "description": "Work_description4",
-                    "deadline": null,
-                    "parts": [
-                        {
-                            "id": "1",
-                            "title": "Lab",
-                            "type": "lab",
-                            "content": "mock lab"
-                        }
-                    ],
-                    "files": [
-                        {
-                            "filename": "desc_lab4",
-                            "path": "path_path"
+                            "text": "answer",
+                            "isCorrect": "crap"
                         }
                     ]
                 }

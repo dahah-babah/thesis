@@ -23,13 +23,18 @@ export interface Teacher extends User {
     courses: Course[]; 
 }
 
+export interface File {
+    filename: string;
+    path: string;
+}
+
 export interface Work extends IdName {
-    status?: 'not started' | 'in propgress' | 'done';
+    completed?: boolean;
     title: string;
     description: string;
     deadline: Date;
-    parts: Part[]; 
-    files?: any; // mock
+    files: File[]; // mock
+    type: 'lab' | 'test' | string; //mock
 }
 
 export interface Course extends IdName {
@@ -37,8 +42,27 @@ export interface Course extends IdName {
     description: any;
 }
 
-export interface Part extends IdName {
+export interface Test {
+    id: string;
+    courseId: string;
+    workId: string;
+    questions: Question[];
+}
+
+export interface Question {
+    id: string;
     title: string;
-    type: 'lab' | 'test' | string; //mock
-    content: any; //mock
+    type: 'radio' | 'checkbox' | 'text';
+    points: TestPoint[];
+}
+
+export interface TestPoint {
+    id: string;
+    text: string;
+    isCorrect: boolean | string; //string, if type === 'text'
+}
+
+export interface Report {
+    userId: string;
+    files?: File[];
 }

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Course, Work, Part } from '../../../../../../../types/types';
+import { Course, Work } from '../../../../../../../types/types';
 import { inject, observer } from 'mobx-react';
 import { observable } from 'mobx';
 import { BorderlessTableOutlined, DoubleRightOutlined, InboxOutlined } from '@ant-design/icons';
-import { Typography, Upload, message, Card } from 'antd';
+import { Typography, Upload, Card } from 'antd';
 import styles from './AddWork.module.less';
 
 const { Text, Paragraph, Title } = Typography;
@@ -80,22 +80,6 @@ export class AddWork extends React.Component<Props | any> {
         );
     };
 
-    private renderParts = (): React.ReactNode => {
-        // render parts [#title - type(editable)]
-        // title - editable : type as dropdown [test, lab, practical]
-        if (this.work) {
-            return (
-                this.work.parts.map((part: Part) =>
-                    <li key={part.id} className={styles.li}>
-                        <Card hoverable>
-                            {`${part.title} - ${part.type}`}
-                        </Card>
-                    </li>
-                )
-            );
-        } else return null;
-    };
-
     private renderAddPartCard = (): React.ReactNode => {
         return (
             <Card hoverable>
@@ -116,12 +100,12 @@ export class AddWork extends React.Component<Props | any> {
                 </div>
                 {this.renderDeadline()}
                 {this.renderFiles()}
-                <ul className={styles.partWrapper}>
+                {/* <ul className={styles.partWrapper}>
                     {this.renderParts()}
                     <li key={'addPart'} className={styles.li}>
                         {this.renderAddPartCard()}
                     </li>
-                </ul>
+                </ul> */}
             </>
         );
     }

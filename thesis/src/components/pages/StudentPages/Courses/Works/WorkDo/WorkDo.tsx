@@ -1,7 +1,7 @@
 import React from 'react';
-import { Course, Work, Part } from '../../../../../../types/types';
+import { Course, Work } from '../../../../../../types/types';
 import { BorderlessTableOutlined, DoubleRightOutlined } from '@ant-design/icons';
-import { Typography, Collapse, Card } from 'antd';
+import { Typography, Collapse } from 'antd';
 import styles from '../../Works/Work.module.less';
 import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
@@ -86,19 +86,19 @@ export class WorkDo extends React.Component<any> {
         } else return null;
     };
 
-    private renderParts = (): React.ReactNode => {
-        if (this.work) {
-            return (
-                this.work.parts.map((part: Part) =>
-                    <li key={part.id} className={styles.li}>
-                        <Card hoverable>
-                            {`${part.title} - ${part.type}`}
-                        </Card>
-                    </li>
-                )
-            );
-        } else return null;
-    };
+    // private renderParts = (): React.ReactNode => {
+    //     if (this.work) {
+    //         return (
+    //             this.work.parts.map((part: Part) =>
+    //                 <li key={part.id} className={styles.li}>
+    //                     <Card hoverable>
+    //                         {`${part.title} - ${part.type}`}
+    //                     </Card>
+    //                 </li>
+    //             )
+    //         );
+    //     } else return null;
+    // };
 
     render(): React.ReactChild {
         return(
@@ -109,9 +109,9 @@ export class WorkDo extends React.Component<any> {
                 </div>
                 {this.renderDeadline()}
                 {this.renderFiles()}
-                <ul className={styles.partWrapper}>
+                {/* <ul className={styles.partWrapper}>
                     {this.renderParts()}
-                </ul>
+                </ul> */}
             </>
         );
     }

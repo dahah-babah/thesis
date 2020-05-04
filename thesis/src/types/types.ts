@@ -52,7 +52,7 @@ export interface Test {
 export interface Question {
     id: string;
     title: string;
-    type: 'radio' | 'checkbox' | 'text';
+    type: 'radio' | 'checkbox' | 'text' | 'select';
     points: TestPoint[];
 }
 

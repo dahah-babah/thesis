@@ -79,7 +79,7 @@ export class UserPage extends React.Component<any> {
                     {this.renderSider()}
                     <Layout>
                         {this.renderHeader()}
-                        {this.renderBreadcrumb()}
+                        {/* {this.renderBreadcrumb()} */}
                         {this.renderContent()}
                     </Layout>
                 </Layout>

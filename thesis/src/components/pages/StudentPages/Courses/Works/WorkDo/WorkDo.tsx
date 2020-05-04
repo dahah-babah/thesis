@@ -2,7 +2,7 @@ import React from 'react';
 import { Course, Work, Part } from '../../../../../../types/types';
 import { BorderlessTableOutlined, DoubleRightOutlined } from '@ant-design/icons';
 import { Typography, Collapse, Card } from 'antd';
-import styles from '../Work/Work.module.less';
+import styles from '../../Works/Work.module.less';
 import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
 
@@ -80,7 +80,7 @@ export class WorkDo extends React.Component<any> {
         if (this.work) {
             return (
                 this.work.files.map((file: any) =>
-                 <p>{file}</p> 
+                 <p key={file.filename}>file</p> 
                 )
             );
         } else return null;

@@ -133,7 +133,21 @@
                         }
                     ],
                     "files": [
-                        
+                        {
+                            "filename": "desc_lab1",
+                            "path": "path_path"
+                        }
+                    ],
+                    "reports": [
+                        {
+                            "userId": "g34sad4df2",
+                            "files": [
+                                {
+                                    "filename": "ivan_report",
+                                    "path": "path"
+                                }
+                            ] 
+                        }
                     ]
                 },
                 {
@@ -156,7 +170,10 @@
                         }
                     ],
                     "files": [
-
+                        {
+                            "filename": "desc_lab2",
+                            "path": "path_path"
+                        }
                     ]
                 },
                 {
@@ -173,7 +190,10 @@
                         }
                     ],
                     "files": [
-
+                        {
+                            "filename": "desc_lab3",
+                            "path": "path_path"
+                        }
                     ]
                 },
                 {
@@ -190,7 +210,10 @@
                         }
                     ],
                     "files": [
-
+                        {
+                            "filename": "desc_lab4",
+                            "path": "path_path"
+                        }
                     ]
                 }
             ]

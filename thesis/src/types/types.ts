@@ -24,7 +24,7 @@ export interface Teacher extends User {
 }
 
 export interface Work extends IdName {
-    status?: 'Not started' | 'In propgress' | 'Done';
+    status?: 'not started' | 'in propgress' | 'done';
     title: string;
     description: string;
     deadline: Date;
@@ -39,6 +39,6 @@ export interface Course extends IdName {
 
 export interface Part extends IdName {
     title: string;
-    type: string; //mock
+    type: 'lab' | 'test' | string; //mock
     content: any; //mock
 }

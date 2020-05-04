@@ -47,10 +47,10 @@ export class Courses extends React.Component<any> {
     };
 
     private renderCardTitle = (work: Work): React.ReactNode => {
-        const { user, course } = this.props;
+        const { user } = this.props;
         return (
             <Link
-                to={`/user/${user?.id}/courses/${course?.id}/works/${work.id}`}
+                to={`/user/${user.id}/courses/${this.course.id}/works/${work.id}/do`}
             >
                 <span className={styles.cardTitle}>
                     <Text strong>{work.title}</Text>

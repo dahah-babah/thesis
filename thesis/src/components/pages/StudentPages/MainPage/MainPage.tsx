@@ -10,7 +10,6 @@ import { Switch, Route } from 'react-router';
 import { PATH } from '../../../../routes/paths';
 import { StudentStatistic } from '../Statistic/Statistic';
 import { Courses } from '../Courses/Course';
-import { Works } from '../Courses/Works/Work/Work';
 import { WorkDo } from '../Courses/Works/WorkDo/WorkDo';
 
 const { Text } = Typography;
@@ -81,11 +80,6 @@ export class StudentMainPage extends React.Component<Props | any> {
                     <Route 
                         path={PATH.WORKDO}
                         render={(matchProps) => <WorkDo {...matchProps} {...this.props} />} 
-                    />
-
-                    <Route 
-                        path={PATH.WORKVIEW}
-                        render={(matchProps) => <Works {...matchProps} {...this.props} />} 
                     />
 
                     <Route path={PATH.COURSE}>

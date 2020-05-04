@@ -60,7 +60,7 @@ export class Header extends React.Component<Props> {
                     <p className={styles.username}>{this.props.user.username}</p>
                     <Dropdown
                         content={this.renderUserIcon()}
-                        menuItems={['statistic']}
+                        menuItems={ ['statistic', 'home'] }
                         userId={this.props.user.id}
                     />
                 </span>

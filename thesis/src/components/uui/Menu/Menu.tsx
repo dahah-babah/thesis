@@ -87,7 +87,7 @@ export class Menu extends React.Component<Props | any> {
                     <Item key={work.id}>
                         <Link
                             to={this.props.userStore.user.role === 'student'
-                                ?   `/user/${this.props.userStore.user.id}/courses/${course.id}/works/${work.id}`
+                                ?   `/user/${this.props.userStore.user.id}/courses/${course.id}/works/${work.id}/do`
                                 :   `/user/${this.props.userStore.user.id}/courses/${course.id}/works/${work.id}/edit`}
                         >
                             {this.renderBadge(work.title)}

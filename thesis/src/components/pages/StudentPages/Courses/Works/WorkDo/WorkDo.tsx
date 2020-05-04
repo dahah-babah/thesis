@@ -1,10 +1,11 @@
 import React from 'react';
-import { Course, Work } from '../../../../../../types/types';
+import { Course, Work, Test } from '../../../../../../types/types';
 import { BorderlessTableOutlined, DoubleRightOutlined } from '@ant-design/icons';
-import { Typography, Collapse } from 'antd';
+import { Typography, Collapse, Button } from 'antd';
 import styles from '../../Works/Work.module.less';
 import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
+import { TestComponent } from './_Test/Test';
 
 const { Text, Paragraph } = Typography;
 const { Panel } = Collapse;
@@ -14,6 +15,7 @@ const { Panel } = Collapse;
 export class WorkDo extends React.Component<any> {
 
     @observable work!: Work;
+    @observable testEnabled = false;
     private course: Course = this.props.courseStore.courses[0];
 
     UNSAFE_componentWillMount() {
@@ -86,19 +88,41 @@ export class WorkDo extends React.Component<any> {
         } else return null;
     };
 
-    // private renderParts = (): React.ReactNode => {
-    //     if (this.work) {
-    //         return (
-    //             this.work.parts.map((part: Part) =>
-    //                 <li key={part.id} className={styles.li}>
-    //                     <Card hoverable>
-    //                         {`${part.title} - ${part.type}`}
-    //                     </Card>
-    //                 </li>
-    //             )
-    //         );
-    //     } else return null;
-    // };
+    private renderManagePanel = (): React.ReactNode => {
+        if (this.work) {
+            if (this.work.type === 'test') {
+                return (
+                    <span>
+                        {/* time picker */}
+                        <Button 
+                            disabled={this.testEnabled}
+                            type='primary' 
+                            onClick={this.enableTest}
+                        >
+                            Start test
+                        </Button>
+                    </span>
+                );
+            }
+        }
+    };
+
+    private enableTest = (): boolean => {
+        console.log(this.testEnabled);
+        return this.testEnabled = !this.testEnabled; //true
+    };
+
+    private renderTest = (): React.ReactNode => {        
+        if (this.work) {
+            if (this.testEnabled) {
+                return (
+                    <div className={styles.margin}>
+                        <TestComponent {...this.props} />
+                    </div>
+                );
+            }
+        }
+    };
 
     render(): React.ReactChild {
         return(
@@ -109,9 +133,8 @@ export class WorkDo extends React.Component<any> {
                 </div>
                 {this.renderDeadline()}
                 {this.renderFiles()}
-                {/* <ul className={styles.partWrapper}>
-                    {this.renderParts()}
-                </ul> */}
+                {this.renderManagePanel()}
+                {this.renderTest()}
             </>
         );
     }

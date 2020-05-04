@@ -133,6 +133,7 @@ export class Menu extends React.Component<Props | any> {
                 theme='light'
                 multiple={false}
                 selectable={true}
+                defaultOpenKeys={['1']}
             >
                 {this.renderMenuItems()}
             </AntdMenu>

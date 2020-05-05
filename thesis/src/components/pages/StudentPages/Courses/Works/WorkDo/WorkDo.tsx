@@ -108,6 +108,10 @@ export class WorkDo extends React.Component<any> {
     };
 
     private enableTest = (): boolean => {
+        //check deadline
+        //if deadline -> if overdue -> render smth 
+        //else -> normal
+        //start timer
         return this.testEnabled = !this.testEnabled; //true
     };
 

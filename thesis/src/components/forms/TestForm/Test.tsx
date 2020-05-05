@@ -16,6 +16,7 @@ export class TestForm extends React.Component<any> {
     @observable test: Test = this.props.testStore.test;
     @observable correctAnswers: any = [];
     @observable testIsFinished = false;
+    @observable rate: string = '';
 
     private courseId = this.props.match.params.courseId;
     private workId = this.props.match.params.workId;
@@ -100,7 +101,7 @@ export class TestForm extends React.Component<any> {
         }
     };
 
-    private calculateSuccess = (answers: any): void => {
+    private calculateSuccess = (answers: any): boolean[] => {
         this.correctAnswers = this.getCorrectAnswers();
         const testLen = this.correctAnswers.length;
         let success: boolean[] = [];
@@ -115,22 +116,38 @@ export class TestForm extends React.Component<any> {
 
                 let isCorrect = true;
                 
-                for (let k = 0; k < coorectLen; k++) {
-                    if (!toJS(this.correctAnswers[i])[k].id === answers[i][k]) {
+                for (let k = 0; k < coorectLen; k++) {                    
+                    if (!(toJS(this.correctAnswers[i])[k].id === answers[i][k])) {
                         isCorrect = false;
                     }
                 }
 
                 success.push(isCorrect);
             }
-        }        
+        }
         
+        return success;        
+    };
+
+    private calculateRate = (success: boolean[]): number => {        
+        const numOfAnswers = success.length;
+        const weight = (100 / numOfAnswers).toFixed(2);
+        const numNotFailed = success.filter((bool: boolean) => bool === true).length;
+        return Number(weight) * numNotFailed;
     };
 
     private onFinish = (values: any): void => {
+        //finish timer 
+        this.calculateTime();
         this.setTestFinished();
-        this.calculateSuccess(values);
+        this.rate = (Math.round(this.calculateRate(this.calculateSuccess(values)))).toString();   
     };
+
+    private calculateTime = (): void | Date => {
+        console.log('calculated time');
+        //time start
+        //time finished
+    }
     
     render(): React.ReactChild {            
         if (!this.testIsFinished) {
@@ -151,8 +168,9 @@ export class TestForm extends React.Component<any> {
         } else {
             return (
                 <section className={styles.resultsWrapper}>
-                    <Text>Test is finished! Your result is /your mark/!</Text>
-                    <Text>TIME: START -> /started/ FINISH -> /finished/</Text>
+                    <Text>Test is finished! Your result is {this.rate}!</Text>
+                    {this.rate === '100' ? 'You r the BEST' : null}
+                    <Text>TIME: /calculated time/</Text>
                     <Text>
                         <Link to={`/user/${this.props.match.params.userId}/statistic`}>
                             See your statistic <DoubleRightOutlined />

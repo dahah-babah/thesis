@@ -113,58 +113,57 @@
             "workId": "2",
             "questions": [
                 {
-                    "id": "1",
+                    "id": "0",
                     "title": "there is the 1st question",
                     "type": "radio",
+                    "isCorrectId": "0",
                     "points": [
                         {
+                            "id": "0",
+                            "text": "answer 1"
+                        },
+                        {
                             "id": "1",
-                            "text": "answer 1",
-                            "isCorrect": false
+                            "text": "answer 2"
                         },
                         {
                             "id": "2",
-                            "text": "answer 2",
-                            "isCorrect": true
+                            "text": "answer 3"
+                        }
+                    ]
+                },
+                {
+                    "id": "1",
+                    "title": "there is the 2nd question",
+                    "type": "checkbox",
+                    "isCorrectId": [
+                        { "id": "0" },
+                        { "id": "1" }
+                    ],
+                    "points": [
+                        {
+                            "id": "0",
+                            "text": "answer 1"
                         },
                         {
-                            "id": "3",
-                            "text": "answer 3",
-                            "isCorrect": false
+                            "id": "1",
+                            "text": "answer 2"
+                        },
+                        {
+                            "id": "2",
+                            "text": "answer 3"
                         }
                     ]
                 },
                 {
                     "id": "2",
-                    "title": "there is the 2nd question",
-                    "type": "checkbox",
-                    "points": [
-                        {
-                            "id": "1",
-                            "text": "answer 1",
-                            "isCorrect": true
-                        },
-                        {
-                            "id": "2",
-                            "text": "answer 2",
-                            "isCorrect": true
-                        },
-                        {
-                            "id": "3",
-                            "text": "answer 3",
-                            "isCorrect": false
-                        }
-                    ]
-                },
-                {
-                    "id": "3",
                     "title": "there is the 3rd question",
                     "type": "text",
+                    "isCorrectId": "crap",
                     "points": [
                         {
-                            "id": "1",
-                            "text": "answer",
-                            "isCorrect": "crap"
+                            "id": "0",
+                            "text": "crap"
                         }
                     ]
                 }

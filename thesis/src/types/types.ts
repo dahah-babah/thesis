@@ -54,12 +54,12 @@ export interface Question {
     title: string;
     type: 'radio' | 'checkbox' | 'text' | 'select';
     points: TestPoint[];
+    isCorrectId: string | string[];
 }
 
 export interface TestPoint {
     id: string;
     text: string;
-    isCorrect: boolean | string; //string, if type === 'text'
 }
 
 export interface Report {

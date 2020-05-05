@@ -5,7 +5,7 @@ import { Typography, Collapse, Button } from 'antd';
 import styles from '../../Works/Work.module.less';
 import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
-import { TestComponent } from './_Test/Test';
+import { TestForm } from '../../../../../forms/TestForm/Test';
 
 const { Text, Paragraph } = Typography;
 const { Panel } = Collapse;
@@ -79,7 +79,7 @@ export class WorkDo extends React.Component<any> {
     };
 
     private renderFiles = (): React.ReactNode => {
-        if (this.work) {
+        if (this.work && !this.testEnabled) {
             return (
                 this.work.files.map((file: any) =>
                  <p key={file.filename}>file</p> 
@@ -92,23 +92,22 @@ export class WorkDo extends React.Component<any> {
         if (this.work) {
             if (this.work.type === 'test') {
                 return (
-                    <span>
-                        {/* time picker */}
-                        <Button 
-                            disabled={this.testEnabled}
-                            type='primary' 
-                            onClick={this.enableTest}
-                        >
-                            Start test
-                        </Button>
-                    </span>
+                    <div>
+                        {!this.testEnabled
+                        ?   <Button 
+                                type='primary' 
+                                onClick={this.enableTest}
+                            >
+                                START TEST
+                            </Button>
+                        :   null}
+                    </div>
                 );
             }
         }
     };
 
     private enableTest = (): boolean => {
-        console.log(this.testEnabled);
         return this.testEnabled = !this.testEnabled; //true
     };
 
@@ -117,7 +116,7 @@ export class WorkDo extends React.Component<any> {
             if (this.testEnabled) {
                 return (
                     <div className={styles.margin}>
-                        <TestComponent {...this.props} />
+                        <TestForm {...this.props} />
                     </div>
                 );
             }

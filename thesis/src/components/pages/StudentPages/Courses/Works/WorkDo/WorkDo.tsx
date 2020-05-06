@@ -1,5 +1,5 @@
 import React from 'react';
-import { Course, Work, Test } from '../../../../../../types/types';
+import { Course, Work } from '../../../../../../types/types';
 import { BorderlessTableOutlined, DoubleRightOutlined } from '@ant-design/icons';
 import { Typography, Collapse, Button } from 'antd';
 import styles from '../../Works/Work.module.less';

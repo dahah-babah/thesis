@@ -17,6 +17,18 @@ class TestStore {
         })
         .catch(error => console.log(error))
     }
+
+    @action.bound
+    public postCompletedTest(userId: string, courseId: string, workId: string, rate: string) {
+        Axios.post(`${PATH.SERVER}/users/${userId}/studentCourses`, {
+            courseId: `${courseId}`,
+            workId: `${workId}`,
+            completed: true,
+            rate: `${rate}`
+        })
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+    }
     
     @action
     private setTest = (test: Test) => {

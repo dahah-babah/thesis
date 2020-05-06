@@ -141,13 +141,19 @@ export class TestForm extends React.Component<any> {
         this.calculateTime();
         this.setTestFinished();
         this.rate = (Math.round(this.calculateRate(this.calculateSuccess(values)))).toString();   
+        this.props.testStore.postCompletedTest(
+            this.props.match.params.userId,
+            this.courseId,
+            this.workId,
+            this.rate
+        );
     };
 
     private calculateTime = (): void | Date => {
         console.log('calculated time');
         //time start
         //time finished
-    }
+    };
     
     render(): React.ReactChild {            
         if (!this.testIsFinished) {

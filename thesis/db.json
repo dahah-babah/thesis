@@ -1,173 +1,143 @@
 {
-    "users": [
+  "users": [
+    {
+      "id": "1ad2min3",
+      "username": "123",
+      "password": "321",
+      "role": "admin"
+    },
+    {
+      "id": "g34sad4df2",
+      "username": "Ivanov_Ivan",
+      "password": "123",
+      "role": "student",
+      "name": "Ivan",
+      "lastname": "Ivanov",
+      "level": "bachelor",
+      "year": "2",
+      "semester": "3",
+      "group": "QWE-81"
+    },
+    {
+      "id": "vcklnjb1",
+      "username": "Poshposh_Poashka",
+      "password": "321",
+      "role": "teacher",
+      "name": "Poashka",
+      "lastname": "Poshposh",
+      "level": "professor"
+    }
+  ],
+  "studentCourses": [],
+  "teacherCourses": [],
+  "courses": [
+    {
+      "id": "1",
+      "name": "MiVT",
+      "description": "This course about nothing"
+    }
+  ],
+  "works": [
+    {
+      "id": "1",
+      "title": "Lab1",
+      "type": "lab",
+      "description": "The task of this work is to met a devil: 1st - lab, 2nd - test!",
+      "deadline": null
+    },
+    {
+      "id": "2",
+      "title": "Lab2 (test)",
+      "type": "test",
+      "description": "Comlete the test and you will become a GOD",
+      "deadline": "1.04.2020"
+    }
+  ],
+  "files": [
+    {
+        "id": 1,
+        "courseId": "1",
+        "workId": "2",
+        "filename": "Lab1Task.pdf",
+        "path": "mock"
+    }
+  ],
+  "reports": [
+    {
+        "id": 1,
+        "userId": "g34sad4df2",
+        "courseId": "1",
+        "workId": "2",
+        "filename": "Lab1Task.pdf",
+        "path": "mock"
+    }
+  ],
+  "tests": [
+    {
+      "id": "1",
+      "courseId": "1",
+      "workId": "2",
+      "questions": [
         {
-            "id": "1ad2min3",
-            "username": "123",
-            "password": "321",
-            "role": "admin"
+          "id": "0",
+          "title": "there is the 1st question",
+          "type": "radio",
+          "isCorrectId": "0",
+          "points": [
+            {
+              "id": "0",
+              "text": "answer 1"
+            },
+            {
+              "id": "1",
+              "text": "answer 2"
+            },
+            {
+              "id": "2",
+              "text": "answer 3"
+            }
+          ]
         },
         {
-            "id": "g34sad4df2",
-            "username": "Ivanov_Ivan",
-            "password": "123",
-            "role": "student",
-            "name": "Ivan",
-            "lastname": "Ivanov",
-            "level": "bachelor",
-            "year": "2",
-            "semester": "3",
-            "group": "QWE-81",
-            "courses": [
-                {
-                    "id": "1",
-                    "works": [
-                        {
-                            "id": "1",
-                            "completed": true
-                        },
-                        {
-                            "id": "2",
-                            "completed": true,
-                            "mark": "75"
-                        }
-                    ]
-                }
-            ]
+          "id": "1",
+          "title": "there is the 2nd question",
+          "type": "checkbox",
+          "isCorrectId": [
+            {
+              "id": "0"
+            },
+            {
+              "id": "1"
+            }
+          ],
+          "points": [
+            {
+              "id": "0",
+              "text": "answer 1"
+            },
+            {
+              "id": "1",
+              "text": "answer 2"
+            },
+            {
+              "id": "2",
+              "text": "answer 3"
+            }
+          ]
         },
         {
-            "id": "vcklnjb1",
-            "username": "Poshposh_Poashka",
-            "password": "321",
-            "role": "teacher",
-            "name": "Poashka",
-            "lastname": "Poshposh",
-            "level": "professor",
-            "courses": [
-                {
-                    "id": "1"
-                }
-            ]
+          "id": "2",
+          "title": "there is the 3rd question",
+          "type": "text",
+          "isCorrectId": "crap",
+          "points": [
+            {
+              "id": "0",
+              "text": "crap"
+            }
+          ]
         }
-    ],
-    "courses": [
-        {
-            "id": "1",
-            "name": "MiVT",
-            "description": "This course about nothing",
-            "works": [
-                {
-                    "id": "1",
-                    "title": "Lab1",
-                    "type": "lab",
-                    "description": "The task of this work is to met a devil: 1st - lab, 2nd - test!",
-                    "deadline": null,
-                    "files": [
-                        {
-                            "filename": "Lab1Task.pdf",
-                            "path": "mock"
-                        }
-                    ],
-                    "reports": [
-                        {
-                            "userId": "g34sad4df2",
-                            "files": [
-                                {
-                                    "filename": "ivans_report_lab1",
-                                    "path": "mock"
-                                }
-                            ] 
-                        }
-                    ]
-                },
-                {
-                    "id": "2",
-                    "title": "Lab2 (test)",
-                    "type": "test",
-                    "description": "Comlete the test and you will become a GOD",
-                    "deadline": "1.04.2020",
-                    "files": [
-                        {
-                            "filename": "theotyFORtest",
-                            "path": "mock"
-                        }
-                    ],
-                    "reports": [
-                        {
-                            "userId": "g34sad4df2",
-                            "files": [
-                                {
-                                    "filename": "ivan_report_test",
-                                    "path": "mock"
-                                }
-                            ] 
-                        }
-                    ]
-                }
-            ]
-        }
-    ],
-    "tests": [
-        {
-            "id": "1",
-            "courseId": "1",
-            "workId": "2",
-            "questions": [
-                {
-                    "id": "0",
-                    "title": "there is the 1st question",
-                    "type": "radio",
-                    "isCorrectId": "0",
-                    "points": [
-                        {
-                            "id": "0",
-                            "text": "answer 1"
-                        },
-                        {
-                            "id": "1",
-                            "text": "answer 2"
-                        },
-                        {
-                            "id": "2",
-                            "text": "answer 3"
-                        }
-                    ]
-                },
-                {
-                    "id": "1",
-                    "title": "there is the 2nd question",
-                    "type": "checkbox",
-                    "isCorrectId": [
-                        { "id": "0" },
-                        { "id": "1" }
-                    ],
-                    "points": [
-                        {
-                            "id": "0",
-                            "text": "answer 1"
-                        },
-                        {
-                            "id": "1",
-                            "text": "answer 2"
-                        },
-                        {
-                            "id": "2",
-                            "text": "answer 3"
-                        }
-                    ]
-                },
-                {
-                    "id": "2",
-                    "title": "there is the 3rd question",
-                    "type": "text",
-                    "isCorrectId": "crap",
-                    "points": [
-                        {
-                            "id": "0",
-                            "text": "crap"
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+      ]
+    }
+  ]
 }

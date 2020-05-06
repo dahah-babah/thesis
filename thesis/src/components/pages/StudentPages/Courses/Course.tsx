@@ -11,6 +11,7 @@ const { Panel } = Collapse;
 export class Courses extends React.Component<any> {
 
     private course: Course = this.props.courseStore.courses[0];
+    private works: Work[] = this.props.workStore.works;
 
     private renderTitle = (): React.ReactNode => {
         return (
@@ -41,7 +42,7 @@ export class Courses extends React.Component<any> {
     private renderCourseWorks = (): React.ReactNode => {
         return (
             <div className={styles.titleWorks}>
-                <Text strong underline>{`Task${this.course.works.length === 1 ? '' : 's'}: ${this.course.works.length}`}</Text>
+                <Text strong underline>{`Task${this.works.length === 1 ? '' : 's'}: ${this.works.length}`}</Text>
             </div>
         );
     };
@@ -62,7 +63,7 @@ export class Courses extends React.Component<any> {
 
     private renderCards = (): React.ReactNode => {
         return (
-            this.course.works.map((work: Work) =>
+            this.works.map((work: Work) =>
                 <li key={work.id} className={styles.li}>
                     <Card
                         hoverable

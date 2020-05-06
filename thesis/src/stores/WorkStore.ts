@@ -9,11 +9,10 @@ class WorkStore {
 
     @action.bound
     public fetchWorks(courseId: string) {
-        Axios.get(`${PATH.SERVER}/courses?id=${courseId}`)
-        .then((course) => {
+        Axios.get(`${PATH.SERVER}/courses/${courseId}/works`)
+        .then((works) => {            
             runInAction(() => {
-                this.setWorks(
-                    course.data[0].works) 
+                this.setWorks(works.data) 
             })
             
         })
@@ -22,9 +21,9 @@ class WorkStore {
     
     @action
     private setWorks = (works: Work[]) => {
-        this.works = works;
+        this.works = works;      
         // console.log(this.works);
-        
+          
     };
 
     @action
@@ -34,6 +33,7 @@ class WorkStore {
 
     @action
     public getWorks = (): Work[] => {
+        // console.log(this.works);
         return this.works;
     };
 

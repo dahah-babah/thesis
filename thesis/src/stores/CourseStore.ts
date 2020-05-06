@@ -20,9 +20,9 @@ class CourseStore {
     };
 
     @action.bound
-    public fetchStudentCourses(courseId: string) {
+    public fetchStudentCourses(userId: string, courseId: string) {
         //make correct reauest
-        Axios.get(`${PATH.SERVER}/courses`)
+        Axios.get(`${PATH.SERVER}/users/${userId}/courses?id=${courseId}`)
         .then((courses) => {
             runInAction(() => {
                 this.setCourses(courses.data)

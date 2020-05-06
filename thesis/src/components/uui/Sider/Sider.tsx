@@ -13,19 +13,21 @@ interface Props {
 
 const { Sider } = Layout;
 
-@inject('userStore', 'siderStore', 'courseStore')
+@inject('userStore', 'siderStore', 'courseStore', 'workStore')
 @observer
 export class CustomSider extends React.Component<Props | any> {
 
     componentDidMount = (): void => {
         this.props.courseStore.fetchCourses(this.props.userStore.user);
+        this.props.workStore.fetchWorks('1');
     };
 
     private renderMenu = (): React.ReactNode => {
         return (
             <div className={styles.fixed}>
                 <Menu
-                    menuItems={this.props.courseStore.courses}
+                    courses={this.props.courseStore.courses}
+                    works={this.props.workStore.works}
                 />
             </div>
         );

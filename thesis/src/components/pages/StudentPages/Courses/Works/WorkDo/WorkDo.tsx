@@ -80,11 +80,7 @@ export class WorkDo extends React.Component<any> {
 
     private renderFiles = (): React.ReactNode => {
         if (this.work && !this.testEnabled) {
-            return (
-                this.work.files.map((file: any) =>
-                 <p key={file.filename}>file</p> 
-                )
-            );
+            return <p>file</p>
         } else return null;
     };
 
@@ -135,7 +131,7 @@ export class WorkDo extends React.Component<any> {
                     {this.renderDescription()}
                 </div>
                 {this.renderDeadline()}
-                {this.renderFiles()}
+                {/* {this.renderFiles()} */}
                 {this.renderManagePanel()}
                 {this.renderTest()}
             </>

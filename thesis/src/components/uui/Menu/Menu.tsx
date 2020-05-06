@@ -9,7 +9,8 @@ import { Badge } from '../Badge/Badge';
 import './Menu.module.less';
 
 interface Props {
-    menuItems: Course[];
+    courses: Course[];
+    works: Work[];
 }
 
 const { SubMenu, Item } = AntdMenu;
@@ -81,9 +82,10 @@ export class Menu extends React.Component<Props | any> {
     };
 
     private renderItems = (course: Course): React.ReactNode => {
-        if (course.works && this.props.userStore.user) {
+        const { works } = this.props;
+        if (works && this.props.userStore.user) {
             return (
-                course.works.map((work: Work) => 
+                works.map((work: Work) => 
                     <Item key={work.id}>
                         <Link
                             to={this.props.userStore.user.role === 'student'
@@ -99,10 +101,10 @@ export class Menu extends React.Component<Props | any> {
     };
 
     private renderMenuItems = (): React.ReactNode => {
-        const { menuItems } = this.props;        
-        if (menuItems && this.props.userStore.user) {            
+        const { courses } = this.props;        
+        if (courses && this.props.userStore.user) {            
             return (
-                menuItems.map((menuItem: Course) => 
+                courses.map((menuItem: Course) => 
                     <SubMenu
                         key={menuItem.id}
                         title={

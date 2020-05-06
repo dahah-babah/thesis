@@ -5,13 +5,37 @@ import { Test } from "../types/types";
 
 class TestStore {
     @observable test!: Test;
+    @observable studentCompleted: any = [];
+    @observable allCompleted: any = [];
+
+    @action.bound
+    public fetchStudentCompleted(userId: string) {
+        Axios.get(`${PATH.SERVER}/users/${userId}/studentCourses`)
+        .then((courses) => {
+            runInAction(() => {
+                this.studentCompleted = courses.data;                
+            });
+        })
+        .catch(error => console.log(error))
+    }
+
+    @action.bound
+    public fetchAllCompleted() {
+        Axios.get(`${PATH.SERVER}/studentCourses`)
+        .then((courses) => {
+            runInAction(() => {
+                this.allCompleted = courses.data;                
+            });
+        })
+        .catch(error => console.log(error))
+    }
 
     @action.bound
     public fetchTest(courseId: string, workId: string) {
         Axios.get(`${PATH.SERVER}/tests?courseId=${courseId}&workId=${workId}`)
         .then((test) => {
             runInAction(() => {
-                this.setTest(test.data) 
+                this.setTest(test.data);
             })
             
         })
@@ -29,6 +53,8 @@ class TestStore {
         .then(response => console.log(response))
         .catch(error => console.log(error))
     }
+
+
     
     @action
     private setTest = (test: Test) => {

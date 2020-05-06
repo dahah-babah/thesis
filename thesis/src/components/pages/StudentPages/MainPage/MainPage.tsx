@@ -18,22 +18,35 @@ interface Props {
     user: Student;
 }
 
-@inject('courseStore')
+@inject('courseStore', 'workStore')
 @observer
 export class StudentMainPage extends React.Component<Props | any> {
 
     @observable courses: Course[] = [];
+    @observable works: Work[] = [];
 
-    UNSAFE_componentWillMount() {
+    async UNSAFE_componentWillMount() {
         // get course id for student 
-        const courseId: string | string[] = '';
-        this.props.courseStore.fetchStudentCourses(courseId);
-        this.courses = this.props.courseStore.getCourses();        
+        const courseId: string | string[] = '1';
+
+        await this.props.courseStore.fetchStudentCourses(this.props.user.id, courseId);
+        this.courses = this.props.courseStore.getCourses();   
+
+        await this.props.workStore.fetchWorks(courseId);
+        this.works = this.props.workStore.getWorks();             
     };
 
-    private renderNotCompletedWorks = (works: Work[], course: Course): React.ReactNode => {       
+    componentDidUpdate() {
+        this.courses = this.props.courseStore.getCourses();
+        this.works = this.props.workStore.getWorks();        
+    };
+
+    renderNotCompletedWorks = (course: Course): React.ReactNode => {   
+        this.props.workStore.fetchWorks(course.id);
+        this.works = this.props.workStore.getWorks();
+
         return (
-            works.map((work: Work) =>
+            this.works.map((work: Work) =>
                 <Collapse
                     key={work.id}
                     title={`${course.name} - ${work.title}`}
@@ -46,11 +59,9 @@ export class StudentMainPage extends React.Component<Props | any> {
         );
     };
 
-    private renderCourses = (): React.ReactNode => {                
-        return this.courses.map((course: Course) => 
-            course.works
-            ?   this.renderNotCompletedWorks(course.works, course)
-            :   `You already completed all works on ${course.name} course! Great job!`
+    private renderCourses = (): React.ReactNode => {                        
+        return this.courses.map((course: Course) =>       
+            this.renderNotCompletedWorks(course)
         );
     };
 

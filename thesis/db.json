@@ -19,6 +19,18 @@
       "group": "QWE-81"
     },
     {
+        "id": "123321",
+        "username": "Ivanov_Ivan1",
+        "password": "123",
+        "role": "student",
+        "name": "Ivan1",
+        "lastname": "Ivanov1",
+        "level": "bachelor",
+        "year": "2",
+        "semester": "3",
+        "group": "QWE-81"
+    },
+    {
       "id": "vcklnjb1",
       "username": "Poshposh_Poashka",
       "password": "321",
@@ -28,7 +40,24 @@
       "level": "professor"
     }
   ],
-  "studentCourses": [],
+  "studentCourses": [
+    {
+      "courseId": "1",
+      "workId": "2",
+      "completed": true,
+      "rate": "67",
+      "userId": "g34sad4df2",
+      "id": 1
+    },
+    {
+        "courseId": "1",
+        "workId": "2",
+        "completed": true,
+        "rate": "85",
+        "userId": "123321",
+        "id": 1
+      }
+  ],
   "teacherCourses": [],
   "courses": [
     {
@@ -40,6 +69,7 @@
   "works": [
     {
       "id": "1",
+      "courseId": "1",
       "title": "Lab1",
       "type": "lab",
       "description": "The task of this work is to met a devil: 1st - lab, 2nd - test!",
@@ -47,6 +77,7 @@
     },
     {
       "id": "2",
+      "courseId": "1",
       "title": "Lab2 (test)",
       "type": "test",
       "description": "Comlete the test and you will become a GOD",
@@ -55,21 +86,21 @@
   ],
   "files": [
     {
-        "id": 1,
-        "courseId": "1",
-        "workId": "2",
-        "filename": "Lab1Task.pdf",
-        "path": "mock"
+      "id": 1,
+      "courseId": "1",
+      "workId": "2",
+      "filename": "Lab1Task.pdf",
+      "path": "mock"
     }
   ],
   "reports": [
     {
-        "id": 1,
-        "userId": "g34sad4df2",
-        "courseId": "1",
-        "workId": "2",
-        "filename": "Lab1Task.pdf",
-        "path": "mock"
+      "id": 1,
+      "userId": "g34sad4df2",
+      "courseId": "1",
+      "workId": "2",
+      "filename": "Lab1Task.pdf",
+      "path": "mock"
     }
   ],
   "tests": [

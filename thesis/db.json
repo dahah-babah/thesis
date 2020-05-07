@@ -50,13 +50,21 @@
       "id": 1
     },
     {
-        "courseId": "1",
-        "workId": "2",
-        "completed": true,
-        "rate": "85",
-        "userId": "123321",
-        "id": 1
-      }
+      "courseId": "1",
+      "workId": "2",
+      "completed": true,
+      "rate": "85",
+      "userId": "123321",
+      "id": 2
+    },
+    {
+      "courseId": "1",
+      "workId": "1",
+      "completed": true,
+      "rate": "33",
+      "userId": "g34sad4df2",
+      "id": 3
+    }
   ],
   "teacherCourses": [],
   "courses": [

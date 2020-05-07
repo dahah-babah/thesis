@@ -11,13 +11,15 @@ import CourseStore from './stores/CourseStore';
 import SiderStore from './stores/SiderStore';
 import WorkStore from './stores/WorkStore';
 import TestStore from './stores/TestStore';
+import ChartStore from './stores/ChartStore';
 
 ReactDOM.render(
     <Provider   userStore={new UserStore()}
                 courseStore={new CourseStore()}
                 siderStore={new SiderStore()}   
                 workStore={new WorkStore()}     
-                testStore={new TestStore()}    
+                testStore={new TestStore()}  
+                chartStore={new ChartStore()}  
     >
         <App />
     </Provider>,

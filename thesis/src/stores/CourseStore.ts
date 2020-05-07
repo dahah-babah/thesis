@@ -1,12 +1,24 @@
 import { observable, action, runInAction } from "mobx";
 import Axios from "axios";
 
-import { Course } from "../types/types";
+import { Course, Work } from "../types/types";
 import { PATH } from "../routes/paths";
 
 class CourseStore {
     @observable
     public courses!: Course[];
+    public worksByCourseId: Work[] = [];
+
+    @action.bound
+    public fetchWorksById(courseId: string) {       
+        Axios.get(`${PATH.SERVER}/courses/${courseId}/works`)
+        .then((works) => {
+            runInAction(() => {
+                this.worksByCourseId = works.data;
+            })
+        })
+        .catch(error => console.log(error))
+    };
 
     @action.bound
     public fetchCourses() {       

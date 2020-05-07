@@ -8,6 +8,7 @@ class TestStore {
     @observable studentCompleted: any = [];
     @observable allCompleted: any = [];
 
+    // fetch this user completed tasks
     @action.bound
     public fetchStudentCompleted(userId: string) {
         Axios.get(`${PATH.SERVER}/users/${userId}/studentCourses`)
@@ -19,9 +20,10 @@ class TestStore {
         .catch(error => console.log(error))
     }
 
+    // fetch all users who completed tasks
     @action.bound
-    public fetchAllCompleted() {
-        Axios.get(`${PATH.SERVER}/studentCourses`)
+    public fetchAllCompleted(courseId: string) {
+        Axios.get(`${PATH.SERVER}/courses/${courseId}/studentCourses`)
         .then((courses) => {
             runInAction(() => {
                 this.allCompleted = courses.data;                

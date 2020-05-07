@@ -6,6 +6,17 @@ import { PATH } from "../routes/paths";
 class WorkStore {
     @observable
     works: Work[] = [];
+    worksById: any;
+
+    @action.bound
+    public fetchWorkByUserIdCourseId(userId: string, courseId: string) {
+        Axios.get(`${PATH.SERVER}/users/${userId}/studentCourses?courseId=${courseId}`)
+        .then((work) => {
+            runInAction(() =>{
+                this.worksById = work.data;
+            });
+        })
+    };
 
     @action.bound
     public fetchWorks(courseId: string) {

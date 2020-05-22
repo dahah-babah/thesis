@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu as AntdMenu } from 'antd';
+import { Menu as AntdMenu, Typography } from 'antd';
 import { ArrowRightOutlined, EditOutlined } from '@ant-design/icons';
 import { Course, Work, User, Student, Teacher } from '../../../types/types';
 import { Link } from 'react-router-dom';
@@ -60,11 +60,11 @@ export class Menu extends React.Component<Props | any> {
         }
     };
 
-    private renderBadge = (workTitle: string): React.ReactNode => {
+    private renderBadge = (work: Work): React.ReactNode => {
         if (this.props.userStore.user.role === 'student') {
             return (
                 <Badge 
-                    content={workTitle} 
+                    content={work.id} 
                     dot 
                     offset={[10, 0]}
                     // status
@@ -74,7 +74,7 @@ export class Menu extends React.Component<Props | any> {
         } else if (this.props.userStore.user.role === 'teacher') {
             return (
                 <span>
-                    {workTitle}
+                    {work.id}
                     <EditOutlined />
                 </span>
             );
@@ -92,7 +92,7 @@ export class Menu extends React.Component<Props | any> {
                                 ?   `/user/${this.props.userStore.user.id}/courses/${course.id}/works/${work.id}/do`
                                 :   `/user/${this.props.userStore.user.id}/courses/${course.id}/works/${work.id}/edit`}
                         >
-                            {this.renderBadge(work.title)}
+                            {this.renderBadge(work)}
                         </Link>
                     </Item>
                 )

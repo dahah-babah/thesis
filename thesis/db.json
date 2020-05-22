@@ -19,16 +19,16 @@
       "group": "QWE-81"
     },
     {
-        "id": "123321",
-        "username": "Ivanov_Ivan1",
-        "password": "123",
-        "role": "student",
-        "name": "Ivan1",
-        "lastname": "Ivanov1",
-        "level": "bachelor",
-        "year": "2",
-        "semester": "3",
-        "group": "QWE-81"
+      "id": "123321",
+      "username": "Ivanov_Ivan1",
+      "password": "123",
+      "role": "student",
+      "name": "Ivan1",
+      "lastname": "Ivanov1",
+      "level": "bachelor",
+      "year": "2",
+      "semester": "3",
+      "group": "QWE-81"
     },
     {
       "id": "vcklnjb1",
@@ -41,14 +41,6 @@
     }
   ],
   "studentCourses": [
-    {
-      "courseId": "1",
-      "workId": "2",
-      "completed": true,
-      "rate": "67",
-      "userId": "g34sad4df2",
-      "id": 1
-    },
     {
       "courseId": "1",
       "workId": "2",
@@ -70,26 +62,75 @@
   "courses": [
     {
       "id": "1",
-      "name": "MiVT",
-      "description": "This course about nothing"
+      "shortName" : "ВиМТ",
+      "name": "Вычислительная и микропроцессорная техника",
+      "description": "Целью изучения дисциплины является ознакомление студентов с общими принципами построения и функционирования микропроцессорных систем, приобретение теоретических навыков использования микропроцесскоров для решения разнообразных технических задач."
     }
   ],
   "works": [
     {
       "id": "1",
       "courseId": "1",
-      "title": "Lab1",
+      "title": "Основы языка программирования Assembler",
       "type": "lab",
-      "description": "The task of this work is to met a devil: 1st - lab, 2nd - test!",
+      "description": "Задание на ЛР№1 представлено в прикрепленном PDF файле, выполнить задание согласно своему варианту и загрузить отчет в систему в формате PDF",
       "deadline": null
     },
     {
       "id": "2",
       "courseId": "1",
-      "title": "Lab2 (test)",
+      "title": "Управление портами вывода",
       "type": "test",
-      "description": "Comlete the test and you will become a GOD",
+      "description": "Выполните тест по теме лабораторной работы",
       "deadline": "1.04.2020"
+    },
+    {
+      "id": "3",
+      "courseId": "1",
+      "title": "Управление портами ввода",
+      "type": "test",
+      "description": "",
+      "deadline": null
+    },
+    {
+      "id": "4",
+      "courseId": "1",
+      "title": "Обработка цифровых данных",
+      "type": "test",
+      "description": "",
+      "deadline": null
+    },
+    {
+      "id": "5",
+      "courseId": "1",
+      "title": "Использование прерываний",
+      "type": "test",
+      "description": "",
+      "deadline": null
+    },
+    {
+      "id": "6",
+      "courseId": "1",
+      "title": "Использование таймеров",
+      "type": "test",
+      "description": "",
+      "deadline": null
+    },
+    {
+      "id": "7",
+      "courseId": "1",
+      "title": "Аналого-цифровое преобразование",
+      "type": "test",
+      "description": "",
+      "deadline": null
+    },
+    {
+      "id": "8",
+      "courseId": "1",
+      "title": "Широтно-импульсная модуляция",
+      "type": "test",
+      "description": "",
+      "deadline": null
     }
   ],
   "files": [
@@ -113,66 +154,73 @@
   ],
   "tests": [
     {
-      "id": "1",
+      "id": 1,
       "courseId": "1",
       "workId": "2",
       "questions": [
         {
-          "id": "0",
-          "title": "there is the 1st question",
+          "id": 1,
+          "title": "Каким образом можно внести изменения в работу микропроцессора",
           "type": "radio",
-          "isCorrectId": "0",
+          "isCorrectId": 1,
           "points": [
             {
-              "id": "0",
-              "text": "answer 1"
+              "id": 1,
+              "text": "Изменяя команды в памяти"
             },
             {
-              "id": "1",
-              "text": "answer 2"
+              "id": 2,
+              "text": "Вводя новые данные"
             },
             {
-              "id": "2",
-              "text": "answer 3"
+              "id": 3,
+              "text": "Выводя данные"
+            },
+            {
+              "id": 4,
+              "text": "Увеличивая размер памяти"
             }
           ]
         },
         {
-          "id": "1",
-          "title": "there is the 2nd question",
+          "id": 2,
+          "title": "Для управления какими из следующих схем предназначены управляющие сигналы, генерируемые микропроцессором",
           "type": "checkbox",
           "isCorrectId": [
             {
-              "id": "0"
+              "id": 1
             },
             {
-              "id": "1"
+              "id": 2
+            },
+            {
+              "id": 3
             }
           ],
           "points": [
             {
-              "id": "0",
-              "text": "answer 1"
+              "id": 1,
+              "text": "Памяти"
             },
             {
-              "id": "1",
-              "text": "answer 2"
+              "id": 2,
+              "text": "Ввода"
             },
             {
-              "id": "2",
-              "text": "answer 3"
+              "id": 3,
+              "text": "Вывода"
             }
           ]
         },
         {
-          "id": "2",
-          "title": "there is the 3rd question",
+          "id": 3,
+          "title": "Чем принято измерять мощность микропроцессора",
           "type": "text",
-          "isCorrectId": "crap",
+          "isCorrectId": "длиной слова",
           "points": [
             {
-              "id": "0",
-              "text": "crap"
+              "id": 1,
+              "text": "Введите ответ"
             }
           ]
         }

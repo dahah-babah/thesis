@@ -42,7 +42,7 @@ export class Menu extends React.Component<Props | any> {
                 <span>
                     <ArrowRightOutlined />
                     <Badge
-                        content={<span>{name}</span>}
+                        content={name}
                         dot
                         offset={[10, 0]}
                         // status
@@ -112,7 +112,7 @@ export class Menu extends React.Component<Props | any> {
                                 ?   `/user/${this.props.userStore.user.id}/courses/${menuItem.id}`
                                 :   `/user/${this.props.userStore.user.id}/courses/${menuItem.id}/edit`}
                             >
-                                {this.renderCourseName(menuItem.name, this.props.userStore.user.role)}
+                                {this.renderCourseName(menuItem.shortName, this.props.userStore.user.role)}
                             </Link>
                         }
                     >

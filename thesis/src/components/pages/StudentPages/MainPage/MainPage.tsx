@@ -49,7 +49,7 @@ export class StudentMainPage extends React.Component<Props | any> {
             this.works.map((work: Work) =>
                 <Collapse
                     key={work.id}
-                    title={`${course.name} - ${work.title}`}
+                    title={`${course.shortName} - ${work.title}`}
                     content={work}
                     user={this.props.user}
                     courseId={course.id}

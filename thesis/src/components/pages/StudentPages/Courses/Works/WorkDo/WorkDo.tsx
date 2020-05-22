@@ -26,7 +26,7 @@ export class WorkDo extends React.Component<any> {
 
     componentDidUpdate() {
         const workId = this.props.match.params.workId;
-        this.work = this.props.workStore.getWork(workId);
+        this.work = this.props.workStore.getWork(workId);        
     }
 
     private renderTitle = (): React.ReactNode => {          

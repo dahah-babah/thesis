@@ -94,7 +94,12 @@ export class TestForm extends React.Component<any> {
     };
 
     private getCorrectAnswers = (): any => {
-        if (this.test) {            
+        if (this.test) {   
+            console.log('correct answers');
+            
+            console.log(this.correctAnswers = this.props.testStore.test[0].questions.map((question) => 
+            question.isCorrectId));
+            
             return this.correctAnswers = this.props.testStore.test[0].questions.map((question) => 
                 question.isCorrectId
             );
@@ -103,7 +108,9 @@ export class TestForm extends React.Component<any> {
 
     private calculateSuccess = (answers: any): boolean[] => {
         this.correctAnswers = this.getCorrectAnswers();
+
         const testLen = this.correctAnswers.length;
+        
         let success: boolean[] = [];
 
         for (let i = 0; i < testLen; i++) {
@@ -141,12 +148,12 @@ export class TestForm extends React.Component<any> {
         this.calculateTime();
         this.setTestFinished();
         this.rate = (Math.round(this.calculateRate(this.calculateSuccess(values)))).toString();   
-        this.props.testStore.postCompletedTest(
-            this.props.match.params.userId,
-            this.courseId,
-            this.workId,
-            this.rate
-        );
+        // this.props.testStore.postCompletedTest(
+        //     this.props.match.params.userId,
+        //     this.courseId,
+        //     this.workId,
+        //     this.rate
+        // );
     };
 
     private calculateTime = (): void | Date => {

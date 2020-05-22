@@ -39,6 +39,8 @@ export interface Work extends IdName {
 
 export interface Course extends IdName {
     works: Work[];
+    id: string;
+    shortName: string;
     description: any;
 }
 

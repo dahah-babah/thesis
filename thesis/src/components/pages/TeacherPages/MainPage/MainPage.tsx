@@ -34,7 +34,7 @@ export class TeacherMainPage extends React.Component<Props | any> {
 
     private formCollapseTitle = (course: Course, work: Work): string => {
         // mock
-        return `${course.name} - ${work.title} - student_group - student_lastname`;
+        return `${course.shortName} - ${work.title} - student_group - student_lastname`;
     }
 
     private renderUnverifiedReports = (works: Work[], course: Course): React.ReactNode => {

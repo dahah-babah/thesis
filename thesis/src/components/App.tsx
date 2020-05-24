@@ -14,14 +14,17 @@ class App extends React.Component {
         return (            
             <Router history={history}>
                 <Switch>
-                    <Redirect exact from='/' to={PATH.LOGIN} />
-                    <Route path={PATH.LOGIN}>
-                        <AuthPage />
-                    </Route>
-                    <Redirect exact from={PATH.USER} to={`${PATH.USER}/home`} />
-                    <Route path={`${PATH.USER}`}>
-                        <UserPage />
-                    </Route>
+                    
+                <Redirect exact from='/' to={PATH.LOGIN} />
+                <Route path={PATH.LOGIN}>
+                    <AuthPage />
+                </Route>
+
+                <Redirect exact from={PATH.USER} to={`${PATH.USER}/home`} />
+                <Route path={`${PATH.USER}`}>
+                    <UserPage />
+                </Route>
+                    
                 </Switch>
             </Router>
         );

@@ -6,6 +6,7 @@ import styles from '../../Works/Work.module.less';
 import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import { TestForm } from '../../../../../forms/TestForm/Test';
+import { LabForm } from '../../../../../forms/LabForm/LabRab';
 
 const { Text, Paragraph } = Typography;
 const { Panel } = Collapse;
@@ -47,11 +48,12 @@ export class WorkDo extends React.Component<any> {
     private renderDescription = (): React.ReactNode => {
         return (
             <Collapse
+                defaultActiveKey={this.course ? this.course.id : 'def'}
                 bordered={true}
             >
                 <Panel 
                     key={this.course ? this.course.id : 'def'} 
-                    header='Description'
+                    header='Описание лабораторной работы'
                 >
                     <Paragraph>
                         {this.work
@@ -113,10 +115,16 @@ export class WorkDo extends React.Component<any> {
 
     private renderTest = (): React.ReactNode => {        
         if (this.work) {
-            if (this.testEnabled) {
+            if (this.work.type === 'test' && this.testEnabled) {
                 return (
                     <div className={styles.margin}>
                         <TestForm {...this.props} />
+                    </div>
+                );
+            } else if (this.work.type === 'lab') {
+                return (
+                    <div className={styles.margin}>
+                        <LabForm {...this.props} />
                     </div>
                 );
             }

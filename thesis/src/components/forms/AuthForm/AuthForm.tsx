@@ -4,25 +4,33 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import styles from './AuthForm.module.less';
 import { inject, observer } from 'mobx-react';
-import { observable } from 'mobx';
-import { User, Teacher, Student } from '../../../types/types';
+import { User, Student, Teacher } from '../../../types/types';
 
-@inject('userStore')
+@inject('authStore', 'userStore')
 @observer
 export class AuthForm extends React.Component<any> {
 
-    @observable user!: User | Teacher | Student;
-
     private onSubmit = (values: any): void => {
-        console.log(values);
         this.validateUser(values);
     };
 
-    private validateUser = (data: any): void => {
-        // this.user = this.props.userStore.findUser('dahah@babah.gmail.com', 'Student_Password'); //student
-        this.user = this.props.userStore.findUser(data.username, data.password);
-        console.log(this.user);
-        
+    async validateUser(data: any) {
+        console.log(data);        
+        await this.props.authStore.findUser(data.username, data.password);
+
+        if (this.props.authStore.user) {
+
+            if (data.remember) {
+                this.props.authStore.setIsRememberedTrue();
+            }
+
+            this.setUser(this.props.authStore.user);        
+        }
+    };
+
+    private setUser = (user: User | Student | Teacher): void => {
+        //set user in userStore
+        this.props.userStore.setUser(user);
     };
 
     private renderFormItems = (): React.ReactNode => {
@@ -33,7 +41,7 @@ export class AuthForm extends React.Component<any> {
                     rules={[{ required: true, message: 'Please input your Username!' }]}
                 >
                     <Input 
-                        prefix={ <UserOutlined className='site-form-item-icon' /> }
+                        prefix={ <UserOutlined /> }
                         placeholder='Username'
                     />
                 </Form.Item>
@@ -42,7 +50,7 @@ export class AuthForm extends React.Component<any> {
                     rules={[{ required: true, message: 'Please input your Password!' }]}
                 >
                     <Input
-                        prefix={ <LockOutlined className='site-form-item-icon' /> }
+                        prefix={ <LockOutlined /> }
                         type='password'
                         placeholder='Password' 
                     />
@@ -58,7 +66,9 @@ export class AuthForm extends React.Component<any> {
                         type='primary'
                         htmlType='submit'
                     >
-                        <Link to={`/user/${this.props.userStore.getUser() ? this.props.userStore.user.id : null}/home`}>Log in</Link>
+                        <Link to={`/user/${this.props.userStore.user ? this.props.userStore.user.id : null}/home`}>
+                            Log in
+                        </Link>
                     </Button>
                 </Form.Item>
             </>

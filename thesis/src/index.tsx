@@ -12,6 +12,8 @@ import SiderStore from './stores/SiderStore';
 import WorkStore from './stores/WorkStore';
 import TestStore from './stores/TestStore';
 import ChartStore from './stores/ChartStore';
+import FileStore from './stores/FileStore';
+import AuthStore from './stores/AuthStore';
 
 ReactDOM.render(
     <Provider   userStore={new UserStore()}
@@ -20,6 +22,8 @@ ReactDOM.render(
                 workStore={new WorkStore()}     
                 testStore={new TestStore()}  
                 chartStore={new ChartStore()}  
+                fileStore={new FileStore()}
+                authStore={new AuthStore()}
     >
         <App />
     </Provider>,

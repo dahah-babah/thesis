@@ -15,17 +15,20 @@ const { Content } = Layout;
 @inject('userStore')
 @observer
 export class UserPage extends React.Component<any> {
-
-    @observable user!: User | Teacher | Student;
-
     componentDidMount = (): void => {
+
+        if (localStorage.length) {
+            const userId = localStorage.getItem('userId');
+            console.log(userId);
+            this.props.userStore.getUserById(userId);
+        } 
+           
         // temporary mock
 
         // this.user = this.props.userStore.findUser('123', '321'); //admin
-        this.user = this.props.userStore.findUser('Ivanov_Ivan', '123'); //student
+        this.props.userStore.findUser('Ivanov_Ivan', '123'); //student
         // this.user = this.props.userStore.findUser('Poshposh_Poashka', '321'); //teacher
 
-        this.user = this.props.userStore.getUser();
     };
 
     private renderHeader = (): React.ReactNode => {               

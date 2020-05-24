@@ -1,6 +1,6 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import { observable, toJS } from 'mobx';
+import { observable } from 'mobx';
 import { Test, Question, TestPoint } from '../../../types/types';
 import { Input, Typography, Radio, Checkbox, Select, Form, Button } from 'antd';
 import { DoubleRightOutlined } from '@ant-design/icons';
@@ -14,8 +14,6 @@ const { Text } = Typography;
 export class TestForm extends React.Component<any> {
     
     @observable test: Test = this.props.testStore.test;
-    @observable correctAnswers: any = [];
-    @observable testIsFinished = false;
     @observable rate: string = '';
 
     private courseId = this.props.match.params.courseId;
@@ -29,15 +27,11 @@ export class TestForm extends React.Component<any> {
         this.test = this.props.testStore.getTest();
     };
 
-    private setTestFinished = (): void => {
-        this.testIsFinished = true;
-    };
-
     private renderRadioGroup = (question: Question): React.ReactNode => {
         return (
-            <Radio.Group>
+            <Radio.Group className={styles.questionWpapper}>
                 {question.points.map((point) => 
-                    <Radio value={point.id} disabled={this.testIsFinished}>
+                    <Radio key={point.id} value={point.id} disabled={this.props.testStore.testIsFinished}>
                         <Text>{point.text}</Text>
                     </Radio>
                 )}
@@ -47,9 +41,9 @@ export class TestForm extends React.Component<any> {
 
     private renderCheckboxGroup = (question: Question): React.ReactNode => {
         return (
-            <Checkbox.Group>
+            <Checkbox.Group className={styles.questionWpapper}>
                 {question.points.map((point) =>
-                    <Checkbox value={point.id} disabled={this.testIsFinished}>
+                    <Checkbox key={point.id} value={point.id} disabled={this.props.testStore.testIsFinished}>
                         <Text>{point.text}</Text>
                     </Checkbox> 
                 )}
@@ -59,13 +53,13 @@ export class TestForm extends React.Component<any> {
 
     private renderSelect = (question: Question): React.ReactNode => {
         return (
-            <Select disabled={this.testIsFinished} />
+            <Select disabled={this.props.testStore.testIsFinished} />
         );
     };
 
     private renderInputGroup = (point: TestPoint): React.ReactNode => {
         return (
-            <Input disabled={this.testIsFinished} />
+            <Input disabled={this.props.testStore.testIsFinished} />
         );
     };
 
@@ -74,6 +68,7 @@ export class TestForm extends React.Component<any> {
             return (
                 this.test[0].questions.map((question) =>
                     <Form.Item 
+                        key={question.id}
                         label={question.title} 
                         name={question.id}
                         rules={[{ required: true, message: 'Please, fill all fields!' }]}
@@ -93,61 +88,15 @@ export class TestForm extends React.Component<any> {
         }
     };
 
-    private getCorrectAnswers = (): any => {
-        if (this.test) {   
-            console.log('correct answers');
-            
-            console.log(this.correctAnswers = this.props.testStore.test[0].questions.map((question) => 
-            question.isCorrectId));
-            
-            return this.correctAnswers = this.props.testStore.test[0].questions.map((question) => 
-                question.isCorrectId
-            );
-        }
-    };
-
-    private calculateSuccess = (answers: any): boolean[] => {
-        this.correctAnswers = this.getCorrectAnswers();
-
-        const testLen = this.correctAnswers.length;
-        
-        let success: boolean[] = [];
-
-        for (let i = 0; i < testLen; i++) {
-            if (typeof answers[i] === 'string') {
-                success.push(toJS(this.correctAnswers[i]) === answers[i]);
-                
-            } else if (typeof answers[i] === 'object') {
-                const coorectLen = toJS(this.correctAnswers[i]).length;
-                answers[i].sort();
-
-                let isCorrect = true;
-                
-                for (let k = 0; k < coorectLen; k++) {                    
-                    if (!(toJS(this.correctAnswers[i])[k].id === answers[i][k])) {
-                        isCorrect = false;
-                    }
-                }
-
-                success.push(isCorrect);
-            }
-        }
-        
-        return success;        
-    };
-
-    private calculateRate = (success: boolean[]): number => {        
-        const numOfAnswers = success.length;
-        const weight = (100 / numOfAnswers).toFixed(2);
-        const numNotFailed = success.filter((bool: boolean) => bool === true).length;
-        return Number(weight) * numNotFailed;
-    };
-
     private onFinish = (values: any): void => {
-        //finish timer 
-        this.calculateTime();
-        this.setTestFinished();
-        this.rate = (Math.round(this.calculateRate(this.calculateSuccess(values)))).toString();   
+        //finish timer here
+        
+        this.props.testStore.calculateTime();
+        this.props.testStore.setTestFinished();
+        this.rate = (Math.round
+        (this.props.testStore.calculateRate
+        (this.props.testStore.calculateSuccess(values)))).toString();
+
         // this.props.testStore.postCompletedTest(
         //     this.props.match.params.userId,
         //     this.courseId,
@@ -155,15 +104,9 @@ export class TestForm extends React.Component<any> {
         //     this.rate
         // );
     };
-
-    private calculateTime = (): void | Date => {
-        console.log('calculated time');
-        //time start
-        //time finished
-    };
     
     render(): React.ReactChild {            
-        if (!this.testIsFinished) {
+        if (!this.props.testStore.testIsFinished) {
             return (
                 <Form onFinish={this.onFinish}>
                     {this.renderQuestions()}
@@ -171,7 +114,7 @@ export class TestForm extends React.Component<any> {
                         <Button 
                             type='primary' 
                             htmlType='submit'
-                            disabled={this.testIsFinished}
+                            disabled={this.props.testStore.testIsFinished}
                         >
                             FINISH TEST
                         </Button>

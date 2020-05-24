@@ -1,4 +1,4 @@
-import { observable, action, runInAction } from "mobx";
+import { observable, action, runInAction, toJS } from "mobx";
 import Axios from "axios";
 import { PATH } from "../routes/paths";
 import { Test } from "../types/types";
@@ -7,6 +7,18 @@ class TestStore {
     @observable test!: Test;
     @observable studentCompleted: any = [];
     @observable allCompleted: any = [];
+    @observable correctAnswers: any = [];
+    @observable testIsFinished = false;
+
+    @action
+    private setTest = (test: Test) => {
+        this.test = test;                
+    };
+
+    @action
+    public getTest = (): Test => {
+        return this.test;
+    };
 
     // fetch this user completed tasks
     @action.bound
@@ -54,18 +66,61 @@ class TestStore {
         })
         .then(response => console.log(response))
         .catch(error => console.log(error))
-    }
-
-
-    
-    @action
-    private setTest = (test: Test) => {
-        this.test = test;                
     };
 
-    @action
-    public getTest = (): Test => {
-        return this.test;
+    private getCorrectAnswers = (): any => {
+        if (this.test) {               
+            return this.correctAnswers = this.test[0].questions.map((question) => 
+                question.isCorrectId
+            );
+        }
+    };
+
+    public setTestFinished = (): void => {
+        this.testIsFinished = true;
+    };
+
+    public calculateSuccess = (answers: any): boolean[] => {
+        this.correctAnswers = this.getCorrectAnswers();
+
+        const testLen = this.correctAnswers.length;
+        
+        let success: boolean[] = [];        
+
+        for (let i = 0; i < testLen; i++) {
+            if (typeof answers[i] === 'string') {
+                success.push(toJS(this.correctAnswers[i]) === answers[i]);
+                
+            } else if (typeof answers[i] === 'object') {
+                const coorectLen = toJS(this.correctAnswers[i]).length;
+                answers[i].sort();
+
+                let isCorrect = true;
+                
+                for (let k = 0; k < coorectLen; k++) {                    
+                    if (!(toJS(this.correctAnswers[i])[k].id === answers[i][k])) {
+                        isCorrect = false;
+                    }
+                }                
+
+                success.push(isCorrect);
+            }
+        }
+        
+        return success;        
+    };
+
+    public calculateRate = (success: boolean[]): number => {        
+        const numOfAnswers = success.length;
+        const weight = (100 / numOfAnswers).toFixed(2);
+        const numNotFailed = success.filter((bool: boolean) => bool === true).length;
+        return Number(weight) * numNotFailed;
+    };
+
+    public calculateTime = (): void | Date => {
+        console.log('calculated time');
+        //time start
+        //time finished
     };
 
 }

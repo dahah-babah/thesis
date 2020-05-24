@@ -1,12 +1,12 @@
 import React from 'react';
-import { Menu as AntdMenu, Typography } from 'antd';
+import { Menu as AntdMenu } from 'antd';
 import { ArrowRightOutlined, EditOutlined } from '@ant-design/icons';
 import { Course, Work, User, Student, Teacher } from '../../../types/types';
 import { Link } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import { observable } from 'mobx';
 import { Badge } from '../Badge/Badge';
-import './Menu.module.less';
+import styles from'./Menu.module.less';
 
 interface Props {
     courses: Course[];
@@ -86,7 +86,10 @@ export class Menu extends React.Component<Props | any> {
         if (works && this.props.userStore.user) {
             return (
                 works.map((work: Work) => 
-                    <Item key={work.id}>
+                    <Item 
+                        key={work.id} 
+                        className={styles.item}
+                    >
                         <Link
                             to={this.props.userStore.user.role === 'student'
                                 ?   `/user/${this.props.userStore.user.id}/courses/${course.id}/works/${work.id}/do`

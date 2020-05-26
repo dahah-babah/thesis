@@ -14,6 +14,7 @@ import TestStore from './stores/TestStore';
 import ChartStore from './stores/ChartStore';
 import FileStore from './stores/FileStore';
 import AuthStore from './stores/AuthStore';
+import BadgeStore from './stores/BadgeStore';
 
 ReactDOM.render(
     <Provider   userStore={new UserStore()}
@@ -24,6 +25,7 @@ ReactDOM.render(
                 chartStore={new ChartStore()}  
                 fileStore={new FileStore()}
                 authStore={new AuthStore()}
+                badgeStore={new BadgeStore()}
     >
         <App />
     </Provider>,

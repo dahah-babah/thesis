@@ -19,7 +19,7 @@ export class CustomSider extends React.Component<Props | any> {
 
     componentDidMount = (): void => {
         this.props.courseStore.fetchCourses(this.props.userStore.user);
-        this.props.workStore.fetchWorks('1');
+        this.props.workStore.fetchWorks('1');        
     };
 
     private renderMenu = (): React.ReactNode => {
@@ -28,6 +28,7 @@ export class CustomSider extends React.Component<Props | any> {
                 <Menu
                     courses={this.props.courseStore.courses}
                     works={this.props.workStore.works}
+                    userId={this.props.userStore.user ? this.props.userStore.user.id : null}
                 />
             </div>
         );

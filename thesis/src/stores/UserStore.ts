@@ -20,14 +20,6 @@ class UserStore {
         return this.user;
     };
 
-    // replace to AuthStore
-    // @action
-    // public getUsers = (): any => {
-    //     Axios.get(`${PATH.SERVER}/users`)
-    //     .then((users) => 
-    //         console.log(users)
-    //     )
-    // };
 
     @action.bound
     public getUserById(userId: string) {
@@ -41,6 +33,7 @@ class UserStore {
     };
 
     // replace to AuthStore
+    // not include in report (cause it is for mock auth)
     @action.bound
     public findUser(username: string, password: string) {
         Axios.get(`${PATH.SERVER}/users`)

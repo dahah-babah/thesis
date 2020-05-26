@@ -4,7 +4,7 @@ import { Badge as AntdBadge } from 'antd';
 interface Props {
     content: React.ReactNode;
     count?: number;
-    status?: 'success' | 'processing' | 'default' | 'error' | 'warning';
+    status?: 'success' | 'default' | 'error' | 'warning'; // warning if comments
     dot?: boolean;
     title?: string;
     offset?: [number, number];

@@ -11,11 +11,12 @@ import styles from'./Menu.module.less';
 interface Props {
     courses: Course[];
     works: Work[];
+    userId: string;
 }
 
 const { SubMenu, Item } = AntdMenu;
 
-@inject('userStore')
+@inject('userStore', 'badgeStore')
 @observer
 export class Menu extends React.Component<Props | any> {
 
@@ -23,8 +24,19 @@ export class Menu extends React.Component<Props | any> {
 
     componentDidMount() {
         this.user = this.props.userStore.getUser();
+        
+        if (this.props.userStore.user) {
+            this.props.badgeStore.getCompletedTasks(this.props.userStore.user.id);
+            this.props.badgeStore.calcIsCourseCompleted(this.props.works);
+        }
     };
 
+    componentDidUpdate() {
+        if (this.props.userStore.user) {
+            this.props.badgeStore.getCompletedTasks(this.props.userStore.user.id);
+            this.props.badgeStore.calcIsCourseCompleted(this.props.works);
+        }
+    };
 
     private renderAddWorkButton = (courseId: string): React.ReactNode => {
         if (this.props.userStore.user) {
@@ -44,9 +56,8 @@ export class Menu extends React.Component<Props | any> {
                     <Badge
                         content={name}
                         dot
-                        offset={[10, 0]}
-                        // status
-                        // title
+                        offset={[10, 7]}
+                        status={this.props.badgeStore.isCourseCompleted ? 'success' : 'error'}
                     />
                 </span>
             );
@@ -66,9 +77,8 @@ export class Menu extends React.Component<Props | any> {
                 <Badge 
                     content={work.id} 
                     dot 
-                    offset={[10, 0]}
-                    // status
-                    // title
+                    offset={[10, 5]}
+                    status={this.props.badgeStore.isTaskCompleted(work.id) ? 'success' : 'error'}
                 />
             );
         } else if (this.props.userStore.user.role === 'teacher') {

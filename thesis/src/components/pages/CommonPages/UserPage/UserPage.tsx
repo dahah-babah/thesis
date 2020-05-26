@@ -41,11 +41,7 @@ export class UserPage extends React.Component<any> {
 
     private renderSider = (): React.ReactNode => {
         return (
-            <CustomSider
-                user={this.props.userStore.user
-                    ?   this.props.userStore.user
-                    :   null}
-            />
+            <CustomSider {...this.props} />
         );
     };
 

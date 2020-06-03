@@ -32,6 +32,8 @@ class UserStore {
         .catch(error => console.log(error))
     };
 
+    //add all fatchers from database by userId
+
     // replace to AuthStore
     // not include in report (cause it is for mock auth)
     @action.bound

@@ -42,7 +42,7 @@ export class AuthForm extends React.Component<any> {
                 >
                     <Input 
                         prefix={ <UserOutlined /> }
-                        placeholder='Username'
+                        placeholder='Имя пользоватля'
                     />
                 </Form.Item>
                 <Form.Item
@@ -52,25 +52,27 @@ export class AuthForm extends React.Component<any> {
                     <Input
                         prefix={ <LockOutlined /> }
                         type='password'
-                        placeholder='Password' 
+                        placeholder='Пароль' 
                     />
                 </Form.Item>
-                <Form.Item
-                    name='remember'
-                    valuePropName='checked'
-                >
-                    <Checkbox>Remember me</Checkbox>
-                </Form.Item>
-                <Form.Item>
-                    <Button
-                        type='primary'
-                        htmlType='submit'
+                <span>
+                    <Form.Item
+                        name='remember'
+                        valuePropName='checked'
                     >
-                        <Link to={`/user/${this.props.userStore.user ? this.props.userStore.user.id : null}/home`}>
-                            Log in
-                        </Link>
-                    </Button>
-                </Form.Item>
+                        <Checkbox>Запомнить меня</Checkbox>
+                    </Form.Item>
+                    <Form.Item className={styles.btn}>
+                        <Button
+                            type='primary'
+                            htmlType='submit'
+                        >
+                            <Link to={`/user/${this.props.userStore.user ? this.props.userStore.user.id : null}/home`}>
+                                Вход
+                            </Link>
+                        </Button>
+                    </Form.Item>
+                </span>
             </>
         );
     };

@@ -1,6 +1,10 @@
 import { observable, action } from "mobx";
 
 class ChartStore {
+
+    public chartAllHeader = ['Дисциплина', 'Мой средний балл', 'Средний балл по курсу'];
+    public chartCourseHeader = ['ЛР', 'Мой средний балл', 'Средний балл по курсу'];
+
     @observable isChartVisible = true;
     @observable chartData: any = [];
 

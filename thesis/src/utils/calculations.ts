@@ -1,0 +1,1 @@
+export const reducer = (accum: number, current: number) => accum += current;

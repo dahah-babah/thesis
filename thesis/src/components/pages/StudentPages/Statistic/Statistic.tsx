@@ -1,9 +1,11 @@
 import React from 'react';
 import Chart from 'react-google-charts';
-import { Select } from 'antd';
+import { Select, Card, List } from 'antd';
 import { observable } from 'mobx';
 import { Course, Work } from '../../../../types/types';
 import { inject, observer } from 'mobx-react';
+import styles from './Statistics.module.less'; 
+import { reducer } from '../../../../utils/calculations';
 
 const { Option } = Select;
 
@@ -12,89 +14,116 @@ const { Option } = Select;
 export class StudentStatistic extends React.Component<any> {
 
     @observable courseNames: string[] = [];
-    @observable avgUserRates: number = 0;
-    @observable avgRates: number = 0;
     @observable worksByCourseId: Work[] = [];
     @observable chartData: any = [];
-
-    private chartAllHeader = ['Course', 'My rate', 'Average rate'];
-    private chartCourseHeader = ['Task', 'My rate', 'Average rate'];
 
     private options: any = {
         vAxis: { minValue: 0, maxValue: 100 } 
     };
 
-    private reducer = (accum: number, current: number) => accum += current;
+    async UNSAFE_componentWillMount() {        
+        await this.props.testStore.fetchStudentCompleted(this.props.user.id);
+        await this.props.testStore.fetchAllCompleted('1');
+        await this.props.workStore.fetchWorks('1');   
+    }
 
-    componentDidMount() {       
-        this.props.testStore.fetchStudentCompleted(this.props.user.id);
-        this.props.testStore.fetchAllCompleted('1');
-        this.props.workStore.fetchWorks('1');        
-
-        const numOfComleted = this.props.testStore.allCompleted.length;
-        const numOfUserCompleted = this.props.testStore.studentCompleted.length;
-        const allCompletedRate = this.props.testStore.allCompleted.map((item: any) => Number(item.rate)); 
-        const userCompletedRate = this.props.testStore.studentCompleted.map((item: any) => Number(item.rate));       
-
-        this.courseNames = this.props.courseStore.courses.map((course: Course) => course.name);
-        this.avgUserRates = userCompletedRate.reduce(this.reducer, 0) / numOfUserCompleted;
-        this.avgRates = allCompletedRate.reduce(this.reducer, 0) / numOfComleted;
-        this.worksByCourseId = this.props.workStore.works;
-        // this.formChartArray(); //enable this str to render all: remove - to render MiVT
+    componentDidMount() {            
+        // get course names for select
+        this.courseNames = this.props.courseStore.courses.map((course: Course) => course.shortName);
+        // console.log(this.courseNames);
+        
+        // this.formChartArray(); // render all as default
+        // this.fromArrayofCourse(); // course chart
     };
 
     private formChartArray = (): void => {
-        this.chartData.length = 0;
-        this.props.chartStore.clearChart();
+        this.props.chartStore.clearChart(); // clear store
 
-        this.props.chartStore.addData(this.chartAllHeader);
+        this.props.chartStore.addData(this.props.chartStore.chartAllHeader);
+        
         for (let i = 0; i < this.courseNames.length; i++) {
-            this.props.chartStore.addData([`${this.courseNames[i]}`, this.avgUserRates, this.avgRates]);
+            this.props.chartStore.addData(
+                [ `${this.courseNames[i]}`, 
+                this.props.testStore.getAvgUserRates(), 
+                this.props.testStore.getAvgAllRates() ]
+            );
         }
-
-        this.chartData = this.props.chartStore.chartData;                
+    
+        this.chartData = this.props.chartStore.chartData;       
+        console.log(this.chartData); 
     };
 
     private fromArrayofCourse = (): void => {
-        this.props.chartStore.clearChart();
-        this.props.chartStore.addData(this.chartCourseHeader);
+        this.props.chartStore.clearChart(); // clear store
 
-        let courseTaskNames = this.worksByCourseId.map((work: any) => [work.id, work.title]);        
-        let userRates = this.props.testStore.studentCompleted.map((work: any) => [work.workId, work.rate]);
-        let avgRates = this.props.testStore.allCompleted.map((work: any) => [work.workId, work.rate]);
-
-        let taskIds: any = [];
-        for (let i = 0; i < courseTaskNames.length; i++) {
-            taskIds.push(courseTaskNames[i][0]);
-        }        
+        // get works 
+        this.worksByCourseId = this.props.workStore.works;
+        // set course header
+        this.props.chartStore.addData(this.props.chartStore.chartCourseHeader);
+        // console.log(this.props.chartStore.chartData);
         
-        for (let i = 0; i < taskIds.length; i++) {           
-            this.props.chartStore.addData([
-                courseTaskNames[i][1], 
-                Number(userRates.find((idRate: any) => idRate[0] === taskIds[i])[1]), 
-                avgRates
-                .filter((idRate: any) => idRate[0] === taskIds[i])
-                .map((idRate: any) => Number(idRate[1]))
-                .reduce(this.reducer, 0) / avgRates.filter((idRate: any) => idRate[0] === taskIds[i]).length
-            ]);
-        }
+        // lab names
+        let courseTaskNames = this.worksByCourseId.map((work: any) => [work.id, work.title]);    
+        // console.log(courseTaskNames);
+            
+        let userRates = this.props.testStore.studentCompleted.map((work: any) => [work.workId, work.rate]);
+        // console.log(userRates);
+        
+        let avgRates = this.props.testStore.allCompleted.map((work: any) => [work.workId, work.rate]);
+        // console.log(avgRates);      
+        
+        
+        for (let i = 0; i < courseTaskNames.length; i++) {  
+            let userRate = 0;
+            let allRate = 0;
 
-        this.chartData = this.props.chartStore.chartData;        
+            if (userRates.find((idRate: any) => idRate[0] === courseTaskNames[i][0])) {
+                userRate = Number(userRates.find((idRate: any) => idRate[0] === courseTaskNames[i][0])[1]);
+            } 
+
+            if (avgRates.filter((idRate: any) => idRate[0] === courseTaskNames[i][0]).length) {
+                allRate = avgRates
+                // group results by task id
+                .filter((idRate: any) => idRate[0] === courseTaskNames[i][0])
+                // string -> number
+                .map((idRate: any) => Number(idRate[1]))
+                // find avg
+                .reduce(reducer, 0) / avgRates.filter((idRate: any) => idRate[0] === courseTaskNames[i][0]).length;
+            }
+            
+            if (userRate || allRate) {
+                this.props.chartStore.addData([
+                    courseTaskNames[i][1], 
+                    userRate, 
+                    allRate
+                ]);
+            }
+        }     
+
+        this.chartData = this.props.chartStore.chartData; 
+        console.log(this.chartData);
+               
     };
 
-    private onChange = (value: any) => {        
+    private onChange = (value: any) => {  
+        this.chartData.length = 0; // clear component
+
         if (value === 'all') {
             this.formChartArray();
+            // this.renderChart();
         } else if (this.courseNames.find((name: string) => name === value)) {
-            this.fromArrayofCourse();       
+            this.fromArrayofCourse();  
+            // this.renderChart();     
+        } else {
+            // return notification message
         }
     }; 
 
-    private renderChart = (): React.ReactNode => {            
+    private renderChart = (): React.ReactNode => {                    
         return (
             <Chart
                 height='600px'
-                width='80%'
+                width='75%'
                 chartType='ColumnChart'
                 data={this.chartData}
                 options={this.options}
@@ -105,35 +134,65 @@ export class StudentStatistic extends React.Component<any> {
 
     private renderTitle = (): React.ReactNode => {
         return (
-            <div>
-                Enjoy your statistic
-                <div>
-                    <Select 
-                        showSearch
-                        style={{ width: 200 }}
-                        placeholder='Select a course'
-                        onSelect={this.onChange}
-                        optionFilterProp='children'
-                        defaultValue={'all'}
+            <div className={styles.titleWrapper}>
+                {this.renderSelect()}
+                {this.renderInfoCard()}
+            </div>
+        );
+    };
+
+    private renderSelect = (): React.ReactNode => {
+        return (
+            <Select 
+                className={styles.select}
+                showSearch
+                style={{ width: 200 }}
+                placeholder='Select a course'
+                onSelect={this.onChange}
+                optionFilterProp='children'
+                defaultValue={'all'}
+            >
+                <Option key={'all'} value='all'>Все дисциплины</Option>
+                {this.courseNames.map((courseName: string) => 
+                    <Option 
+                        key={courseName} 
+                        value={`${courseName}`}
                     >
-                        <Option key={'all'} value='all'>All</Option>
-                        {this.courseNames.map((courseName: string) => 
-                            <Option 
-                                key={courseName} 
-                                value={`${courseName}`}
-                            >
-                                {courseName}
-                            </Option>
-                        )}
-                    </Select>
-                </div>
+                        {courseName}
+                    </Option>
+                )}
+            </Select>
+        );
+    };
+
+    private renderInfoCard = (): React.ReactNode => {
+        return (
+            <div>
+                <Card
+                    title={'Критерии оценивания'}
+                >
+                    <List>
+                        <List.Item key='5'>
+                            <List.Item.Meta description={'> 85 : отлично'} />
+                        </List.Item>
+                        <List.Item key='4'>
+                            <List.Item.Meta description={'84 - 70 : хорошо'} />
+                        </List.Item>
+                        <List.Item key='3'>
+                            <List.Item.Meta description={'69 - 55 : удовлетварительно'} />
+                        </List.Item>
+                        <List.Item key='2'>
+                            <List.Item.Meta description={'< 54 : неудовлетварительно'} />
+                        </List.Item>
+                    </List>
+                </Card>
             </div>
         );
     };
 
     render(): React.ReactChild {
         return (
-            <section>
+            <section className={styles.mainWrapper}>
                 {this.renderTitle()}
                 {this.chartData
                 ?   this.renderChart()

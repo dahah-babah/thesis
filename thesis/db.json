@@ -8,15 +8,15 @@
     },
     {
       "id": "g34sad4df2",
-      "username": "Ivanov_Ivan",
+      "username": "Plyusha_Plyushechkina",
       "password": "123",
       "role": "student",
-      "name": "Ivan",
-      "lastname": "Ivanov",
+      "name": "Плюша",
+      "lastname": "Плюшечкина",
       "level": "bachelor",
       "year": "2",
       "semester": "3",
-      "group": "QWE-81"
+      "group": "ГРУППА-1"
     },
     {
       "id": "123321",
@@ -43,11 +43,19 @@
   "studentCourses": [
     {
       "courseId": "1",
+      "workId": "1",
+      "completed": true,
+      "rate": "55",
+      "userId": "123321",
+      "id": 1
+    },
+    {
+      "courseId": "1",
       "workId": "2",
       "completed": true,
       "rate": "85",
       "userId": "123321",
-      "id": 1
+      "id": 2
     },
     {
       "courseId": "1",
@@ -55,7 +63,15 @@
       "completed": true,
       "rate": "33",
       "userId": "g34sad4df2",
-      "id": 2
+      "id": 3
+    },
+    {
+      "courseId": "1",
+      "workId": "3",
+      "completed": true,
+      "rate": "68",
+      "userId": "g34sad4df2",
+      "id": 4
     }
   ],
   "teacherCourses": [],

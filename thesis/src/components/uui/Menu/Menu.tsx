@@ -57,7 +57,7 @@ export class Menu extends React.Component<Props | any> {
                         content={name}
                         dot
                         offset={[10, 7]}
-                        status={this.props.badgeStore.isCourseCompleted ? 'success' : 'error'}
+                        status={this.props.badgeStore.isCourseCompleted ? 'success' : 'default'}
                     />
                 </span>
             );
@@ -78,7 +78,7 @@ export class Menu extends React.Component<Props | any> {
                     content={work.id} 
                     dot 
                     offset={[10, 5]}
-                    status={this.props.badgeStore.isTaskCompleted(work.id) ? 'success' : 'error'}
+                    status={this.props.badgeStore.isTaskCompleted(work.id) ? 'success' : 'default'}
                 />
             );
         } else if (this.props.userStore.user.role === 'teacher') {

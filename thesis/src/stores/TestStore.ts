@@ -2,11 +2,17 @@ import { observable, action, runInAction, toJS } from "mobx";
 import Axios from "axios";
 import { PATH } from "../routes/paths";
 import { Test } from "../types/types";
+import { reducer } from "../utils/calculations";
 
 class TestStore {
+
     @observable test!: Test;
     @observable studentCompleted: any = [];
     @observable allCompleted: any = [];
+    // avg this user lab rates
+    @observable avgUserRates: number = 0;
+    // avg all user rates
+    @observable avgRates: number = 0;
     @observable correctAnswers: any = [];
     @observable testIsFinished = false;
 
@@ -20,14 +26,42 @@ class TestStore {
         return this.test;
     };
 
+    private getAllCompletedRates = () => {
+        // console.log(this.allCompleted.map((item: any) => Number(item.rate)));
+        
+        return this.allCompleted.map((item: any) => Number(item.rate)); 
+    };
+
+    private getStudentCompletedRates = () => {
+        // console.log(this.studentCompleted.map((item: any) => Number(item.rate)));
+        
+        return this.studentCompleted.map((item: any) => Number(item.rate)); 
+    };
+
+    private getAvgUserRates = () => {
+        // console.log(this.getStudentCompletedRates().reduce(reducer, 0) / this.studentCompleted.length);
+        
+        return this.getStudentCompletedRates().reduce(reducer, 0) / this.studentCompleted.length;
+    };
+
+    private getAvgAllRates = () => {
+        // console.log(this.getAllCompletedRates().reduce(reducer, 0) / this.allCompleted.length);
+        
+        return this.getAllCompletedRates().reduce(reducer, 0) / this.allCompleted.length;
+    };
+
     // fetch this user completed tasks
     @action.bound
     public fetchStudentCompleted(userId: string) {
         Axios.get(`${PATH.SERVER}/users/${userId}/studentCourses`)
         .then((courses) => {
+            // console.log(courses.data);
+            
             runInAction(() => {
                 this.studentCompleted = courses.data;                
             });
+
+            this.getAvgUserRates();
         })
         .catch(error => console.log(error))
     }
@@ -37,9 +71,13 @@ class TestStore {
     public fetchAllCompleted(courseId: string) {
         Axios.get(`${PATH.SERVER}/courses/${courseId}/studentCourses`)
         .then((courses) => {
+            // console.log(courses.data);
+
             runInAction(() => {
                 this.allCompleted = courses.data;                
             });
+
+            this.getAvgAllRates();
         })
         .catch(error => console.log(error))
     }

@@ -1,12 +1,10 @@
 import React from 'react';
-import { observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import { Layout } from 'antd';
 import styles from './UserPage.module.less';
 import { Header } from '../../../uui/Header/Header';
 import { CustomSider } from '../../../uui/Sider/Sider';
 import { Breadcrumb } from '../../../uui/Breadcrumb/Breadcrumb';
-import { User, Student, Teacher } from '../../../../types/types';
 import { StudentMainPage } from '../../StudentPages/MainPage/MainPage';
 import { TeacherMainPage } from '../../TeacherPages/MainPage/MainPage';
 
@@ -26,7 +24,7 @@ export class UserPage extends React.Component<any> {
         // temporary mock
 
         // this.user = this.props.userStore.findUser('123', '321'); //admin
-        this.props.userStore.findUser('Ivanov_Ivan', '123'); //student
+        this.props.userStore.findUser('Plyusha_Plyushechkina', '123'); //student
         // this.user = this.props.userStore.findUser('Poshposh_Poashka', '321'); //teacher
 
     };

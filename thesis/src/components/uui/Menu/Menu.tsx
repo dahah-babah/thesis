@@ -32,7 +32,7 @@ export class Menu extends React.Component<Props | any> {
     };
 
     componentDidUpdate() {
-        if (this.props.userStore.user) {
+        if (this.props.userStore.user && this.props.badgeStore.completedTasks.length === 0) {
             this.props.badgeStore.getCompletedTasks(this.props.userStore.user.id);
             this.props.badgeStore.calcIsCourseCompleted(this.props.works);
         }
@@ -75,10 +75,12 @@ export class Menu extends React.Component<Props | any> {
         if (this.props.userStore.user.role === 'student') {
             return (
                 <Badge 
-                    content={work.id} 
+                    content={`ЛР №${work.id}`} 
                     dot 
                     offset={[10, 5]}
-                    status={this.props.badgeStore.isTaskCompleted(work.id) ? 'success' : 'default'}
+                    status={this.props.badgeStore.isTaskCompleted(work.id) 
+                        ?   this.props.badgeStore.getLabStatus(work.id)
+                        :   'default'}
                 />
             );
         } else if (this.props.userStore.user.role === 'teacher') {

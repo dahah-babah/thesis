@@ -43,11 +43,11 @@ export class UserPage extends React.Component<any> {
         );
     };
 
-    private renderBreadcrumb = (): React.ReactNode => {
-        return (
-            <Breadcrumb />
-        );
-    };
+    // private renderBreadcrumb = (): React.ReactNode => {
+    //     return (
+    //         <Breadcrumb />
+    //     );
+    // };
 
     private renderUserContent = (): React.ReactNode => {
         if (this.props.userStore.user) {

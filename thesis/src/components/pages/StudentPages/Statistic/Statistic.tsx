@@ -1,11 +1,11 @@
 import React from 'react';
 import Chart from 'react-google-charts';
-import { Select, Card, List } from 'antd';
-import { observable } from 'mobx';
+import { Select, Card, List, Table } from 'antd';
+import { observable, toJS } from 'mobx';
 import { Course, Work } from '../../../../types/types';
 import { inject, observer } from 'mobx-react';
 import styles from './Statistics.module.less'; 
-import { reducer } from '../../../../utils/calculations';
+import { reducer, findPer } from '../../../../utils/calculations';
 
 const { Option } = Select;
 
@@ -16,10 +16,49 @@ export class StudentStatistic extends React.Component<any> {
     @observable courseNames: string[] = [];
     @observable worksByCourseId: Work[] = [];
     @observable chartData: any = [];
+    
+    private tableData: any = [
+        {
+            key: `0_ВиМТ`,
+            num: `1`,
+            courseName: `ВиМТ`,
+            numOfTasks: `8`,
+            numOfCompletedTasks: `3`,
+            completed: findPer(8, 3)
+        }
+    ];
 
     private options: any = {
         vAxis: { minValue: 0, maxValue: 100 } 
     };
+
+    private columns: any = [
+        {
+            title: '№',
+            dataIndex: 'num',
+            key: 'num'
+        },
+        {
+            title: 'Дисциплина',
+            dataIndex: 'courseName',
+            key: 'courseName'
+        },
+        {
+            title: 'Всего работ',
+            dataIndex: 'numOfTasks',
+            key: 'numOfTasks'
+        },
+        {
+            title: 'Выполнено работ',
+            dataIndex: 'numOfCompletedTasks',
+            key: 'numOfCompletedTasks'
+        },
+        {
+            title: 'Завершено, %',
+            dataIndex: 'completed',
+            key: 'completed'
+        }
+    ];
 
     async UNSAFE_componentWillMount() {        
         await this.props.testStore.fetchStudentCompleted(this.props.user.id);
@@ -30,11 +69,30 @@ export class StudentStatistic extends React.Component<any> {
     componentDidMount() {            
         // get course names for select
         this.courseNames = this.props.courseStore.courses.map((course: Course) => course.shortName);
-        // console.log(this.courseNames);
-        
-        // this.formChartArray(); // render all as default
-        // this.fromArrayofCourse(); // course chart
+        this.setTableData();        
     };
+
+    private setTableData = (): void => {
+
+        const courseLen = this.props.workStore.works.length;
+        const completedLen = this.props.testStore.studentCompleted.length;
+        
+        for (let i = 0; i < this.courseNames.length; i++) {
+            this.tableData.push(
+                {
+                    key: `${i + 1}_${this.courseNames[i]}`,
+                    num: `${i + 1}`,
+                    courseName: `${this.courseNames[i]}`,
+                    numOfTasks: courseLen,
+                    numOfCompletedTasks: completedLen,
+                    completed: findPer(courseLen, completedLen)
+                }
+            )
+        }
+
+        console.log(toJS(this.tableData));
+        
+    }; 
 
     private formChartArray = (): void => {
         this.props.chartStore.clearChart(); // clear store
@@ -179,10 +237,10 @@ export class StudentStatistic extends React.Component<any> {
                             <List.Item.Meta description={'84 - 70 : хорошо'} />
                         </List.Item>
                         <List.Item key='3'>
-                            <List.Item.Meta description={'69 - 55 : удовлетварительно'} />
+                            <List.Item.Meta description={'69 - 55 : удовлетворительно'} />
                         </List.Item>
                         <List.Item key='2'>
-                            <List.Item.Meta description={'< 54 : неудовлетварительно'} />
+                            <List.Item.Meta description={'< 54 : неудовлетворительно'} />
                         </List.Item>
                     </List>
                 </Card>
@@ -192,11 +250,18 @@ export class StudentStatistic extends React.Component<any> {
 
     render(): React.ReactChild {
         return (
-            <section className={styles.mainWrapper}>
-                {this.renderTitle()}
-                {this.chartData
-                ?   this.renderChart()
-                :   null}
+            <section>
+                <div className={styles.mainWrapper}>
+                    {this.renderTitle()}
+                    {this.chartData
+                    ?   this.renderChart()
+                    :   null}
+                </div>
+                <Table
+                    dataSource={toJS(this.tableData)}
+                    columns={this.columns}
+                    size={'middle'}
+                />
             </section>
         );
     }

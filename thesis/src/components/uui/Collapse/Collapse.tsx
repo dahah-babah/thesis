@@ -24,15 +24,17 @@ export class Collapse extends React.Component<Props> {
         const { content, user, courseId } = this.props; //content = work        
         if (user && content) {
             return (
-                <>
-                    <span className={styles.titleWrapper}>
+                <div className={styles.taskWrapper}>
+                    {/* <span className={styles.titleWrapper}>
                         <Title className={styles.title}>{content.title}</Title>
-                    </span>
-                    <Paragraph>{`Deadline: ${content.deadline ? content.deadline : '-'}`}</Paragraph>
-                    <Paragraph>{`Description: ${content.description}`}</Paragraph>
+                    </span> */}
+                    <Paragraph>{`Крайний срок выполнения: ${content.deadline ? content.deadline : '-'}`}</Paragraph>
+                    <Paragraph>{`Описание работы: ${content.description}`}</Paragraph>
                     {/* correct path */}
-                    <Link to={`/user/${user.id}/courses/${courseId}/works/${content.id}/do`}>Go to tast <DoubleRightOutlined /></Link>
-                </>
+                    <Paragraph>
+                        <Link to={`/user/${user.id}/courses/${courseId}/works/${content.id}/do`}>Приступить к выполнению <DoubleRightOutlined /></Link>
+                    </Paragraph>
+                </div>
             );
         } else return 'null';
     };
@@ -66,7 +68,7 @@ export class Collapse extends React.Component<Props> {
     private renderPanels = (): React.ReactNode => {
         const { title, content } = this.props;
         return (
-            <Panel key={content.id} header={title}>
+            <Panel key={content.id} header={<Title className={styles.title}>{title}</Title>}>
                 {this.renderContent()}
             </Panel>
         );

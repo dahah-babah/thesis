@@ -7,3 +7,24 @@
     font-size: 16px;
     margin-left: 5px;
 }
+
+.listWrapper {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    list-style: none;
+}
+
+.listElem {
+    flex-basis: 30%;
+    margin-right: 50px;
+}
+
+:global(.ant-collapse-item:last-child > .ant-collapse-content) {
+    height: 170px;
+}
+
+.header {
+    font-size: 16px !important;
+}

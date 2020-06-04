@@ -1,4 +1,4 @@
-import { observable, action, runInAction, toJS } from "mobx";
+import { observable, action, runInAction, toJS, computed } from "mobx";
 import Axios from "axios";
 import { PATH } from "../routes/paths";
 import { Test } from "../types/types";
@@ -26,27 +26,33 @@ class TestStore {
         return this.test;
     };
 
-    private getAllCompletedRates = () => {
-        // console.log(this.allCompleted.map((item: any) => Number(item.rate)));
+    @action
+    public getStudentCompleted = (): any[] => {
+        // console.log(this.studentCompleted);
         
+        return this.studentCompleted;
+    };
+
+    @action
+    private setStudentCompleted = (data: any): void => {
+        this.studentCompleted = data;
+        // console.log(this.studentCompleted);
+        
+    };
+
+    private getAllCompletedRates = () => {        
         return this.allCompleted.map((item: any) => Number(item.rate)); 
     };
 
-    private getStudentCompletedRates = () => {
-        // console.log(this.studentCompleted.map((item: any) => Number(item.rate)));
-        
+    private getStudentCompletedRates = () => {        
         return this.studentCompleted.map((item: any) => Number(item.rate)); 
     };
 
     private getAvgUserRates = () => {
-        // console.log(this.getStudentCompletedRates().reduce(reducer, 0) / this.studentCompleted.length);
-        
         return this.getStudentCompletedRates().reduce(reducer, 0) / this.studentCompleted.length;
     };
 
     private getAvgAllRates = () => {
-        // console.log(this.getAllCompletedRates().reduce(reducer, 0) / this.allCompleted.length);
-        
         return this.getAllCompletedRates().reduce(reducer, 0) / this.allCompleted.length;
     };
 
@@ -58,9 +64,9 @@ class TestStore {
             // console.log(courses.data);
             
             runInAction(() => {
-                this.studentCompleted = courses.data;                
+                this.setStudentCompleted(courses.data);                
             });
-
+            
             this.getAvgUserRates();
         })
         .catch(error => console.log(error))

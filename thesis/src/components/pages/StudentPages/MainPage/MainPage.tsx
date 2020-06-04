@@ -18,50 +18,108 @@ interface Props {
     user: Student;
 }
 
-@inject('courseStore', 'workStore')
+@inject('courseStore', 'workStore', 'testStore')
 @observer
 export class StudentMainPage extends React.Component<Props | any> {
 
     @observable courses: Course[] = [];
     @observable works: Work[] = [];
+    @observable studentCompleted: any[] = [];
+    @observable notCompletedTasks: Work[] = [];
 
+    
     async UNSAFE_componentWillMount() {
         // get course id for student 
-        const courseId: string | string[] = '1';
+        const courseId: string | string[] = '1'; 
+        
+        // i can`t really undersand  WHY SUKA BITCH this request doesn`t work, blyat`        
+        await this.props.testStore.fetchStudentCompleted(this.props.user.id);        
+        this.studentCompleted = this.props.testStore.getStudentCompleted();
+        // console.log(this.studentCompleted);
 
         await this.props.courseStore.fetchStudentCourses(this.props.user.id, courseId);
         this.courses = this.props.courseStore.getCourses();   
+        // console.log(this.courses);
 
-        await this.props.workStore.fetchWorks(courseId);
-        this.works = this.props.workStore.getWorks();             
-    };
-
-    componentDidUpdate() {
-        this.courses = this.props.courseStore.getCourses();
-        this.works = this.props.workStore.getWorks();        
-    };
-
-    renderNotCompletedWorks = (course: Course): React.ReactNode => {   
-        this.props.workStore.fetchWorks(course.id);
+        await this.props.workStore.fetchWorks(courseId);        
         this.works = this.props.workStore.getWorks();
+        // console.log(this.works);
+        
+        this.setValues();   
+    };
 
-        return (
-            this.works.map((work: Work) =>
+    private setValues = (): void => {
+        this.courses = this.props.courseStore.getCourses();
+        this.works = this.props.workStore.getWorks();  
+        this.studentCompleted = this.props.testStore.getStudentCompleted();             
+        this.notCompletedTasks = this.getNotCompletedTasks();
+    };
+
+    // componentDidMount() {
+    //     this.courses = this.props.courseStore.getCourses();
+    //     this.works = this.props.workStore.getWorks();  
+    //     this.studentCompleted = this.props.testStore.getStudentCompleted();             
+    //     this.notCompletedTasks = this.getNotCompletedTasks();
+    // };
+
+    // componentDidUpdate() {
+    //     this.courses = this.props.courseStore.getCourses();
+    //     this.works = this.props.workStore.getWorks();  
+    //     this.studentCompleted = this.props.testStore.getStudentCompleted();             
+    //     this.notCompletedTasks = this.getNotCompletedTasks();
+    // };
+
+    private getNotCompletedTasks = (): Work[] => {
+        // all course tasks 
+        this.works = this.props.workStore.getWorks();
+        
+        // get completed tasks
+        // doesn`t work
+        this.studentCompleted = this.props.testStore.getStudentCompleted();  
+        // console.log(this.studentCompleted);
+
+        let notCompletedTasks = this.works;
+
+        for (let i = 0; i < this.studentCompleted.length; i++) {
+            if (this.works[i].id === this.studentCompleted[i].workId) {
+                // works or not i dont know
+                notCompletedTasks.splice(i, 1);
+            }
+        }
+
+        return notCompletedTasks;
+    };
+
+    renderNotCompletedWorks = (course: Course): React.ReactNode => {
+        // mock filter -> getStudentCompleted doesn`t work
+        return this.notCompletedTasks
+            .filter((work: Work) =>
+                work.id > '3'
+            )
+            .map((work: Work) =>
+            <li 
+                key={work.id}
+                className={styles.listElem}
+            >
                 <Collapse
                     key={work.id}
-                    title={`${course.shortName} - ${work.title}`}
+                    title={`${course.shortName} : ЛР№ ${work.id} - ${work.title}`}
                     content={work}
                     user={this.props.user}
                     courseId={course.id}
                     iconPosition={'right'}
-                />
-            )
-        );
+                /> 
+             </li>
+        )
     };
 
     private renderCourses = (): React.ReactNode => {                        
-        return this.courses.map((course: Course) =>       
-            this.renderNotCompletedWorks(course)
+        return ( 
+            <ul className={styles.listWrapper}>
+                {this.courses.map((course: Course) =>       
+                    this.renderNotCompletedWorks(course)
+                )}
+            </ul>
         );
     };
 
@@ -70,7 +128,7 @@ export class StudentMainPage extends React.Component<Props | any> {
             <>
                 <span className={styles.titleWrapper}>
                     <BorderlessTableOutlined />
-                    <Text mark strong className={styles.title}>{'Not comleted tasks'}</Text>
+                    <Text mark strong className={styles.title}>{'Незавершенные работы'}</Text>
                 </span>
                 {this.renderCourses()}
             </>

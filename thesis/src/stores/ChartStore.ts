@@ -22,6 +22,8 @@ class ChartStore {
     public clearChart = (): void => {        
         this.chartData.length = 0;
     };
+
+    //table
 }
 
 export default ChartStore;

@@ -41,6 +41,14 @@ class BadgeStore {
         }
     };
 
+    public getLabStatus = (workId: string): 'success' | 'error' | 'warning' => {
+        const rate = this.completedTasks.find((task) => task.workId === workId).rate;
+                
+        if (rate <= 54) return 'error';
+        else if (rate >= 55 && rate <= 69) return 'warning';
+        else return 'success';
+    };
+
 }
 
 export default BadgeStore;

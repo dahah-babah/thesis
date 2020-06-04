@@ -45,7 +45,7 @@
       "courseId": "1",
       "workId": "1",
       "completed": true,
-      "rate": "55",
+      "rate": "70",
       "userId": "123321",
       "id": 1
     },
@@ -59,11 +59,35 @@
     },
     {
       "courseId": "1",
+      "workId": "3",
+      "completed": true,
+      "rate": "55",
+      "userId": "123321",
+      "id": 3
+    },
+    {
+      "courseId": "1",
+      "workId": "4",
+      "completed": true,
+      "rate": "70",
+      "userId": "123321",
+      "id": 4
+    },
+    {
+      "courseId": "1",
       "workId": "1",
       "completed": true,
-      "rate": "33",
+      "rate": "80",
       "userId": "g34sad4df2",
-      "id": 3
+      "id": 5
+    },
+    {
+      "courseId": "1",
+      "workId": "2",
+      "completed": true,
+      "rate": "75",
+      "userId": "g34sad4df2",
+      "id": 6
     },
     {
       "courseId": "1",
@@ -71,7 +95,7 @@
       "completed": true,
       "rate": "68",
       "userId": "g34sad4df2",
-      "id": 4
+      "id": 7
     }
   ],
   "teacherCourses": [],
@@ -89,64 +113,64 @@
       "courseId": "1",
       "title": "Основы языка программирования Assembler",
       "type": "lab",
-      "description": "Задание на ЛР№1 представлено в прикрепленном PDF файле, выполнить задание согласно своему варианту и загрузить отчет в систему в формате PDF",
-      "deadline": null
+      "description": "Цель работы - ознакомление с основами языка программирования Assembler",
+      "deadline": "1.04.2020"
     },
     {
       "id": "2",
       "courseId": "1",
       "title": "Управление портами вывода",
       "type": "test",
-      "description": "Выполните тест по теме лабораторной работы",
-      "deadline": "1.04.2020"
+      "description": "Цель работы – ознакомление с устройством вывода микроконтроллеров",
+      "deadline": "8.04.2020"
     },
     {
       "id": "3",
       "courseId": "1",
       "title": "Управление портами ввода",
       "type": "lab",
-      "description": "",
-      "deadline": null
+      "description": "Цель работы – ознакомление с устройством ввода микроконтроллеров",
+      "deadline": "15.04.2020"
     },
     {
       "id": "4",
       "courseId": "1",
       "title": "Обработка цифровых данных",
       "type": "lab",
-      "description": "",
-      "deadline": null
+      "description": "Цель работы - изучение способов обработки сигналов на основе численных методов с использованием цифровой вычислительной техники",
+      "deadline": "22.04.2020"
     },
     {
       "id": "5",
       "courseId": "1",
       "title": "Использование прерываний",
       "type": "lab",
-      "description": "",
-      "deadline": null
+      "description": "Цель работы - изучение понятия прерывания, их типы, аппаратные и программные прерывания",
+      "deadline": "29.04.2020"
     },
     {
       "id": "6",
       "courseId": "1",
       "title": "Использование таймеров",
       "type": "lab",
-      "description": "",
-      "deadline": null
+      "description": "Цель работы - изучение таймеров микроконтроллера STM8S и их характеристик",
+      "deadline": "5.05.2020"
     },
     {
       "id": "7",
       "courseId": "1",
       "title": "Аналого-цифровое преобразование",
       "type": "lab",
-      "description": "",
-      "deadline": null
+      "description": "Цель работы - изучение общих понятий, характеристик и погрешностей АЦП",
+      "deadline": "12.05.2020"
     },
     {
       "id": "8",
       "courseId": "1",
       "title": "Широтно-импульсная модуляция",
       "type": "lab",
-      "description": "",
-      "deadline": null
+      "description": "Цель работы - ознакомление с понятием ШИМ, причинами распространения и принципами работы аналоговой и цофровой ШИМ",
+      "deadline": "19.05.2020"
     }
   ],
   "files": [

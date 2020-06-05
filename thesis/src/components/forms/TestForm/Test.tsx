@@ -2,8 +2,8 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { observable } from 'mobx';
 import { Test, Question, TestPoint } from '../../../types/types';
-import { Input, Typography, Radio, Checkbox, Select, Form, Button } from 'antd';
-import { DoubleRightOutlined } from '@ant-design/icons';
+import { Input, Typography, Radio, Checkbox, Select, Form, Button, Result } from 'antd';
+import { DoubleRightOutlined, CheckOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import styles from './Test.module.less';
 
@@ -71,7 +71,7 @@ export class TestForm extends React.Component<any> {
                         key={question.id}
                         label={question.title} 
                         name={question.id}
-                        rules={[{ required: true, message: 'Please, fill all fields!' }]}
+                        rules={[{ required: true, message: 'Все поля обязательны для заполнения!' }]}
                     >
                         {
                             question.type === 'radio'
@@ -93,9 +93,13 @@ export class TestForm extends React.Component<any> {
         
         this.props.testStore.calculateTime();
         this.props.testStore.setTestFinished();
-        this.rate = (Math.round
+        this.rate = 
+        (Math.round
         (this.props.testStore.calculateRate
-        (this.props.testStore.calculateSuccess(values)))).toString();
+        (this.props.testStore.calculateSuccess(values))))
+        .toString();
+
+        //  add time + form reporttt aaaaaa
 
         // this.props.testStore.postCompletedTest(
         //     this.props.match.params.userId,
@@ -104,34 +108,53 @@ export class TestForm extends React.Component<any> {
         //     this.rate
         // );
     };
+
+    private seeStatistics = (): React.ReactNode => {
+        return (
+            <Link to={`/user/${this.props.match.params.userId}/statistic`}>
+                На страницу успеваемости <DoubleRightOutlined />
+            </Link>
+        );
+    };
+
+    private renderReporButton = (): React.ReactNode => {
+        return (
+            <Link to=''>
+                <Button type={'link'}>ОТЧЕТ</Button>
+            </Link>
+        );
+    };
     
     render(): React.ReactChild {            
         if (!this.props.testStore.testIsFinished) {
             return (
-                <Form onFinish={this.onFinish}>
+                <Form 
+                    onFinish={this.onFinish}
+                    className={styles.formWrapper}
+                >
                     {this.renderQuestions()}
                     <Form.Item>
-                        <Button 
-                            type='primary' 
-                            htmlType='submit'
-                            disabled={this.props.testStore.testIsFinished}
-                        >
-                            FINISH TEST
-                        </Button>
+                        <div className={styles.btnStop}>
+                            <Button 
+                                type='primary' 
+                                htmlType='submit'
+                                disabled={this.props.testStore.testIsFinished}
+                            >
+                                СФОРМИРОВАТЬ ОТЧЕТ
+                            </Button>
+                        </div>
                     </Form.Item>
                 </Form>
             );
         } else {
             return (
                 <section className={styles.resultsWrapper}>
-                    <Text>Test is finished! Your result is {this.rate}!</Text>
-                    {this.rate === '100' ? 'You r the BEST' : null}
-                    <Text>TIME: /calculated time/</Text>
-                    <Text>
-                        <Link to={`/user/${this.props.match.params.userId}/statistic`}>
-                            See your statistic <DoubleRightOutlined />
-                        </Link>
-                    </Text> 
+                    <Result
+                        icon={<CheckOutlined />}
+                        title={`Тест окончен! Вы набрали ${this.rate}% правильных ответов!`}
+                        subTitle={this.seeStatistics()}
+                        extra={this.renderReporButton()}
+                    />
                 </section>
             );
         }

@@ -47,7 +47,8 @@
       "completed": true,
       "rate": "70",
       "userId": "123321",
-      "id": 1
+      "id": 1,
+      "date": "27.03.2020"
     },
     {
       "courseId": "1",
@@ -55,7 +56,8 @@
       "completed": true,
       "rate": "85",
       "userId": "123321",
-      "id": 2
+      "id": 2,
+      "date": "5.04.2020"
     },
     {
       "courseId": "1",
@@ -63,7 +65,8 @@
       "completed": true,
       "rate": "55",
       "userId": "123321",
-      "id": 3
+      "id": 3,
+      "date": "5.04.2020"
     },
     {
       "courseId": "1",
@@ -71,7 +74,17 @@
       "completed": true,
       "rate": "70",
       "userId": "123321",
-      "id": 4
+      "id": 4,
+      "date": "5.04.2020"
+    },
+    {
+      "courseId": "1",
+      "workId": "5",
+      "completed": true,
+      "rate": "70",
+      "userId": "123321",
+      "id": 9,
+      "date": "5.04.2020"
     },
     {
       "courseId": "1",
@@ -79,7 +92,8 @@
       "completed": true,
       "rate": "80",
       "userId": "g34sad4df2",
-      "id": 5
+      "id": 5,
+      "date": "5.04.2020"
     },
     {
       "courseId": "1",
@@ -87,7 +101,8 @@
       "completed": true,
       "rate": "75",
       "userId": "g34sad4df2",
-      "id": 6
+      "id": 6,
+      "date": "5.04.2020"
     },
     {
       "courseId": "1",
@@ -95,7 +110,17 @@
       "completed": true,
       "rate": "68",
       "userId": "g34sad4df2",
-      "id": 7
+      "id": 7,
+      "date": "5.04.2020"
+    },
+    {
+      "courseId": "1",
+      "workId": "4",
+      "completed": true,
+      "rate": "60",
+      "userId": "g34sad4df2",
+      "id": 8,
+      "date": "5.06.2020"
     }
   ],
   "teacherCourses": [],
@@ -136,7 +161,7 @@
       "id": "4",
       "courseId": "1",
       "title": "Обработка цифровых данных",
-      "type": "lab",
+      "type": "test",
       "description": "Цель работы - изучение способов обработки сигналов на основе численных методов с использованием цифровой вычислительной техники",
       "deadline": "22.04.2020"
     },
@@ -177,18 +202,23 @@
     {
       "id": 1,
       "courseId": "1",
-      "workId": "2",
-      "filename": "Lab1Task.pdf",
+      "workId": "1",
+      "filename": "Lecture1.pdf",
       "path": "mock"
     },
     {
-      "id": 2
+      "id": 2,
+      "courseId": "1",
+      "workId": "2",
+      "filename": "Lecture2.pdf",
+      "path": "mock"
     },
     {
-      "id": 3
-    },
-    {
-      "id": 4
+      "id": 3,
+      "courseId": "1",
+      "workId": "2",
+      "filename": "OutputExamples.pdf",
+      "path": "mock"
     }
   ],
   "reports": [
@@ -205,7 +235,7 @@
     {
       "id": 1,
       "courseId": "1",
-      "workId": "2",
+      "workId": "4",
       "questions": [
         {
           "id": 0,

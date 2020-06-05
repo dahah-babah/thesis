@@ -53,12 +53,15 @@ export class WorkDo extends React.Component<any> {
             >
                 <Panel 
                     key={this.course ? this.course.id : 'def'} 
-                    header='Описание лабораторной работы'
+                    header={`Описание лабораторной работы`}
                 >
                     <Paragraph>
                         {this.work
                         ?   this.work.description
                         :   null}
+                    </Paragraph>
+                    <Paragraph>
+                        {this.renderDeadline()}
                     </Paragraph>
                 </Panel>
             </Collapse>
@@ -90,13 +93,13 @@ export class WorkDo extends React.Component<any> {
         if (this.work) {
             if (this.work.type === 'test') {
                 return (
-                    <div>
+                    <div className={styles.startButton}>
                         {!this.testEnabled
                         ?   <Button 
                                 type='primary' 
                                 onClick={this.enableTest}
                             >
-                                START TEST
+                                НАЧАТЬ
                             </Button>
                         :   null}
                     </div>
@@ -138,7 +141,6 @@ export class WorkDo extends React.Component<any> {
                 <div className={styles.margin}>
                     {this.renderDescription()}
                 </div>
-                {this.renderDeadline()}
                 {/* {this.renderFiles()} */}
                 {this.renderManagePanel()}
                 {this.renderTest()}

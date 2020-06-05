@@ -26,6 +26,9 @@ export interface Teacher extends User {
 export interface File {
     filename: string;
     path: string;
+    id: number;
+    courseId: string;
+    workId: string;
 }
 
 export interface Work extends IdName {

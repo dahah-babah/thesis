@@ -29,6 +29,7 @@ export class StudentStatistic extends React.Component<any> {
     ];
 
     private options: any = {
+        width: 1150,
         vAxis: { minValue: 0, maxValue: 100 } 
     };
 
@@ -90,7 +91,7 @@ export class StudentStatistic extends React.Component<any> {
             )
         }
 
-        console.log(toJS(this.tableData));
+        // console.log(toJS(this.tableData));
         
     }; 
 
@@ -108,7 +109,7 @@ export class StudentStatistic extends React.Component<any> {
         }
     
         this.chartData = this.props.chartStore.chartData;       
-        console.log(this.chartData); 
+        // console.log(this.chartData); 
     };
 
     private fromArrayofCourse = (): void => {

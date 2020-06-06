@@ -86,8 +86,7 @@ export class Menu extends React.Component<Props | any> {
         } else if (this.props.userStore.user.role === 'teacher') {
             return (
                 <span>
-                    {work.id}
-                    <EditOutlined />
+                    {`ЛР №${work.id}`}
                 </span>
             );
         }

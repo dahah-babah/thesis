@@ -8,6 +8,9 @@ class UserStore {
     @observable 
     public user!: User | Student | Teacher ;
 
+    @observable
+    public students: Student[] = [];
+
     @action
     private setUser = (user: User | Student | Teacher): void => {
         this.user = user;
@@ -20,6 +23,15 @@ class UserStore {
         return this.user;
     };
 
+    @action
+    private setStudents = (data: Student[]): void => {
+        this.students = data;
+    };
+
+    @action
+    public getStudents = (): Student[] => {
+        return this.students;
+    };
 
     @action.bound
     public getUserById(userId: string) {
@@ -30,6 +42,22 @@ class UserStore {
             });
         })
         .catch(error => console.log(error))
+    };
+
+    @action.bound
+    public fetchStudents() {
+        Axios.get(`${PATH.SERVER}/users?role=student`)
+        .then(student => {
+            runInAction(() => {
+                this.setStudents(student.data);
+            });
+        })
+        .catch(error => console.log(error))
+    };
+
+    @action
+    public findUserDataById = (userId: string): Student => {
+        return this.students.filter((student: Student) => student.id === userId)[0];
     };
 
     //add all fatchers from database by userId

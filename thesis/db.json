@@ -20,23 +20,23 @@
     },
     {
       "id": "123321",
-      "username": "Ivanov_Ivan1",
+      "username": "Ivanov_Ivan",
       "password": "123",
       "role": "student",
-      "name": "Ivan1",
-      "lastname": "Ivanov1",
+      "name": "Иван",
+      "lastname": "Иванов",
       "level": "bachelor",
       "year": "2",
       "semester": "3",
-      "group": "QWE-81"
+      "group": "ГРУППА-2"
     },
     {
       "id": "vcklnjb1",
-      "username": "Poshposh_Poashka",
+      "username": "Pusyash_Pushistyj",
       "password": "321",
       "role": "teacher",
-      "name": "Poashka",
-      "lastname": "Poshposh",
+      "name": "Пусяш",
+      "lastname": "Пушистый",
       "level": "professor"
     }
   ],

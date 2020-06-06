@@ -1,7 +1,7 @@
 import React from 'react';
 import { Course, Work } from '../../../../../../../types/types';
 import styles from './EditWork.module.less';
-import { Typography, Collapse, Upload, Card } from 'antd';
+import { Typography, Collapse, Upload, Card, message } from 'antd';
 import { BorderlessTableOutlined, DoubleRightOutlined, InboxOutlined } from '@ant-design/icons';
 import { inject, observer } from 'mobx-react';
 import { observable } from 'mobx';
@@ -92,7 +92,21 @@ export class EditWork extends React.Component<Props | any> {
     private renderFiles = (): React.ReactNode => {
         // does not work 
         const props = {
+            name: 'file',
+            multiple: true,
+            action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+            onChange(info) {
+                const { status } = info.file;
 
+                if (status !== 'uploading') {
+                    console.log(info.file, info.fileList);
+                }
+                if (status === 'done') {
+                    message.success(`Файл ${info.file.name} успешно загружен.`);
+                } else if (status === 'error') {
+                    message.error(`Ошибка при загрузке файла ${info.file.name}.`);
+                }
+            },
         };
 
         return (
@@ -101,25 +115,26 @@ export class EditWork extends React.Component<Props | any> {
                     <p className={styles.icon}>
                         <InboxOutlined />
                     </p>
-                    <p>Click or drag file to this area to upload</p>
                     <p>
-                        Support for a single or bulk upload. 
-                        Strictly prohibit from uploading company data or other band files
+                        Нажмите или перетащите файл в эту область, чтобы загрузить
+                    </p>
+                    <p>
+                        Поле поддерживает разовую или массовую загрузку
                     </p>
                 </Dragger>
             </>
         );
     };
 
-    private renderAddPartCard = (): React.ReactNode => {
-        return (
-            <Card hoverable>
-                <Title className={styles.addPartCardTitle} level={4} type='secondary'>
-                    + ADD PART TO TASK
-                </Title>
-            </Card>
-        );
-    };
+    // private renderAddPartCard = (): React.ReactNode => {
+    //     return (
+    //         <Card hoverable>
+    //             <Title className={styles.addPartCardTitle} level={4} type='secondary'>
+    //                 + ADD PART TO TASK
+    //             </Title>
+    //         </Card>
+    //     );
+    // };
 
     render (): React.ReactChild {                        
         return (

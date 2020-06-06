@@ -4,15 +4,18 @@ import styles from './EditCourse.module.less';
 import { BorderlessTableOutlined } from '@ant-design/icons';
 import { Typography, Collapse, Card, Button } from 'antd';
 import { Link } from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
 
 const { Text, Paragraph, Title } = Typography;
 const { Panel } = Collapse;
 
 interface Props {
-    course?: Course;
-    user?: Teacher;
+    course: Course;
+    user: Teacher;
 }
 
+@inject('userStore')
+@observer
 export class EditCourse extends React.Component<Props> {
 
     private renderTitle = (): React.ReactNode => {
@@ -45,10 +48,9 @@ export class EditCourse extends React.Component<Props> {
     };
 
     private renderCourseWorks = (): React.ReactNode => {
-        const { course } = this.props;
         return (
             <div className={styles.titleWorks}>
-                <Text strong underline>{`Task${course?.works.length === 1 ? '' : 's'}: ${course?.works.length}`}</Text>
+                {/* <Text strong underline>{`Task: ${this.props.course.works.length}`}</Text> */}
             </div>
         );
     };
@@ -96,9 +98,8 @@ export class EditCourse extends React.Component<Props> {
     };
 
     private renderCards = (): React.ReactNode => {
-        const { course } = this.props;
         return (
-            course?.works.map((work: Work) =>
+            this.props.course.works.map((work: Work) =>
                 <li key={work.id} className={styles.li}>
                     <Card
                         hoverable

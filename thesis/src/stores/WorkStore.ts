@@ -38,8 +38,10 @@ class WorkStore {
     };
 
     @action
-    public getWork = (workId: string): Work | undefined => {              
-        return this.works.find((work: Work) => work.id === workId);
+    public getWork = (workId: string): Work => {    
+        console.log(this.works.filter((work: Work) => work.id === workId)[0]);
+                  
+        return this.works.filter((work: Work) => work.id === workId)[0];
     }; 
 
     @action

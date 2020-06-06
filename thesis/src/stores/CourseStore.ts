@@ -5,9 +5,9 @@ import { Course, Work } from "../types/types";
 import { PATH } from "../routes/paths";
 
 class CourseStore {
-    @observable
-    public courses!: Course[];
+    @observable public courses: Course[] = [];
     public worksByCourseId: Work[] = [];
+    @observable public completedReports: any[] = [];
 
     @action.bound
     public fetchWorksById(courseId: string) {       
@@ -31,6 +31,13 @@ class CourseStore {
         .catch(error => console.log(error))
     };
 
+    @action 
+    public getCourseSgortNameById = (courseId: string): string => {
+        return this.courses.filter((course: Course) => 
+            course.id = courseId
+        )[0].shortName;
+    };
+
     @action.bound
     public fetchStudentCourses(userId: string, courseId: string) {
         //make correct reauest
@@ -46,10 +53,12 @@ class CourseStore {
     @action.bound
     public fetchTeacherCourses(courseId: string) {
         //make correct request for several course id
-        Axios.get(`${PATH.SERVER}/courses`)
+        Axios.get(`${PATH.SERVER}/studentCourses`)
         .then((courses) => {
+            console.log(courses.data);
+            
             runInAction(() => {
-                this.setCourses(courses.data)
+                this.setcompletedReports(courses.data)
             })
         })
         .catch(error => console.log(error))
@@ -66,6 +75,19 @@ class CourseStore {
         this.courses = courses;
         // console.log(this.courses);
         
+    };
+
+    @action
+    private setcompletedReports = (data: any[]): void => {
+        this.completedReports = data;
+        console.log(this.completedReports);
+    };
+
+    @action
+    public getSetcompletedReports = (): any[] => {
+        console.log(this.completedReports);
+        
+        return this.completedReports;
     };
 }
 

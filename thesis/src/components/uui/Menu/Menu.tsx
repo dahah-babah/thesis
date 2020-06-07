@@ -65,7 +65,6 @@ export class Menu extends React.Component<Props | any> {
             return (
                 <span>
                     {name}
-                    <EditOutlined />
                 </span>
             );
         }

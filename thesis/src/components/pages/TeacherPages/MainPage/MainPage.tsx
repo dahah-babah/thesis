@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Card, Switch as AntdSwitch, Divider } from 'antd';
+import { Typography, Card, Checkbox, Divider, Modal, TreeSelect } from 'antd';
 import { observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import { Teacher, Course, Work } from '../../../../types/types';
@@ -19,13 +19,67 @@ interface Props {
     user: Teacher;
 }
 
-@inject('courseStore', 'workStore', 'userStore')
+@inject('courseStore', 'workStore', 'userStore', 'modalStore')
 @observer
 export class TeacherMainPage extends React.Component<Props | any> {
         
     @observable completedReports: any[] = [];
     @observable courses: Course | Course[] = [];
     @observable works: Work[] = [];
+
+    private treeSelectData = [
+        {
+            title: 'Дисциплины',
+            value: '0-0',
+            key: '0-0',
+            children: [
+              {
+                title: 'Все',
+                value: '0-0-0',
+                key: '0-0-0',
+              },
+              {
+                title: 'ВиМТ',
+                value: '0-0-1',
+                key: '0-0-1',
+              },
+            ],
+          },
+          {
+            title: 'Группы',
+            value: '0-1',
+            key: '0-1',
+            children: [
+              {
+                title: 'ГРУППА-1',
+                value: '0-1-0',
+                key: '0-1-0',
+              },
+              {
+                title: 'ГРУППА-2',
+                value: '0-1-1',
+                key: '0-1-1',
+              },
+            ],
+          },
+          {
+            title: 'Отчеты',
+            value: '0-2',
+            key: '0-2',
+            children: [
+              {
+                title: 'Все',
+                value: '0-2-0',
+                key: '0-2-0',
+              },
+              {
+                title: 'Непроверенные',
+                value: '0-2-1',
+                key: '0-2-1',
+              },
+            ],
+          },
+    ];
 
     async UNSAFE_componentWillMount() {        
         //get course id for teacher
@@ -43,8 +97,13 @@ export class TeacherMainPage extends React.Component<Props | any> {
 
     private renderSwitch = (completedT: any): React.ReactNode => {
         return (
-            <AntdSwitch />
+            <Checkbox onChange={this.onSwitchChange}/>
         );
+    };
+
+    private onSwitchChange = (event: any): void => {
+        console.log(event);
+        
     };
 
     private renderCardTitle = (completedT: any): React.ReactNode => {
@@ -56,10 +115,15 @@ export class TeacherMainPage extends React.Component<Props | any> {
         );
     };
 
-    private openCommentModal = (data: any): void => {
-        console.log(data);
+    private openCommentModal = (): void => {
+        console.log('modal');
         
     }; 
+
+    private openReport = (): void => {
+        console.log('report');
+        
+    };
 
     private renderUnverifiedReports = (): React.ReactNode => {
         return (
@@ -73,7 +137,7 @@ export class TeacherMainPage extends React.Component<Props | any> {
                         title={this.renderCardTitle(completed)}
                         actions={[
                             <CommentOutlined key={'comment'} onClick={this.openCommentModal}/>,
-                            <FilePdfOutlined />,
+                            <FilePdfOutlined key={'report'} onClick={this.openReport}/>,
                             this.renderSwitch(completed),
                         ]}
                         className=
@@ -118,12 +182,34 @@ export class TeacherMainPage extends React.Component<Props | any> {
         );
     };
 
+    private renderHeader = (): React.ReactNode => {
+        return (
+            <TreeSelect
+                className={styles.select}
+                // allowClear
+                defaultValue={'Непроверенные отчеты'}
+                multiple
+                placeholder={'Выберите опции для фильтра'}
+                size={'middle'}
+                showArrow
+                treeData={this.treeSelectData}
+                treeCheckable
+                showCheckedStrategy={"SHOW_PARENT"}
+            />
+        );
+    };
+
     private renderDefault = (): React.ReactNode => {
         return (
             <>
-                <span className={styles.titleWrapper}>
-                    <BorderlessTableOutlined />
-                    <Text mark strong className={styles.title}>{'Выполненные работы'}</Text>
+                <span className={styles.headerWrapper}>
+                    <span className={styles.titleWrapper}>
+                        <BorderlessTableOutlined />
+                        <Text mark strong className={styles.title}>{'Выполненные работы'}</Text>
+                    </span>
+                    <span>
+                        {this.renderHeader()}
+                    </span>
                 </span>
                 {this.renderCourses()}
             </>

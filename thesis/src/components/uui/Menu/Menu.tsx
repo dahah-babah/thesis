@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu as AntdMenu } from 'antd';
+import { Menu as AntdMenu, Button } from 'antd';
 import { ArrowRightOutlined, EditOutlined } from '@ant-design/icons';
 import { Course, Work, User, Student, Teacher } from '../../../types/types';
 import { Link } from 'react-router-dom';
@@ -42,7 +42,7 @@ export class Menu extends React.Component<Props | any> {
         if (this.props.userStore.user) {
             return (
                 <Item key={courseId}>
-                    <Link to={`/user/${this.props.userStore.user.id}/courses/${courseId}/works/new`}>+ ADD TASK</Link>
+                    <Button type={'link'}>Добавить работу</Button>
                 </Item>
             );
         } else return null;

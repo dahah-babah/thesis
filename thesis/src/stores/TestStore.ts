@@ -52,7 +52,7 @@ class TestStore {
         return this.getStudentCompletedRates().reduce(reducer, 0) / this.studentCompleted.length;
     };
 
-    private getAvgAllRates = () => {
+    private getAvgAllRates = () => {        
         return this.getAllCompletedRates().reduce(reducer, 0) / this.allCompleted.length;
     };
 

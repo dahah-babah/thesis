@@ -7,6 +7,7 @@ import { CustomSider } from '../../../uui/Sider/Sider';
 import { Breadcrumb } from '../../../uui/Breadcrumb/Breadcrumb';
 import { StudentMainPage } from '../../StudentPages/MainPage/MainPage';
 import { TeacherMainPage } from '../../TeacherPages/MainPage/MainPage';
+import { AdminMainPage } from '../../AdminPages/MainPage';
 
 const { Content } = Layout;
 
@@ -23,9 +24,9 @@ export class UserPage extends React.Component<any> {
            
         // temporary mock
 
-        // this.user = this.props.userStore.findUser('123', '321'); //admin
+        this.props.userStore.findUser('123', '321'); //admin
         // this.props.userStore.findUser('Plyusha_Plyushechkina', '123'); //student
-        this.props.userStore.findUser('Pusyash_Pushistyj', '321'); //teacher
+        // this.props.userStore.findUser('Pusyash_Pushistyj', '321'); //teacher
 
     };
 
@@ -54,8 +55,8 @@ export class UserPage extends React.Component<any> {
             if (this.props.userStore.user.role === 'teacher') {
                 return <TeacherMainPage user={this.props.userStore.user} />;
             } else if (this.props.userStore.user.role === 'student') {
-                return <StudentMainPage user={this.props.userStore.user} />
-            } else return 'Admin';
+                return <StudentMainPage user={this.props.userStore.user} />;
+            } else return <AdminMainPage user={this.props.userStore.user} />;
         } else return null;
     };
 

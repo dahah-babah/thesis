@@ -1,15 +1,27 @@
 import React from 'react';
 import { Course, Work } from '../../../../../../../types/types';
 import styles from './EditWork.module.less';
-import { Typography, Collapse, Upload, Card, message } from 'antd';
-import { BorderlessTableOutlined, DoubleRightOutlined, InboxOutlined } from '@ant-design/icons';
+import { 
+    Typography, 
+    Collapse, 
+    Upload, 
+    Card, 
+    message, 
+    Divider, 
+    Input, 
+    Select, 
+    Button,
+    Form,
+    Checkbox    } from 'antd';
+import { BorderlessTableOutlined, DoubleRightOutlined, InboxOutlined, PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { inject, observer } from 'mobx-react';
 import { observable } from 'mobx';
-import Title from 'antd/lib/typography/Title';
+import TextArea from 'antd/lib/input/TextArea';
 
 const { Text, Paragraph } = Typography;
 const { Panel } = Collapse;
 const { Dragger } = Upload;
+const { Option } = Select;
 
 interface Props {
     course?: Course;
@@ -60,7 +72,7 @@ export class EditWork extends React.Component<Props | any> {
             >
                 <Panel 
                     key={course ? course.id : 'def'} 
-                    header='Description'
+                    header='Описание'
                 >
                     {/* !not work yet: request to server + state (store) */}
                     <Paragraph editable>
@@ -126,15 +138,130 @@ export class EditWork extends React.Component<Props | any> {
         );
     };
 
-    // private renderAddPartCard = (): React.ReactNode => {
-    //     return (
-    //         <Card hoverable>
-    //             <Title className={styles.addPartCardTitle} level={4} type='secondary'>
-    //                 + ADD PART TO TASK
-    //             </Title>
-    //         </Card>
-    //     );
-    // };
+    private onFinish = (data: any): void => {
+        console.log(data);
+        
+    };
+
+    private renderFormItems = (): React.ReactNode => {
+        return (
+            <>
+                <Form.List name="names">
+                    {(fields, { add, remove }) => {
+                    return (
+                        <div>
+                            {fields.map((field, index) => (
+                                <Form.Item
+                                    label={index === 0 ? 'Вариант ответа' : ''}
+                                    required
+                                    key={field.key}
+                                >
+
+                                <div className={styles.wrapper}>
+                                    <Form.Item>
+                                        <Checkbox />
+                                    </Form.Item>
+
+                                    <Form.Item
+                                        {...field}
+                                        validateTrigger={['onChange', 'onBlur']}
+                                        rules={[
+                                            {
+                                                required: true,
+                                                whitespace: true,
+                                                message: "Введите вариант ответа или удалите поле.",
+                                            },
+                                        ]}
+                                        noStyle
+                                    >
+                                        <Input 
+                                            className={styles.input}
+                                            placeholder="Вариант ответа" 
+                                            size={'middle'}
+                                        />
+                                    </Form.Item>
+
+                                    {fields.length > 1 ? (
+                                        <MinusCircleOutlined
+                                            className={styles.icon1}
+                                            onClick={() => {
+                                                remove(field.name);
+                                            }}
+                                        />
+                                    ) : null}
+                                </div>
+
+                                </Form.Item>
+                                
+                            ))}
+
+                            <Form.Item>
+                                <Button
+                                    type="dashed"
+                                    onClick={() => {
+                                        add();
+                                    }}
+                                >
+                                <PlusOutlined /> Добавить вариант ответа
+                                </Button>
+                            </Form.Item>
+
+                        </div>
+                    );
+                    }}
+                </Form.List>
+            </>
+        );
+    };
+
+    private renderDynamicFields = (): React.ReactNode => {
+
+        return (
+            <Form 
+                name={'dynamic_items'}  
+                onFinish={this.onFinish}
+            >
+                {this.renderFormItems()}
+            </Form>
+        );
+    };
+
+    private renderCard = (): React.ReactNode => {
+        return (
+            <Card>
+                <Divider>Добавить вопрос</Divider>
+                <TextArea
+                    className={styles.marginBottom20}
+                    placeholder={'Введите текст вопроса'} 
+                />
+                <Select
+                    className={styles.marginBottom20}
+                    placeholder={'Выберите тип ответа'}
+                >
+                    <Option 
+                        key={'radio'}
+                        value={'radio'}
+                    >
+                        Radio
+                    </Option>
+                    <Option 
+                        key={'checkbox'}
+                        value={'checkbox'}
+                    >
+                        Checkbox
+                    </Option>
+                    <Option 
+                        key={'text'}
+                        value={'text'}
+                    >
+                        Text
+                    </Option>
+                </Select>
+                {this.renderDynamicFields()}
+                <Button type={'primary'}>Добавить вопрос</Button>
+            </Card>
+        );
+    };
 
     render (): React.ReactChild {                        
         return (
@@ -145,6 +272,7 @@ export class EditWork extends React.Component<Props | any> {
                 </div>
                 {this.renderDeadline()}
                 {this.renderFiles()}
+                {this.renderCard()}
             </>
         );
     }

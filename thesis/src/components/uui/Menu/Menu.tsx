@@ -1,12 +1,13 @@
 import React from 'react';
-import { Menu as AntdMenu, Button } from 'antd';
-import { ArrowRightOutlined, EditOutlined } from '@ant-design/icons';
+import { Menu as AntdMenu, Button, Modal, Input, DatePicker, Upload, message } from 'antd';
+import { ArrowRightOutlined, EditOutlined, UploadOutlined } from '@ant-design/icons';
 import { Course, Work, User, Student, Teacher } from '../../../types/types';
 import { Link } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import { observable } from 'mobx';
 import { Badge } from '../Badge/Badge';
 import styles from'./Menu.module.less';
+import TextArea from 'antd/lib/input/TextArea';
 
 interface Props {
     courses: Course[];
@@ -21,6 +22,7 @@ const { SubMenu, Item } = AntdMenu;
 export class Menu extends React.Component<Props | any> {
 
     @observable user!: User | Teacher | Student;
+    @observable isModalVisible = false;
 
     componentDidMount() {
         this.user = this.props.userStore.getUser();
@@ -38,11 +40,21 @@ export class Menu extends React.Component<Props | any> {
         }
     };
 
+    private toogleModal = (): void => {
+        this.isModalVisible = !this.isModalVisible;
+    };
+
+    private onButtonAddClick = (): void => {
+        console.log('123');
+        
+        this.toogleModal();
+    };
+
     private renderAddWorkButton = (courseId: string): React.ReactNode => {
         if (this.props.userStore.user) {
             return (
                 <Item key={courseId}>
-                    <Button type={'link'}>Добавить работу</Button>
+                    <Button type={'link'} onClick={this.onButtonAddClick}>Добавить работу</Button>
                 </Item>
             );
         } else return null;
@@ -141,17 +153,68 @@ export class Menu extends React.Component<Props | any> {
         }
     };
 
+    private renderModalContent = (): React.ReactNode => {
+
+        const props = {
+            name: 'file',
+            action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+            headers: {
+              authorization: 'authorization-text',
+            },
+            onChange(info) {
+              if (info.file.status !== 'uploading') {
+                console.log(info.file, info.fileList);
+              }
+              if (info.file.status === 'done') {
+                message.success(`Файл ${info.file.name} успешно загружен`);
+              } else if (info.file.status === 'error') {
+                message.error(`Ошибка при загрузке файла ${info.file.name}`);
+              }
+            },
+          };
+          
+        return (
+            <article>
+                <Input
+                    className={styles.marginBottom20}
+                    placeholder={'Введите название'}
+                />
+                <DatePicker 
+                    placeholder={'Выберите дату'}
+                    className={styles.marginBottom20}
+                />
+                <TextArea
+                    className={styles.marginBottom20}
+                    placeholder={'Выедите описание'} 
+                />
+                <Upload {...props}>
+                    <Button>
+                        <UploadOutlined /> Загрузить файлы
+                    </Button>
+                </Upload>
+            </article>
+        );
+    };
+
     render(): React.ReactChild {
         return (
-            <AntdMenu
-                mode='inline'
-                theme='light'
-                multiple={false}
-                selectable={true}
-                defaultOpenKeys={['1']}
-            >
-                {this.renderMenuItems()}
-            </AntdMenu>
+            <>
+                <AntdMenu
+                    mode='inline'
+                    theme='light'
+                    multiple={false}
+                    selectable={true}
+                    defaultOpenKeys={['1']}
+                >
+                    {this.renderMenuItems()}
+                </AntdMenu>
+                <Modal
+                    title={'Добавить лабораторную работу'} 
+                    visible={this.isModalVisible}
+                >
+                    {this.renderModalContent()}
+                </Modal>
+            </>
         );
     }
 }

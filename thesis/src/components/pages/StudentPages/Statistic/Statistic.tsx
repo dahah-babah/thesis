@@ -23,8 +23,8 @@ export class StudentStatistic extends React.Component<any> {
             num: `1`,
             courseName: `ВиМТ`,
             numOfTasks: `8`,
-            numOfCompletedTasks: `3`,
-            completed: findPer(8, 3)
+            numOfCompletedTasks: `4`,
+            completed: findPer(8, 4)
         }
     ];
 

@@ -29,7 +29,7 @@ export class Header extends React.Component<Props> {
     private formTitle = (): string => {
         if (this.props.user) {
             if (this.props.user.role === 'admin') {
-                return 'Administrator';
+                return 'Администратор';
             } else {
                 return `${this.props.user.name} 
                         ${this.props.user.lastname}`;

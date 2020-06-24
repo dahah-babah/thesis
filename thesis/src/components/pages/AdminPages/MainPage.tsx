@@ -1,5 +1,6 @@
 import React from 'react';
-import { Typography, Select, Card, Button } from 'antd';
+import { Typography, Select, Card, Button, Modal, Input } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 import { observable } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import { User, Student } from '../../../types/types';
@@ -16,6 +17,8 @@ interface Props {
 @observer
 export class AdminMainPage extends React.Component<Props | any> {
 
+    @observable isModalVisible = false;
+
     UNSAFE_componentWillMount() {
         this.props.userStore.fetchStudents();
     };
@@ -26,7 +29,7 @@ export class AdminMainPage extends React.Component<Props | any> {
                 <Card
                     key={student.id}
                     className={styles.card}
-                    title={<Text strong editable>{student.lastname} {student.name}</Text>}
+                    title={<span className={styles.flexTitle}><Text strong editable>{student.lastname} {student.name}</Text><CloseOutlined /></span>}
                 >
                     <div className={styles.width}>
                         Логин
@@ -40,13 +43,23 @@ export class AdminMainPage extends React.Component<Props | any> {
                         Курс
                         <Text strong editable>  {student.year}</Text>
                     </div>
-                    <div className={styles.width}>
+                    {/* <div className={styles.width}>
                         Семестр
                         <Text strong editable>  {student.semester}</Text>
-                    </div>                   
+                    </div>                    */}
                 </Card>
             )
         );
+    };
+
+    private openModal = (): void => {
+        console.log(123);
+        
+        this.toogleModal();
+    };
+
+    private toogleModal = (): void => {        
+        this.isModalVisible = !this.isModalVisible;
     };
 
     private renderAddStudent = (): React.ReactNode => {
@@ -54,7 +67,7 @@ export class AdminMainPage extends React.Component<Props | any> {
             <Card
                 className={styles.add}
             >
-                <Button type={'dashed'}>+ ДОБАВИТЬ СТУДЕНТА</Button>                   
+                <Button type={'dashed'} onClick={this.openModal}>+ ДОБАВИТЬ СТУДЕНТА</Button>                   
             </Card>
         );
     };
@@ -71,7 +84,39 @@ export class AdminMainPage extends React.Component<Props | any> {
             </Select>
         );
     };
-            
+
+    private renderModalContent = (): React.ReactNode => {
+        return (
+            <article>
+                <Input
+                    className={styles.marginBottom20}
+                    placeholder={'Введите имя студента'}
+                />
+                <Input
+                    className={styles.marginBottom20}
+                    placeholder={'Введите фамилию студента'}
+                />
+                <div className={styles.flexSelect}>
+                <Select
+                    className={styles.select}
+                    // defaultValue={'2'}
+                    placeholder={'Выберите курс'}
+                >
+                    <Option key={'2'} value={'2'}>2</Option>
+                </Select>
+                <Select
+                    className={styles.select}
+                    // defaultValue={'1'}
+                    placeholder={'Выберите группу'}
+                >
+                    <Option key={'1'} value={'1'}>ГРУППА-1</Option>
+                    <Option key={'2'} value={'2'}>ГРУППА-2</Option>
+                </Select>
+                </div>
+            </article>
+        );
+    };
+    
     render(): React.ReactChild {        
         return (
             <section>
@@ -80,6 +125,12 @@ export class AdminMainPage extends React.Component<Props | any> {
                     {this.renderStudents()}
                     {this.renderAddStudent()}
                 </div>
+                <Modal
+                    title={'Добавить студента'} 
+                    visible={this.isModalVisible}
+                >
+                    {this.renderModalContent()}
+                </Modal>
             </section>
         );
     }

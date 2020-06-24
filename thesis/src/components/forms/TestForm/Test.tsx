@@ -140,7 +140,7 @@ export class TestForm extends React.Component<any> {
                                 htmlType='submit'
                                 disabled={this.props.testStore.testIsFinished}
                             >
-                                СФОРМИРОВАТЬ ОТЧЕТ
+                                ЗАКОНЧИТЬ ТЕСТ
                             </Button>
                         </div>
                     </Form.Item>

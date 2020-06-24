@@ -136,7 +136,7 @@ export class TeacherMainPage extends React.Component<Props | any> {
                         key={completed.id}
                         title={this.renderCardTitle(completed)}
                         actions={[
-                            <CommentOutlined key={'comment'} onClick={this.openCommentModal}/>,
+                            // <CommentOutlined key={'comment'} onClick={this.openCommentModal}/>,
                             <FilePdfOutlined key={'report'} onClick={this.openReport}/>,
                             this.renderSwitch(completed),
                         ]}

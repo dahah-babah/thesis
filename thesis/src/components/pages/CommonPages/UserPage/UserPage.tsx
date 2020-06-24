@@ -24,7 +24,7 @@ export class UserPage extends React.Component<any> {
            
         // temporary mock
 
-        this.props.userStore.findUser('123', '321'); //admin
+        this.props.userStore.findUser('admin', '321'); //admin
         // this.props.userStore.findUser('Plyusha_Plyushechkina', '123'); //student
         // this.props.userStore.findUser('Pusyash_Pushistyj', '321'); //teacher
 

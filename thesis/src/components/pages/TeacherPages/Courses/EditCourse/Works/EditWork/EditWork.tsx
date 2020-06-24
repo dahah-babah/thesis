@@ -1,5 +1,5 @@
 import React from 'react';
-import { Course, Work } from '../../../../../../../types/types';
+import { Course, Work, Question, TestPoint } from '../../../../../../../types/types';
 import styles from './EditWork.module.less';
 import { 
     Typography, 
@@ -12,11 +12,13 @@ import {
     Select, 
     Button,
     Form,
-    Checkbox    } from 'antd';
+    Checkbox,    
+    Radio} from 'antd';
 import { BorderlessTableOutlined, DoubleRightOutlined, InboxOutlined, PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { inject, observer } from 'mobx-react';
 import { observable } from 'mobx';
 import TextArea from 'antd/lib/input/TextArea';
+import { RecordWithTtl } from 'dns';
 
 const { Text, Paragraph } = Typography;
 const { Panel } = Collapse;
@@ -33,6 +35,45 @@ export class EditWork extends React.Component<Props | any> {
 
     @observable work!: Work;
     private courseId = this.props.courseStore.courses[0].id;
+
+    private questions: any = [
+        {
+            id: 1,
+            title: "Для чего  в первую очередь предназначен модуль входного захвата микроконтроллера?",
+            type: "radio",
+            isCorrectId: 3,
+            points: [
+              {
+                id: 1,
+                text: "для отслеживания изменений сигнала на входе МК"
+              },
+              {
+                id: 2,
+                text: "для подсчета количества событий на входе МК"
+              },
+              {
+                id: 3,
+                text: "для измерения временных интервалов между событиями на входах МК"
+              },
+              {
+                id: 4,
+                text: "для выдачи импульсов фиксированной продолжительности"
+              }
+            ]
+        },
+        {
+            id: 2,
+            title: "Какой параметр выходного сигнала изменяется при широтно-импульсной модуляции?",
+            type: "text",
+            isCorrectId: "скважность",
+            points: [
+              {
+                id: 1,
+                text: "Введите ответ"
+              }
+            ]
+        },
+    ];
 
     UNSAFE_componentWillMount() {
         const workId = this.props.match.params.workId;
@@ -228,7 +269,7 @@ export class EditWork extends React.Component<Props | any> {
 
     private renderCard = (): React.ReactNode => {
         return (
-            <Card>
+            <Card className={styles.card}>
                 <Divider>Добавить вопрос</Divider>
                 <TextArea
                     className={styles.marginBottom20}
@@ -263,17 +304,105 @@ export class EditWork extends React.Component<Props | any> {
         );
     };
 
-    render (): React.ReactChild {                        
+    private renderLeftSide = (): React.ReactNode => {
         return (
-            <>
+            <div className={styles.leftSide}>
                 {this.renderTitle()}
                 <div className={styles.margin}>
                     {this.renderDescription()}
                 </div>
                 {this.renderDeadline()}
                 {this.renderFiles()}
+            </div>
+        );
+    };
+
+    private renderRightSide = (): React.ReactNode => {
+        return (
+            <div className={styles.rightSide}>
                 {this.renderCard()}
-            </>
+            </div>
+        );
+    };
+
+    private renderQuestions = (): React.ReactNode => {
+        return (
+            <Card>
+                <Divider>Вопросы</Divider>
+                {
+                    this.questions.map(question => 
+                        <Form.Item 
+                            key={question.id}
+                            label={question.title} 
+                            name={question.id}
+                        >
+                            <Text>Вопрос <Text strong>№{question.id}</Text></Text>
+                            {
+                                question.type === 'radio'
+                                ?   this.renderRadioGroup(question)
+                                :   question.type === 'checkbox'
+                                    ?   this.renderCheckboxGroup(question)
+                                    :   question.type === 'select'
+                                        ?   this.renderSelect(question)
+                                        :   <div />
+                            }
+                            <Text>Правильный ответ: <Text code>{
+                                question.type === 'radio'
+                                ?   this.getCorrect(question)
+                                :   question.type === "text"
+                                    ?   question.isCorrectId
+                                    :   null
+                            }</Text></Text>
+                        </Form.Item>
+                    )
+                }
+            </Card>
+        );
+    };
+
+    private getCorrect = (question: any): string | string[] => {
+        return question.points.find(point => point.id === question.isCorrectId).text;
+    };
+
+    private renderRadioGroup = (question: Question): React.ReactNode => {
+        return (
+            <Radio.Group className={styles.questionWpapper}>
+                {question.points.map((point) => 
+                    <Radio key={point.id} value={point.id}>
+                        <Text>{point.text}</Text>
+                    </Radio>
+                )}
+            </Radio.Group>
+        );
+    };
+
+    private renderCheckboxGroup = (question: Question): React.ReactNode => {
+        return (
+            <Checkbox.Group className={styles.questionWpapper}>
+                {question.points.map((point) =>
+                    <Checkbox key={point.id} value={point.id}>
+                        <Text>{point.text}</Text>
+                    </Checkbox> 
+                )}
+            </Checkbox.Group>
+        );
+    };
+
+    private renderSelect = (question: Question): React.ReactNode => {
+        return (
+            <Select/>
+        );
+    };
+
+    render (): React.ReactChild {                        
+        return (
+            <section className={styles.mainMani}>
+                <section className={styles.main}>
+                    {this.renderLeftSide()}
+                    {this.renderRightSide()}
+                </section>
+                {this.renderQuestions()}
+            </section>
         );
     }
 }
